@@ -29,8 +29,7 @@ from taos.core.tasks.task_model import (
 from taos.core.tasks.condition_checker import ConditionChecker
 from taos.core.notifications.notifier import NotificationManager
 from taos.core.notifications.models import NotificationEvent, NotificationConfig, NotificationChannel
-from taos.infra.persistence.store import StorageBackend, InMemoryStore
-from taos.infra.persistence.firebase_store import FirestoreStore
+from taos.infra.persistence.store import StorageBackend
 from taos.infra.persistence.shared_store import get_shared_store
 from taos.infra.logging.logger import TAOSLogger
 from taos.config.settings import get_settings

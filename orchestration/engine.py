@@ -22,9 +22,9 @@ from __future__ import annotations
 import asyncio
 from collections import deque
 import json
+import os
 import re
 import time
-import traceback
 import httpx
 from datetime import datetime, timezone
 from typing import Any, Deque, Dict, List, Optional, TYPE_CHECKING
@@ -44,10 +44,9 @@ from taos.core.agents import (
     PlannerAgent,
     ResearchAgent,
 )
-from taos.core.controller.controller import Controller, ControllerError
+from taos.core.controller.controller import Controller
 from taos.core.debate import DebateSystem
 from taos.core.execution.executor import Executor
-from taos.core.execution.result_handler import ResultHandler
 from taos.core.execution.step_runner import StepRunner
 from taos.core.feedback import FeedbackMemoryEngine
 from taos.core.loop.loop_guard import LoopGuard
@@ -55,7 +54,7 @@ from taos.core.loop.termination import TerminationChecker, build_final_result
 from taos.core.memory.memory_manager import MemoryManager
 from taos.core.persistence import FirestoreMemorySchema
 from taos.core.planner.decomposition import GoalDecomposer
-from taos.core.planner.planner import Planner, PlannerError
+from taos.core.planner.planner import Planner
 from taos.core.planner.plan_memory import PlanMemoryStore
 from taos.core.planner.plan_validator import PlanValidator
 from taos.core.reflection.confidence import ConfidenceScorer
@@ -79,7 +78,7 @@ from taos.core.semantic.tone_profile import GLOBAL_TONE_PROFILER, ToneResult
 from taos.core.routing import RouteDecider
 from taos.core.search import SearchDepthRouter, SearchLite, SearchResultCache
 from taos.core.understanding.universal_understanding_gateway import UniversalUnderstandingGateway, frame_to_trace_summary
-from taos.core.understanding.query_frame import QueryFrameBuilder
+from taos.core.understanding.query_frame import QueryFrameBuilder, compare_query_frame_to_selected_route
 from taos.core.fast_path import FastPathEngine, QueryCache
 from taos.core.output.response_formatter import ResponseFormatter
 from taos.core.output.templates import TemplateFormatter
@@ -431,6 +430,28 @@ class OrchestrationEngine:
                 route_decision["route_reason"] = "entity_lookup_flag_disabled"
                 route_decision["policy_reason"] = "entity_lookup_flag_disabled"
                 policy_reason = "entity_lookup_flag_disabled"
+            query_frame_observation = self._build_query_frame_observation(
+                query=goal,
+                selected_route=selected_route,
+            )
+            route_assist = self._decide_query_frame_route_assist(
+                query_frame_observation=query_frame_observation,
+                selected_route=selected_route,
+                query_kind=query_kind,
+                doc_context_active=bool(doc_context_active),
+            )
+            query_frame_observation.update(route_assist)
+            if bool(route_assist.get("route_assist_applied")):
+                selected_route = str(route_assist.get("route_assist_to") or selected_route).strip().lower()
+                route_decision["selected_route"] = selected_route
+                route_decision["route_reason"] = "query_frame_route_assist"
+                route_decision["policy_reason"] = "query_frame_route_assist"
+                route_decision["rerouted"] = True
+                route_decision["route_owner"] = self._route_owner_for_selected_route(
+                    selected_route=selected_route,
+                    phase107_route=deterministic_route.route,
+                )
+                policy_reason = "query_frame_route_assist"
             route_label_override = deterministic_route.route
             search_depth_decision = self._search_depth_router.route(effective_goal)
             route_boundary_summary = self._build_route_boundary_summary(
@@ -440,10 +461,25 @@ class OrchestrationEngine:
                 boundary=deterministic_route.boundary,
                 used_llm=deterministic_route.used_llm,
             )
-            query_frame_observation = self._build_query_frame_observation(
+            # Recompute alignment against the final selected route while keeping assist metadata.
+            refreshed_observation = self._build_query_frame_observation(
                 query=goal,
                 selected_route=selected_route,
             )
+            for key in (
+                "route_assist_enabled",
+                "route_assist_eligible",
+                "route_assist_applied",
+                "route_assist_from",
+                "route_assist_to",
+                "route_assist_reason",
+                "route_assist_blocked_reason",
+                "route_assist_confidence",
+                "route_assist_lookup_type",
+            ):
+                refreshed_observation[key] = query_frame_observation.get(key)
+            query_frame_observation = refreshed_observation
+            self._set_query_frame_telemetry(query_frame_observation)
 
             if not isinstance(classification.metadata, dict):
                 classification.metadata = {}
@@ -2684,6 +2720,24 @@ class OrchestrationEngine:
             "route_decision": None,
             "route_boundary_summary": None,
             "query_frame": None,
+            "query_frame_mismatch_count": 0,
+            "query_frame_aligned_count": 0,
+            "query_frame_unknown_count": 0,
+            "query_frame_supported_multilingual_count": 0,
+            "query_frame_semantic_fallback_used_count": 0,
+            "query_frame_fastpath_used_count": 0,
+            "query_frame_low_confidence_count": 0,
+            "query_frame_entity_handoff_enabled": False,
+            "query_frame_entity_handoff_applied": False,
+            "query_frame_entity_handoff_blocked_reason": "",
+            "entity_handoff_source": "",
+            "entity_handoff_lookup_type": "",
+            "entity_handoff_entity_name": "",
+            "entity_handoff_requested_role": "",
+            "entity_handoff_answer_language": "",
+            "entity_search_queries_generated": [],
+            "entity_search_query_lanes": [],
+            "legacy_entity_resolver_used": True,
             "planning_handoff": None,
             "planner_path": None,
             "dag_name": None,
@@ -3193,6 +3247,24 @@ class OrchestrationEngine:
             "route_decision": self._trace_data.get("route_decision"),
             "route_boundary_summary": self._trace_data.get("route_boundary_summary"),
             "query_frame": self._trace_data.get("query_frame"),
+            "query_frame_mismatch_count": self._trace_data.get("query_frame_mismatch_count"),
+            "query_frame_aligned_count": self._trace_data.get("query_frame_aligned_count"),
+            "query_frame_unknown_count": self._trace_data.get("query_frame_unknown_count"),
+            "query_frame_supported_multilingual_count": self._trace_data.get("query_frame_supported_multilingual_count"),
+            "query_frame_semantic_fallback_used_count": self._trace_data.get("query_frame_semantic_fallback_used_count"),
+            "query_frame_fastpath_used_count": self._trace_data.get("query_frame_fastpath_used_count"),
+            "query_frame_low_confidence_count": self._trace_data.get("query_frame_low_confidence_count"),
+            "query_frame_entity_handoff_enabled": self._trace_data.get("query_frame_entity_handoff_enabled"),
+            "query_frame_entity_handoff_applied": self._trace_data.get("query_frame_entity_handoff_applied"),
+            "query_frame_entity_handoff_blocked_reason": self._trace_data.get("query_frame_entity_handoff_blocked_reason"),
+            "entity_handoff_source": self._trace_data.get("entity_handoff_source"),
+            "entity_handoff_lookup_type": self._trace_data.get("entity_handoff_lookup_type"),
+            "entity_handoff_entity_name": self._trace_data.get("entity_handoff_entity_name"),
+            "entity_handoff_requested_role": self._trace_data.get("entity_handoff_requested_role"),
+            "entity_handoff_answer_language": self._trace_data.get("entity_handoff_answer_language"),
+            "entity_search_queries_generated": self._trace_data.get("entity_search_queries_generated"),
+            "entity_search_query_lanes": self._trace_data.get("entity_search_query_lanes"),
+            "legacy_entity_resolver_used": self._trace_data.get("legacy_entity_resolver_used"),
             "planning_handoff": self._trace_data.get("planning_handoff"),
             "planner_path": planner_path,
             "dag_name": dag_name,
@@ -3232,45 +3304,125 @@ class OrchestrationEngine:
     def _build_query_frame_observation(self, *, query: str, selected_route: str) -> Dict[str, Any]:
         frame = self._query_frame_builder.build(query)
         intent_family = str(frame.intent or "unknown").strip().lower() or "unknown"
-        alignment = self._compute_query_frame_route_alignment(
-            selected_route=selected_route,
-            query_frame_suggested_family=intent_family,
-        )
+        alignment = compare_query_frame_to_selected_route(frame, selected_route)
         return {
             "canonical_query": str(frame.canonical_query or "").strip(),
             "original_query": str(frame.original_query or "").strip(),
+            "normalized_query": str(frame.normalized_query or "").strip(),
             "detected_language": str(frame.detected_language or "en").strip().lower(),
+            "answer_language": str(frame.answer_language or frame.detected_language or "en").strip().lower(),
+            "detected_script": str(frame.detected_script or "Latin"),
             "intent_family": intent_family,
+            "lookup_type": str(frame.lookup_type or "").strip().lower(),
             "entity_name": str(frame.entity or "").strip(),
             "requested_role": str(frame.role or "").strip().lower(),
             "profile_target": str(frame.lookup_type or "").strip().lower(),
             "evidence_need": "public_web_evidence" if intent_family == "entity_lookup" else "unknown",
-            "ambiguity_flags": [],
+            "ambiguity_flags": list(frame.ambiguity_flags or []),
+            "warnings": list(frame.warnings or []),
+            "confidence": float(frame.confidence or 0.0),
+            "source": str(frame.source or ""),
+            "search_queries": list(frame.search_queries or []),
             "normalized_terms": [part for part in re.findall(r"[a-z0-9]+", str(frame.normalized_query or "").lower()) if part][:20],
-            "current_selected_route": str(selected_route or "").strip().lower(),
-            "query_frame_suggested_family": intent_family,
-            "route_alignment": alignment["route_alignment"],
-            "mismatch_reason": alignment["mismatch_reason"],
+            "current_selected_route": str(alignment.get("current_selected_route") or "").strip().lower(),
+            "query_frame_suggested_family": str(alignment.get("query_frame_suggested_family") or "unknown"),
+            "route_alignment": str(alignment.get("route_alignment") or "unknown"),
+            "mismatch_reason": str(alignment.get("mismatch_reason") or ""),
         }
 
-    def _compute_query_frame_route_alignment(
+    def _set_query_frame_telemetry(self, query_frame_observation: Dict[str, Any]) -> None:
+        alignment = str(query_frame_observation.get("route_alignment") or "unknown").strip().lower()
+        intent_family = str(query_frame_observation.get("query_frame_suggested_family") or "unknown").strip().lower()
+        stats = {
+            "query_frame_mismatch_count": 1 if alignment == "mismatch" else 0,
+            "query_frame_aligned_count": 1 if alignment == "aligned" else 0,
+            "query_frame_unknown_count": 1 if alignment == "unknown" else 0,
+            "query_frame_supported_multilingual_count": 1 if intent_family != "unknown" else 0,
+            "query_frame_semantic_fallback_used_count": 1 if "semantic" in str(query_frame_observation.get("source") or "").lower() else 0,
+            "query_frame_fastpath_used_count": 1 if "fast_path" in str(query_frame_observation.get("source") or "").lower() else 0,
+            "query_frame_low_confidence_count": 1 if str(query_frame_observation.get("mismatch_reason") or "") == "query_frame_low_confidence" else 0,
+        }
+        for key, value in stats.items():
+            self._set_trace_value(key, int(value))
+
+    def _decide_query_frame_route_assist(
         self,
         *,
+        query_frame_observation: Dict[str, Any],
         selected_route: str,
-        query_frame_suggested_family: str,
-    ) -> Dict[str, str]:
-        selected = str(selected_route or "").strip().lower()
-        suggested = str(query_frame_suggested_family or "").strip().lower()
-        if suggested in {"", "unknown"}:
-            return {"route_alignment": "unknown", "mismatch_reason": ""}
-        if suggested == "entity_lookup":
-            if selected == "entity_lookup":
-                return {"route_alignment": "aligned", "mismatch_reason": ""}
-            return {
-                "route_alignment": "mismatch",
-                "mismatch_reason": "query_frame_entity_lookup_but_selected_route_differs",
-            }
-        return {"route_alignment": "unknown", "mismatch_reason": ""}
+        query_kind: str,
+        doc_context_active: bool,
+    ) -> Dict[str, Any]:
+        enabled = str(os.getenv("QUERY_FRAME_ROUTE_ASSIST_ENABLED", "false")).strip().lower() == "true"
+        from_route = str(selected_route or "").strip().lower()
+        lookup_type = str(query_frame_observation.get("lookup_type") or "").strip().lower()
+        confidence = float(query_frame_observation.get("confidence") or 0.0)
+        intent_family = str(query_frame_observation.get("intent_family") or "unknown").strip().lower()
+        entity_name = str(query_frame_observation.get("entity_name") or "").strip()
+        canonical_query = str(query_frame_observation.get("canonical_query") or "").strip()
+        ambiguity_flags = list(query_frame_observation.get("ambiguity_flags") or [])
+        warnings = list(query_frame_observation.get("warnings") or [])
+
+        supported_lookup = {
+            "founder_lookup",
+            "ceo_lookup",
+            "linkedin_profile",
+            "official_website",
+            "business_legitimacy",
+        }
+        weak_routes = {"standard_task", "standard_answer", "no_search", "generic_task", "official_search"}
+        protected_routes = {"doc_mode", "clarification", "deep_research", "news_search"}
+
+        result = {
+            "route_assist_enabled": enabled,
+            "route_assist_eligible": False,
+            "route_assist_applied": False,
+            "route_assist_from": from_route,
+            "route_assist_to": from_route,
+            "route_assist_reason": "",
+            "route_assist_blocked_reason": "",
+            "route_assist_confidence": confidence,
+            "route_assist_lookup_type": lookup_type,
+        }
+        if not enabled:
+            result["route_assist_blocked_reason"] = "feature_disabled"
+            return result
+        if from_route in protected_routes or doc_context_active:
+            result["route_assist_blocked_reason"] = "protected_route"
+            return result
+        if str(query_kind or "").strip().lower() == "document_qa":
+            result["route_assist_blocked_reason"] = "protected_route"
+            return result
+        if from_route not in weak_routes:
+            result["route_assist_blocked_reason"] = "protected_route"
+            return result
+        if intent_family != "entity_lookup":
+            result["route_assist_blocked_reason"] = "query_frame_not_entity_lookup"
+            return result
+        if lookup_type not in supported_lookup:
+            result["route_assist_blocked_reason"] = "unsupported_lookup_type"
+            return result
+        if confidence < 0.85:
+            result["route_assist_blocked_reason"] = "query_frame_low_confidence"
+            return result
+        if not entity_name:
+            result["route_assist_blocked_reason"] = "query_frame_missing_entity"
+            return result
+        if not canonical_query:
+            result["route_assist_blocked_reason"] = "query_frame_missing_canonical_query"
+            return result
+        if ambiguity_flags:
+            result["route_assist_blocked_reason"] = "query_frame_ambiguous"
+            return result
+        if warnings:
+            result["route_assist_blocked_reason"] = "query_frame_validation_warning"
+            return result
+
+        result["route_assist_eligible"] = True
+        result["route_assist_applied"] = True
+        result["route_assist_to"] = "entity_lookup"
+        result["route_assist_reason"] = "high_confidence_entity_lookup"
+        return result
 
     def _calibrate_research_confidence(
         self,
@@ -6456,6 +6608,35 @@ class OrchestrationEngine:
             stats["rejected_source_count"] = int(source_quality_summary.get("rejected_count") or 0)
             stats["official_source_count"] = int(source_quality_summary.get("official_source_count") or 0)
         if not deduped:
+            candidate_rows = preselected_rows or ranked_rows or search_rows
+            if preselected_rows or ranked_rows:
+                agreement = self._compute_research_agreement(
+                    candidate_rows,
+                    freshness_mode=freshness_mode,
+                    goal=goal,
+                    high_stakes_mode=high_stakes_mode,
+                )
+                fallback = self._build_research_evidence_fallback(
+                    goal=goal,
+                    evidence_rows=candidate_rows,
+                    freshness_mode=freshness_mode,
+                    agreement=agreement,
+                    high_stakes_mode=high_stakes_mode,
+                )
+                if fallback:
+                    self._mark_trace_fallback(
+                        reason="research_evidence_fallback",
+                        freshness_status="recovered",
+                        freshness_note="Search returned candidate rows but ranking/quality filters were sparse; returned cautious evidence fallback.",
+                    )
+                    self._append_direct_trace_step(
+                        step_type="reason",
+                        status="failed",
+                        tool="evidence_ranker",
+                        summary="Ranking/quality filters were sparse; returned structured evidence fallback.",
+                    )
+                    self._log("engine.research_role_flow", role_flow=role_flow)
+                    return fallback
             self._mark_trace_fallback(
                 reason="profile_evidence_mismatch" if profile_mode else "search_sparse",
                 freshness_status="failed",
@@ -6654,17 +6835,18 @@ class OrchestrationEngine:
                 official_source_required=official_source_required,
             )
             recovered_rows = list(recovery.get("recovered_rows") or [])
-            self._update_research_evidence_trace(recovered_rows or deduped)
+            fallback_rows = recovered_rows or deduped or preselected_rows or ranked_rows or search_rows
+            self._update_research_evidence_trace(fallback_rows)
             fallback_reason = "research_timeout" if extract_rejections.get("stage_timeout") else "extract_failed"
             agreement = self._compute_research_agreement(
-                recovered_rows or deduped,
+                fallback_rows,
                 freshness_mode=freshness_mode,
                 goal=goal,
                 high_stakes_mode=high_stakes_mode,
             )
             fallback = self._build_research_evidence_fallback(
                 goal=goal,
-                evidence_rows=recovered_rows or deduped,
+                evidence_rows=fallback_rows,
                 freshness_mode=freshness_mode,
                 agreement=agreement,
                 high_stakes_mode=high_stakes_mode,
@@ -6692,7 +6874,7 @@ class OrchestrationEngine:
                 await self._store_research_profile_cache(
                     goal=goal,
                     answer=fallback,
-                    evidence_rows=recovered_rows or deduped,
+                    evidence_rows=fallback_rows,
                     agreement=agreement,
                 )
                 return fallback
@@ -7066,18 +7248,39 @@ class OrchestrationEngine:
 
         self._set_trace_value("planner_path", "entity_lookup")
         self._set_trace_value("query_kind", "entity_lookup")
+        handoff = self._build_query_frame_entity_handoff(goal=goal)
+        self._set_trace_value("query_frame_entity_handoff_enabled", bool(handoff.get("query_frame_entity_handoff_enabled")))
+        self._set_trace_value("query_frame_entity_handoff_applied", bool(handoff.get("query_frame_entity_handoff_applied")))
+        self._set_trace_value("query_frame_entity_handoff_blocked_reason", str(handoff.get("query_frame_entity_handoff_blocked_reason") or ""))
+        self._set_trace_value("entity_handoff_source", str(handoff.get("entity_handoff_source") or ""))
+        self._set_trace_value("entity_handoff_lookup_type", str(handoff.get("entity_handoff_lookup_type") or ""))
+        self._set_trace_value("entity_handoff_entity_name", str(handoff.get("entity_handoff_entity_name") or ""))
+        self._set_trace_value("entity_handoff_requested_role", str(handoff.get("entity_handoff_requested_role") or ""))
+        self._set_trace_value("entity_handoff_answer_language", str(handoff.get("entity_handoff_answer_language") or ""))
+        self._set_trace_value("legacy_entity_resolver_used", not bool(handoff.get("query_frame_entity_handoff_applied")))
         entity_query = EntityIntentDetector().detect(goal)
         source_plan = EntitySourcePlanner().plan(entity_query)
         role, entity = self._extract_profile_role_and_entity(goal)
         role = str(entity_query.requested_attribute or role or "ceo").strip().lower()
         entity = str(entity_query.entity_name or entity or "").strip()
+        if bool(handoff.get("query_frame_entity_handoff_applied")):
+            role = str(handoff.get("entity_handoff_requested_role") or role or "ceo").strip().lower()
+            entity = str(handoff.get("entity_handoff_entity_name") or entity or "").strip()
         role_label = (role or "ceo").upper()
         entity_label = entity or str(goal or "").strip()
-        queries = source_plan.flatten() or self._build_entity_lookup_queries(goal=goal, role=role, entity=entity_label)
+        if bool(handoff.get("query_frame_entity_handoff_applied")):
+            queries = list(handoff.get("entity_search_queries_generated") or [])
+        else:
+            queries = source_plan.flatten() or self._build_entity_lookup_queries(goal=goal, role=role, entity=entity_label)
+        self._set_trace_value("entity_search_queries_generated", list(queries))
         lane_map: Dict[str, str] = {}
-        for lane, lane_queries in (source_plan.lanes or {}).items():
-            for lane_query in lane_queries or []:
-                lane_map[str(lane_query).strip().lower()] = str(lane)
+        if bool(handoff.get("query_frame_entity_handoff_applied")):
+            lane_map = dict(handoff.get("entity_query_lane_map") or {})
+        else:
+            for lane, lane_queries in (source_plan.lanes or {}).items():
+                for lane_query in lane_queries or []:
+                    lane_map[str(lane_query).strip().lower()] = str(lane)
+        self._set_trace_value("entity_search_query_lanes", sorted({str(v) for v in lane_map.values() if str(v).strip()}))
 
         stats = self._trace_data.setdefault("evidence_stats", {})
         stats["query_kind"] = "entity_lookup"
@@ -7723,6 +7926,167 @@ class OrchestrationEngine:
                 }
             )
         return out[:6]
+
+    def _build_query_frame_entity_handoff(self, *, goal: str) -> Dict[str, Any]:
+        enabled = str(os.getenv("QUERY_FRAME_ENTITY_HANDOFF_ENABLED", "false")).strip().lower() == "true"
+        route_assist_enabled = str(os.getenv("QUERY_FRAME_ROUTE_ASSIST_ENABLED", "false")).strip().lower() == "true"
+        query_frame = dict(self._trace_data.get("query_frame") or {})
+        selected_route = str((self._trace_data.get("route_decision") or {}).get("selected_route") or "").strip().lower()
+        intent_family = str(query_frame.get("intent_family") or "unknown").strip().lower()
+        lookup_type = str(query_frame.get("lookup_type") or "").strip().lower()
+        entity_name = str(query_frame.get("entity_name") or "").strip()
+        requested_role = str(query_frame.get("requested_role") or "").strip().lower()
+        answer_language = str(query_frame.get("answer_language") or query_frame.get("detected_language") or "unknown").strip().lower()
+        canonical_query = str(query_frame.get("canonical_query") or "").strip()
+        confidence = float(query_frame.get("confidence") or 0.0)
+        ambiguity_flags = list(query_frame.get("ambiguity_flags") or [])
+        warnings = list(query_frame.get("warnings") or [])
+
+        result: Dict[str, Any] = {
+            "query_frame_entity_handoff_enabled": enabled,
+            "query_frame_entity_handoff_applied": False,
+            "query_frame_entity_handoff_blocked_reason": "",
+            "entity_handoff_source": "legacy_resolver",
+            "entity_handoff_lookup_type": lookup_type,
+            "entity_handoff_entity_name": entity_name,
+            "entity_handoff_requested_role": requested_role,
+            "entity_handoff_answer_language": answer_language,
+            "entity_search_queries_generated": [],
+            "entity_query_lane_map": {},
+        }
+        if not enabled:
+            result["query_frame_entity_handoff_blocked_reason"] = "feature_disabled"
+            return result
+        if not route_assist_enabled:
+            result["query_frame_entity_handoff_blocked_reason"] = "route_assist_disabled"
+            return result
+        if selected_route != "entity_lookup":
+            result["query_frame_entity_handoff_blocked_reason"] = "route_not_entity_lookup"
+            return result
+        if intent_family != "entity_lookup":
+            result["query_frame_entity_handoff_blocked_reason"] = "query_frame_not_entity_lookup"
+            return result
+        supported_lookup = {
+            "founder_lookup",
+            "ceo_lookup",
+            "linkedin_profile",
+            "official_website",
+            "business_legitimacy",
+        }
+        if lookup_type not in supported_lookup:
+            result["query_frame_entity_handoff_blocked_reason"] = "unsupported_lookup_type"
+            return result
+        if confidence < 0.85:
+            result["query_frame_entity_handoff_blocked_reason"] = "query_frame_low_confidence"
+            return result
+        if not entity_name:
+            result["query_frame_entity_handoff_blocked_reason"] = "query_frame_missing_entity"
+            return result
+        if not canonical_query:
+            result["query_frame_entity_handoff_blocked_reason"] = "query_frame_missing_canonical_query"
+            return result
+        if ambiguity_flags:
+            result["query_frame_entity_handoff_blocked_reason"] = "query_frame_ambiguous"
+            return result
+        if warnings:
+            result["query_frame_entity_handoff_blocked_reason"] = "query_frame_validation_warning"
+            return result
+
+        generated = self._build_entity_queries_from_query_frame(
+            goal=goal,
+            entity_name=entity_name,
+            lookup_type=lookup_type,
+            canonical_query=canonical_query,
+            original_query=str(query_frame.get("original_query") or goal),
+        )
+        result["query_frame_entity_handoff_applied"] = True
+        result["entity_handoff_source"] = "query_frame"
+        result["entity_search_queries_generated"] = [row["query"] for row in generated]
+        result["entity_query_lane_map"] = {str(row["query"]).strip().lower(): str(row["lane"]) for row in generated}
+        return result
+
+    def _build_entity_queries_from_query_frame(
+        self,
+        *,
+        goal: str,
+        entity_name: str,
+        lookup_type: str,
+        canonical_query: str,
+        original_query: str,
+    ) -> List[Dict[str, str]]:
+        entity = str(entity_name or "").strip()
+        lookup = str(lookup_type or "").strip().lower()
+        canon = str(canonical_query or "").strip()
+        original = str(original_query or goal or "").strip()
+
+        pairs: List[tuple[str, str]] = []
+        if lookup == "founder_lookup":
+            pairs.extend(
+                [
+                    (f"{entity} founder", "entity_role"),
+                    (f"{entity} founded by", "entity_role"),
+                    (f"{entity} company history founder", "entity_role"),
+                    (f"{entity} official history founder", "official_website"),
+                    (canon, "query_frame_canonical"),
+                ]
+            )
+        elif lookup == "ceo_lookup":
+            pairs.extend(
+                [
+                    (f"{entity} CEO", "entity_role"),
+                    (f"{entity} Chief Executive Officer", "entity_role"),
+                    (f"{entity} leadership CEO", "entity_role"),
+                    (f"{entity} official leadership CEO", "official_website"),
+                    (canon, "query_frame_canonical"),
+                ]
+            )
+        elif lookup == "linkedin_profile":
+            pairs.extend(
+                [
+                    (f"{entity} LinkedIn", "linkedin_profile"),
+                    (f"site:linkedin.com/company {entity}", "linkedin_profile"),
+                    (f"{entity} company LinkedIn", "linkedin_profile"),
+                    (canon, "query_frame_canonical"),
+                ]
+            )
+        elif lookup == "official_website":
+            pairs.extend(
+                [
+                    (f"{entity} official website", "official_website"),
+                    (f"{entity} official site", "official_website"),
+                    (f"{entity} company website", "official_website"),
+                    (canon, "query_frame_canonical"),
+                ]
+            )
+        elif lookup == "business_legitimacy":
+            pairs.extend(
+                [
+                    (f"{entity} official website", "legitimacy"),
+                    (f"{entity} LinkedIn", "legitimacy"),
+                    (f"{entity} company profile", "legitimacy"),
+                    (f"{entity} registration", "legitimacy"),
+                    (f"{entity} business details", "legitimacy"),
+                    (canon, "query_frame_canonical"),
+                ]
+            )
+        else:
+            pairs.append((canon or original or goal, "query_frame_canonical"))
+
+        if original and original.lower() != canon.lower():
+            pairs.append((original, "original_language"))
+
+        out: List[Dict[str, str]] = []
+        seen: set[str] = set()
+        for query, lane in pairs:
+            q = str(query or "").strip()
+            if not q:
+                continue
+            key = q.lower()
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append({"query": q, "lane": str(lane or "query_frame_canonical")})
+        return out[:8]
 
     def _build_entity_lookup_queries(self, *, goal: str, role: str, entity: str) -> List[str]:
         role_token = (role or "ceo").upper()
@@ -8772,6 +9136,19 @@ class OrchestrationEngine:
             quality = row.get("extraction_quality", row.get("extract_quality_score", "n/a"))
             lines.append(f"- [{date_hint}] {claim} - {provider} ({tier}, quality={quality}) [S{idx}]")
 
+        timeline_rows = list(evidence_rows[:6])
+        timeline_rows.sort(
+            key=lambda row: (
+                self._extract_date_from_text(str(row.get("date_hint") or row.get("published_at") or "")) or datetime.min
+            ),
+            reverse=True,
+        )
+        lines.extend(["", "Timeline (newest evidence first)"])
+        for idx, row in enumerate(timeline_rows, start=1):
+            date_hint = row.get("date_hint") or row.get("published_at") or "date n/a"
+            title = re.sub(r"\s+", " ", (row.get("title") or "").strip())[:120] or f"Source {idx}"
+            lines.append(f"- [{date_hint}] {title} [S{idx}]")
+
         lines.extend(["", "Confidence"])
         if agreement_level == "high" and not conflict_detected and not stale_detected:
             lines.append("- High, because multiple usable sources survived quality checks.")
@@ -8801,7 +9178,7 @@ class OrchestrationEngine:
         else:
             lines.append("- Treat this as the best-supported answer from current retrievable evidence, not a guarantee that no newer source exists.")
 
-        lines.extend(["", "Sources"])
+        lines.extend(["", "Sources:"])
         for idx, row in enumerate(evidence_rows[:6], start=1):
             title = (row.get("title") or "").strip() or f"Source {idx}"
             link = (row.get("link") or "").strip()

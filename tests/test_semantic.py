@@ -432,9 +432,11 @@ class TestFastPathCache:
         assert cache.get("nonexistent") is None
 
     def test_ttl_expiry(self):
+        import time
+
         cache = FastPathCache(ttl_seconds=0)  # Instant expiry
         cache.put("key1", "value1")
-        import time; time.sleep(0.01)
+        time.sleep(0.01)
         assert cache.get("key1") is None
 
     def test_capacity_eviction(self):

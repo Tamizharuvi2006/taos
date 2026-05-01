@@ -142,7 +142,7 @@ def build_rumour_no_confirmation_answer(
         [
             "",
             "Bottom line:",
-            f"- The rumour is not confirmed. Treat the related evidence as context, not proof of the exact claim.",
+            "- The rumour is not confirmed. Treat the related evidence as context, not proof of the exact claim.",
             "",
             "Confidence",
             "- Low for the exact rumour claim.",

@@ -72,19 +72,21 @@ def _compare_regression(
     cfg: Dict[str, Any],
     issues: List[str],
 ) -> None:
-    if "overall_score_max_drop" in cfg:
-        drop = _get_metric(previous, "overall_score") - _get_metric(current, "overall_score")
-        threshold = float(cfg["overall_score_max_drop"])
+    drop_checks = (
+        ("overall_score", "overall_score_max_drop"),
+        ("citation_quality", "citation_quality_max_drop"),
+        ("confidence_calibration", "confidence_calibration_max_drop"),
+        ("followup_usefulness", "followup_usefulness_max_drop"),
+        ("mode_consistency", "mode_consistency_max_drop"),
+    )
+    for metric_name, cfg_key in drop_checks:
+        if cfg_key not in cfg:
+            continue
+        drop = _get_metric(previous, metric_name) - _get_metric(current, metric_name)
+        threshold = float(cfg[cfg_key])
         if drop > threshold:
             issues.append(
-                f"overall_score regression: drop {drop:.3f} exceeds max {threshold:.3f}"
-            )
-    if "citation_quality_max_drop" in cfg:
-        drop = _get_metric(previous, "citation_quality") - _get_metric(current, "citation_quality")
-        threshold = float(cfg["citation_quality_max_drop"])
-        if drop > threshold:
-            issues.append(
-                f"citation_quality regression: drop {drop:.3f} exceeds max {threshold:.3f}"
+                f"{metric_name} regression: drop {drop:.3f} exceeds max {threshold:.3f}"
             )
     if "failed_cases_max_increase" in cfg:
         increase = _get_failed_cases(current) - _get_failed_cases(previous)

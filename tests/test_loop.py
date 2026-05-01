@@ -7,13 +7,12 @@ and state management.
 
 from __future__ import annotations
 
-import time
 import pytest
 
 from taos.config.constants import FSMState
 from taos.core.loop.loop_guard import LoopGuard
 from taos.core.loop.termination import TerminationChecker, build_final_result
-from taos.core.memory.memory_store import MemoryStore, MemoryEntry
+from taos.core.memory.memory_store import MemoryStore
 from taos.core.memory.memory_manager import MemoryManager
 from taos.core.memory.retrieval import MemoryRetriever
 from taos.core.reflection.confidence import ConfidenceScorer

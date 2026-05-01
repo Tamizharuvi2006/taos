@@ -20,7 +20,6 @@ from typing import Any, Dict, Optional
 from taos.config.constants import ErrorType
 from taos.core.state.state_schema import StepResult
 from taos.core.tools.registry import (
-    ToolDefinition,
     ToolNotFoundError,
     ToolPolicyViolation,
     ToolRateLimitError,

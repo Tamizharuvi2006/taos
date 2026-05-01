@@ -15,7 +15,6 @@ Production features:
 from __future__ import annotations
 
 import json
-import time
 from typing import Any, Dict, List, Optional
 
 import httpx
@@ -134,8 +133,6 @@ class Planner:
 
         # ─── Call LLM ───
         model_config = self._orchestration.planner
-        start_time = time.time()
-
         try:
             response_text, cost = await self._call_llm(model_config, system_prompt, user_prompt)
         except Exception as primary_error:
@@ -160,7 +157,6 @@ class Planner:
             intent=intent,
         )
 
-        latency = time.time() - start_time
         return plan, cost
 
     async def _call_llm(

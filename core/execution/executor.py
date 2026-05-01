@@ -21,7 +21,6 @@ from taos.core.execution.step_runner import StepRunner
 from taos.core.execution.result_handler import ResultHandler
 
 if TYPE_CHECKING:
-    from taos.core.tools.registry import ToolRegistry
     from taos.infra.logging.logger import TAOSLogger
 
 

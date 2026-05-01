@@ -9,9 +9,9 @@ Coordinates with:
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import Optional
 
-from taos.config.constants import ErrorType, RETRYABLE_ERRORS, NON_RETRYABLE_ERRORS
+from taos.config.constants import NON_RETRYABLE_ERRORS
 from taos.config.settings import get_settings
 from taos.core.retry.backoff import BackoffStrategy, ExponentialBackoff
 from taos.core.state.state_schema import StepResult

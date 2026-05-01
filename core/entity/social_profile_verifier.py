@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Iterable, List
+from typing import Iterable
 
 from .profile_confidence import ProfileConfidence
 from .social_profile_models import SocialProfileEvidence, SocialProfileVerification

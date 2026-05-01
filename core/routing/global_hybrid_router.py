@@ -258,8 +258,6 @@ class GlobalHybridRouter:
                 ).to_rule()
         signals = self._normalizer.normalize(query)
         text = str(signals.get("normalized_query") or "").strip()
-        raw = str(signals.get("raw_query") or "").strip()
-        entities = list(signals.get("entities") or [])
         package_entity = signals.get("package_entity")
         freshness = bool(signals.get("freshness_required"))
         official = bool(signals.get("official_preferred"))

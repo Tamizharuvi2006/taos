@@ -23,7 +23,6 @@ class FirebaseAuthVerifier:
         if self._initialized:
             return
         try:
-            import firebase_admin
             from firebase_admin import auth
 
             init_firebase_admin()

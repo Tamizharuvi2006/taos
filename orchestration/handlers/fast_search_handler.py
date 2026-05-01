@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from taos.core.performance.progress import ProgressPhase
 from taos.orchestration.handlers.response_finalizer import finalize_payload
 from taos.orchestration.route_dispatcher import RouteExecutionContext, RouteExecutionResult
 

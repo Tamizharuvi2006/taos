@@ -3,7 +3,7 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass, field
 import re
 import time
-from typing import Any, Dict, Iterable, List
+from typing import Any, Dict, List
 
 from .memory_policy import MemoryPolicy, estimate_tokens
 from .project_memory import ProjectMemory

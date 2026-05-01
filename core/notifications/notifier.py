@@ -495,7 +495,6 @@ class NotificationManager:
     ) -> bool:
         """Send push notification via Firebase Cloud Messaging."""
         try:
-            import firebase_admin
             from firebase_admin import messaging
             from taos.infra.firebase import init_firebase_admin
         except Exception:

@@ -12,7 +12,7 @@ PRD §14: Self-Evaluation + Refine Auto-Fix
 from __future__ import annotations
 
 import httpx
-from typing import Optional, Dict, Any
+from typing import Dict, Any
 from taos.config.settings import get_settings
 from taos.config.model_config import ModelOrchestration
 from taos.core.evaluation.self_evaluator import SelfEvaluator, EvaluationResult

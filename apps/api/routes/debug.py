@@ -404,7 +404,7 @@ async def research_extractors_debug(
     if not goal:
         raise HTTPException(status_code=400, detail="query is required")
 
-    scoped_user_id = resolve_user_id(raw_request, user_id)
+    resolve_user_id(raw_request, user_id)
     engine = OrchestrationEngine()
     with contextlib.suppress(Exception):
         engine._latency.cache.clear()  # type: ignore[attr-defined]

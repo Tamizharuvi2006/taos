@@ -270,7 +270,6 @@ def _collect_research_metrics(records: List[Dict[str, Any]]) -> Dict[str, Any]:
     source_unavailable_count = 0
 
     for record in records:
-        route = _pick_route(record)
         mode = _pick_answer_mode(record)
         evidence = _pick_evidence(record)
         freshness = _pick_freshness(record)
