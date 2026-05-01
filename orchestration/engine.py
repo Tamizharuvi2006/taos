@@ -22,6 +22,7 @@ from __future__ import annotations
 import asyncio
 from collections import deque
 import json
+import os
 import re
 import time
 import traceback
@@ -431,6 +432,28 @@ class OrchestrationEngine:
                 route_decision["route_reason"] = "entity_lookup_flag_disabled"
                 route_decision["policy_reason"] = "entity_lookup_flag_disabled"
                 policy_reason = "entity_lookup_flag_disabled"
+            query_frame_observation = self._build_query_frame_observation(
+                query=goal,
+                selected_route=selected_route,
+            )
+            route_assist = self._decide_query_frame_route_assist(
+                query_frame_observation=query_frame_observation,
+                selected_route=selected_route,
+                query_kind=query_kind,
+                doc_context_active=bool(doc_context_active),
+            )
+            query_frame_observation.update(route_assist)
+            if bool(route_assist.get("route_assist_applied")):
+                selected_route = str(route_assist.get("route_assist_to") or selected_route).strip().lower()
+                route_decision["selected_route"] = selected_route
+                route_decision["route_reason"] = "query_frame_route_assist"
+                route_decision["policy_reason"] = "query_frame_route_assist"
+                route_decision["rerouted"] = True
+                route_decision["route_owner"] = self._route_owner_for_selected_route(
+                    selected_route=selected_route,
+                    phase107_route=deterministic_route.route,
+                )
+                policy_reason = "query_frame_route_assist"
             route_label_override = deterministic_route.route
             search_depth_decision = self._search_depth_router.route(effective_goal)
             route_boundary_summary = self._build_route_boundary_summary(
@@ -440,10 +463,24 @@ class OrchestrationEngine:
                 boundary=deterministic_route.boundary,
                 used_llm=deterministic_route.used_llm,
             )
-            query_frame_observation = self._build_query_frame_observation(
+            # Recompute alignment against the final selected route while keeping assist metadata.
+            refreshed_observation = self._build_query_frame_observation(
                 query=goal,
                 selected_route=selected_route,
             )
+            for key in (
+                "route_assist_enabled",
+                "route_assist_eligible",
+                "route_assist_applied",
+                "route_assist_from",
+                "route_assist_to",
+                "route_assist_reason",
+                "route_assist_blocked_reason",
+                "route_assist_confidence",
+                "route_assist_lookup_type",
+            ):
+                refreshed_observation[key] = query_frame_observation.get(key)
+            query_frame_observation = refreshed_observation
             self._set_query_frame_telemetry(query_frame_observation)
 
             if not isinstance(classification.metadata, dict):
@@ -3287,6 +3324,85 @@ class OrchestrationEngine:
         }
         for key, value in stats.items():
             self._set_trace_value(key, int(value))
+
+    def _decide_query_frame_route_assist(
+        self,
+        *,
+        query_frame_observation: Dict[str, Any],
+        selected_route: str,
+        query_kind: str,
+        doc_context_active: bool,
+    ) -> Dict[str, Any]:
+        enabled = str(os.getenv("QUERY_FRAME_ROUTE_ASSIST_ENABLED", "false")).strip().lower() == "true"
+        from_route = str(selected_route or "").strip().lower()
+        lookup_type = str(query_frame_observation.get("lookup_type") or "").strip().lower()
+        confidence = float(query_frame_observation.get("confidence") or 0.0)
+        intent_family = str(query_frame_observation.get("intent_family") or "unknown").strip().lower()
+        entity_name = str(query_frame_observation.get("entity_name") or "").strip()
+        canonical_query = str(query_frame_observation.get("canonical_query") or "").strip()
+        ambiguity_flags = list(query_frame_observation.get("ambiguity_flags") or [])
+        warnings = list(query_frame_observation.get("warnings") or [])
+
+        supported_lookup = {
+            "founder_lookup",
+            "ceo_lookup",
+            "linkedin_profile",
+            "official_website",
+            "business_legitimacy",
+        }
+        weak_routes = {"standard_task", "standard_answer", "no_search", "generic_task", "official_search"}
+        protected_routes = {"doc_mode", "clarification", "deep_research", "news_search"}
+
+        result = {
+            "route_assist_enabled": enabled,
+            "route_assist_eligible": False,
+            "route_assist_applied": False,
+            "route_assist_from": from_route,
+            "route_assist_to": from_route,
+            "route_assist_reason": "",
+            "route_assist_blocked_reason": "",
+            "route_assist_confidence": confidence,
+            "route_assist_lookup_type": lookup_type,
+        }
+        if not enabled:
+            result["route_assist_blocked_reason"] = "feature_disabled"
+            return result
+        if from_route in protected_routes or doc_context_active:
+            result["route_assist_blocked_reason"] = "protected_route"
+            return result
+        if str(query_kind or "").strip().lower() == "document_qa":
+            result["route_assist_blocked_reason"] = "protected_route"
+            return result
+        if from_route not in weak_routes:
+            result["route_assist_blocked_reason"] = "protected_route"
+            return result
+        if intent_family != "entity_lookup":
+            result["route_assist_blocked_reason"] = "query_frame_not_entity_lookup"
+            return result
+        if lookup_type not in supported_lookup:
+            result["route_assist_blocked_reason"] = "unsupported_lookup_type"
+            return result
+        if confidence < 0.85:
+            result["route_assist_blocked_reason"] = "query_frame_low_confidence"
+            return result
+        if not entity_name:
+            result["route_assist_blocked_reason"] = "query_frame_missing_entity"
+            return result
+        if not canonical_query:
+            result["route_assist_blocked_reason"] = "query_frame_missing_canonical_query"
+            return result
+        if ambiguity_flags:
+            result["route_assist_blocked_reason"] = "query_frame_ambiguous"
+            return result
+        if warnings:
+            result["route_assist_blocked_reason"] = "query_frame_validation_warning"
+            return result
+
+        result["route_assist_eligible"] = True
+        result["route_assist_applied"] = True
+        result["route_assist_to"] = "entity_lookup"
+        result["route_assist_reason"] = "high_confidence_entity_lookup"
+        return result
 
     def _calibrate_research_confidence(
         self,
