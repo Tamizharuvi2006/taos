@@ -2735,6 +2735,11 @@ class OrchestrationEngine:
             "entity_handoff_entity_name": "",
             "entity_handoff_requested_role": "",
             "entity_handoff_answer_language": "",
+            "answer_language": "en",
+            "answer_language_source": "default",
+            "language_preservation_applied": False,
+            "language_preservation_status": "english_default",
+            "language_preservation_limitations": "",
             "entity_search_queries_generated": [],
             "entity_search_query_lanes": [],
             "legacy_entity_resolver_used": True,
@@ -3262,6 +3267,11 @@ class OrchestrationEngine:
             "entity_handoff_entity_name": self._trace_data.get("entity_handoff_entity_name"),
             "entity_handoff_requested_role": self._trace_data.get("entity_handoff_requested_role"),
             "entity_handoff_answer_language": self._trace_data.get("entity_handoff_answer_language"),
+            "answer_language": self._trace_data.get("answer_language"),
+            "answer_language_source": self._trace_data.get("answer_language_source"),
+            "language_preservation_applied": self._trace_data.get("language_preservation_applied"),
+            "language_preservation_status": self._trace_data.get("language_preservation_status"),
+            "language_preservation_limitations": self._trace_data.get("language_preservation_limitations"),
             "entity_search_queries_generated": self._trace_data.get("entity_search_queries_generated"),
             "entity_search_query_lanes": self._trace_data.get("entity_search_query_lanes"),
             "legacy_entity_resolver_used": self._trace_data.get("legacy_entity_resolver_used"),
@@ -8709,6 +8719,61 @@ class OrchestrationEngine:
             "evidence_rows": confirmable_rows[:5] if confirmable_rows else rows[:5],
         }
 
+    def _resolve_entity_answer_language(self) -> tuple[str, str]:
+        handoff_lang = str(self._trace_data.get("entity_handoff_answer_language") or "").strip().lower()
+        if handoff_lang and handoff_lang not in {"unknown", "und"}:
+            return handoff_lang, "query_frame_handoff"
+        query_frame = self._trace_data.get("query_frame")
+        if isinstance(query_frame, dict):
+            frame_lang = str(query_frame.get("answer_language") or query_frame.get("detected_language") or "").strip().lower()
+            if frame_lang and frame_lang not in {"unknown", "und"}:
+                return frame_lang, "query_frame_observation"
+        return "en", "default"
+
+    def _apply_entity_answer_language_preservation(
+        self,
+        *,
+        answer_text: str,
+        answer_mode: str,
+        answer_language: str,
+    ) -> tuple[str, Dict[str, Any]]:
+        lang = str(answer_language or "en").strip().lower() or "en"
+        mode = str(answer_mode or "").strip().lower()
+        if lang in {"", "en", "unknown", "und"}:
+            return answer_text, {
+                "language_preservation_applied": False,
+                "language_preservation_status": "english_default",
+                "language_preservation_limitations": "",
+            }
+        if lang == "ta":
+            mode_line_map = {
+                "profile_link_result": "Tamil note: Idhu profile/link query. Candidate public profile details keezha irukku.",
+                "official_website_result": "Tamil note: Idhu official website query. Candidate website evidence keezha irukku.",
+                "business_legitimacy_result": "Tamil note: Idhu company legitimacy query. Public presence vs legal verification separate-aa paathirukkom.",
+            }
+            mode_line = mode_line_map.get(mode, "Tamil note: Public evidence base pannitu safe summary kudukiren.")
+            translated = "\n".join(
+                [
+                    "Tamil/Tanglish summary:",
+                    mode_line,
+                    "Source names, company names, and links unchanged-aa vechirukkom.",
+                    "",
+                    answer_text,
+                ]
+            ).strip()
+            return translated, {
+                "language_preservation_applied": True,
+                "language_preservation_status": "tamil_tanglish_applied",
+                "language_preservation_limitations": "Tamil rendering currently uses safe Tanglish framing; citations and source labels remain unchanged.",
+            }
+        return answer_text, {
+            "language_preservation_applied": False,
+            "language_preservation_status": "fallback_english",
+            "language_preservation_limitations": (
+                f"Language '{lang}' metadata preserved; response kept in English because a reliable renderer is not enabled yet."
+            ),
+        }
+
     def _build_entity_lookup_response(
         self,
         *,
@@ -8855,6 +8920,13 @@ class OrchestrationEngine:
             for row in evidence
         ]
         answer_obj = EntityAnswerComposer().compose(entity_query=entity_query, evidence_rows=entity_evidence)
+        answer_language, answer_language_source = self._resolve_entity_answer_language()
+        localized_answer, language_meta = self._apply_entity_answer_language_preservation(
+            answer_text=str(answer_obj.answer or "").strip(),
+            answer_mode=str(answer_obj.mode or "").strip(),
+            answer_language=answer_language,
+        )
+        answer_obj = replace(answer_obj, answer=localized_answer)
 
         stats = self._trace_data.setdefault("evidence_stats", {})
         stats.update(
@@ -8894,6 +8966,11 @@ class OrchestrationEngine:
                 "confidence_reason": str(answer_obj.confidence_reason or ""),
                 "provider_connectivity_failed": bool(provider_connectivity_failed),
                 "provider_error_safe": str(provider_error_safe or "").strip(),
+                "answer_language": answer_language,
+                "answer_language_source": answer_language_source,
+                "language_preservation_applied": bool(language_meta.get("language_preservation_applied")),
+                "language_preservation_status": str(language_meta.get("language_preservation_status") or ""),
+                "language_preservation_limitations": str(language_meta.get("language_preservation_limitations") or ""),
             }
         )
         self._set_trace_value(
@@ -8934,6 +9011,11 @@ class OrchestrationEngine:
                 "confidence_reason": str(answer_obj.confidence_reason or ""),
                 "provider_connectivity_failed": bool(provider_connectivity_failed),
                 "provider_error_safe": str(provider_error_safe or "").strip(),
+                "answer_language": answer_language,
+                "answer_language_source": answer_language_source,
+                "language_preservation_applied": bool(language_meta.get("language_preservation_applied")),
+                "language_preservation_status": str(language_meta.get("language_preservation_status") or ""),
+                "language_preservation_limitations": str(language_meta.get("language_preservation_limitations") or ""),
             },
         )
         self._set_trace_value("verification_state", answer_obj.verification_state or verification)
@@ -8955,6 +9037,11 @@ class OrchestrationEngine:
             bool(answer_obj.mode == "business_legitimacy_result" and answer_obj.registry_source_found),
         )
         self._set_trace_value("entity_answer_limitations", str(answer_obj.uncertainty or "").strip())
+        self._set_trace_value("answer_language", answer_language)
+        self._set_trace_value("answer_language_source", answer_language_source)
+        self._set_trace_value("language_preservation_applied", bool(language_meta.get("language_preservation_applied")))
+        self._set_trace_value("language_preservation_status", str(language_meta.get("language_preservation_status") or ""))
+        self._set_trace_value("language_preservation_limitations", str(language_meta.get("language_preservation_limitations") or ""))
         self._set_trace_value("confidence_reason", answer_obj.confidence_reason)
         self._set_trace_value("requested_role", answer_obj.requested_role)
         self._set_trace_value("supported_role", answer_obj.supported_role)
