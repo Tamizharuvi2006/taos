@@ -8,7 +8,7 @@ Each transition can have optional guards (conditions) and actions (side effects)
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Callable, Dict, FrozenSet, List, Optional
+from typing import Callable, Dict, List, Optional
 
 from taos.config.constants import FSMState
 from taos.core.state.state_schema import GlobalState

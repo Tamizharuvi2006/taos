@@ -10,11 +10,10 @@ Detection methods:
 
 from __future__ import annotations
 
-from collections import Counter
 from typing import List, Optional
 
 from taos.config.settings import get_settings
-from taos.core.state.state_schema import GlobalState, StepResult
+from taos.core.state.state_schema import GlobalState
 
 
 class LoopDetected(Exception):

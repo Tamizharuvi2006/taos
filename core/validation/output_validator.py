@@ -246,7 +246,6 @@ class OutputValidator:
         """Additional quality checks for strict mode."""
         # Check for error-only output
         error_indicators = ["error:", "exception:", "traceback", "failed to"]
-        lower = output.lower()
 
         error_lines = sum(1 for line in output.split("\n") if any(
             ind in line.lower() for ind in error_indicators

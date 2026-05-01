@@ -12,9 +12,9 @@ Used for conditional automation:
 from __future__ import annotations
 
 import re
-from typing import Any, Dict, Optional, Tuple
+from typing import Any, Optional, Tuple
 
-from taos.core.tasks.task_model import ConditionConfig, TaskExecution
+from taos.core.tasks.task_model import ConditionConfig
 
 
 class ConditionChecker:

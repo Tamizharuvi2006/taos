@@ -11,11 +11,10 @@ Executes Python code in an isolated subprocess with:
 from __future__ import annotations
 
 import asyncio
-import subprocess
 import sys
 import tempfile
 import os
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
 from taos.core.tools.registry import ToolDefinition, ToolPolicy
 from taos.config.constants import ToolRiskLevel

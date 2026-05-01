@@ -7,7 +7,7 @@ from .memory_deletion_service import MemoryDeletionService
 from .memory_export_bundle import export_all_memory_bundle
 from .memory_retention_policy import MemoryPrivacySettings
 from .user_memory_model import UserMemory, utc_now_iso
-from .user_memory_store import UserMemoryStore
+from .user_memory_store import GLOBAL_USER_MEMORY_STORE, UserMemoryStore
 
 
 class MemoryPrivacyService:
@@ -73,8 +73,5 @@ class MemoryPrivacyService:
     def _log(self, user_id: str, action: str, details: Dict[str, Any]) -> None:
         safe_details = {key: value for key, value in details.items() if key not in {"content", "memories"}}
         self._audit.setdefault(user_id, []).append({"timestamp": utc_now_iso(), "action": action, "details": safe_details})
-
-
-from .user_memory_store import GLOBAL_USER_MEMORY_STORE
 
 GLOBAL_MEMORY_PRIVACY = MemoryPrivacyService(GLOBAL_USER_MEMORY_STORE)

@@ -23,7 +23,7 @@ from __future__ import annotations
 
 import re
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 
 from taos.core.semantic.intent_classifier import IntentType
 
@@ -141,12 +141,14 @@ class ResponseFormatter:
         confidence_display = ""
         uncertainty_wrapper = False
         if confidence > 0:
-            if confidence >= 0.9: confidence_display = "High"
-            elif confidence >= 0.7: confidence_display = "Medium"
-            else: 
+            if confidence >= 0.9:
+                confidence_display = "High"
+            elif confidence >= 0.7:
+                confidence_display = "Medium"
+            else:
                 confidence_display = "Low"
                 uncertainty_wrapper = True
-                
+
         if uncertainty_wrapper:
             formatted_text = f"⚠️ I couldn't find reliable data for this.\n\n{formatted_text}\n\n👉 Suggestion: Try refining the query or providing broader context."
 

@@ -10,16 +10,13 @@ Manages memory across the agent lifecycle:
 
 from __future__ import annotations
 
-import time
 from typing import Any, Dict, List, Optional, Set
 
 from taos.config.constants import (
     CompressionStrategy,
     DEFAULT_MAX_TOKENS_CONTEXT,
-    DEFAULT_MEMORY_MIN_CONFIDENCE,
     DEFAULT_SUMMARIZATION_TRIGGER,
 )
-from taos.config.settings import get_settings
 from taos.core.memory.memory_store import MemoryEntry, MemoryStore
 from taos.core.state.state_schema import (
     GlobalState,

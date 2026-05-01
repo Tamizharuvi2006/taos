@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import asyncio
 import unittest
 
 from taos.core.research import ResearchPipeline

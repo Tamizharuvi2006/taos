@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from taos.core.memory.conversation_memory_manager import ConversationMemoryManager
 from taos.core.memory.memory_policy import MemoryPolicy
-from taos.core.memory.project_memory import ProjectMemory, extract_project_facts
+from taos.core.memory.project_memory import extract_project_facts
 from taos.core.memory.rolling_summary import RollingSummary
 
 

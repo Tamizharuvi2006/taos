@@ -15,7 +15,7 @@ from __future__ import annotations
 
 import time
 from dataclasses import dataclass
-from typing import List, Optional
+from typing import Optional
 
 from taos.config.settings import get_settings
 from taos.core.state.state_schema import GlobalState

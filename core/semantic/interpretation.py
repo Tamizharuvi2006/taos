@@ -10,7 +10,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 import re
 import unicodedata
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from taos.core.semantic.intent_classifier import ClassificationResult, IntentType
 from taos.core.semantic.query_rewriter import RewriteResult
@@ -233,7 +233,6 @@ class RequestInterpreter:
         has_active_doc: bool,
         language_profile: Dict[str, Any],
     ) -> Dict[str, Any]:
-        q_raw = str(raw_query or "")
         q_norm = str(normalized_query or "").lower()
         q_rewritten = str(rewritten_query or "").lower()
         minimal_progress_followup = bool(_MINIMAL_PROGRESS_RE.fullmatch(q_norm))

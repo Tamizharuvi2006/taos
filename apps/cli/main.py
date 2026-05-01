@@ -14,7 +14,6 @@ import argparse
 import asyncio
 import json
 import sys
-from typing import List, Optional
 
 
 def main() -> None:
@@ -71,7 +70,7 @@ def _handle_run(args) -> None:
         print("Error: No goal provided. Use 'taos run \"your goal\"' or --file", file=sys.stderr)
         sys.exit(1)
 
-    print(f"🧠 TAOS AgentOS")
+    print("🧠 TAOS AgentOS")
     print(f"{'─' * 50}")
     print(f"📋 Goal: {goal}")
     print(f"{'─' * 50}")
@@ -106,7 +105,7 @@ async def _execute_goal(goal: str, plan_only: bool = False) -> dict:
 def _print_result(result: dict, plan_only: bool = False) -> None:
     """Pretty-print execution result."""
     if plan_only:
-        print(f"\n📝 Generated Plan:")
+        print("\n📝 Generated Plan:")
         plan = result.get("plan", {})
         steps = plan.get("steps", [])
         for i, step in enumerate(steps):
@@ -122,7 +121,7 @@ def _print_result(result: dict, plan_only: bool = False) -> None:
     print(f"\n{status_icon} Status: {result.get('status', 'unknown')}")
 
     if result.get("result"):
-        print(f"\n📄 Result:")
+        print("\n📄 Result:")
         result_text = str(result["result"])
         if len(result_text) > 2000:
             result_text = result_text[:2000] + "..."
@@ -131,7 +130,7 @@ def _print_result(result: dict, plan_only: bool = False) -> None:
     if result.get("error"):
         print(f"\n⚠️  Error: {result['error']}")
 
-    print(f"\n📊 Metrics:")
+    print("\n📊 Metrics:")
     print(f"  Steps executed: {result.get('steps_executed', 0)}")
     print(f"  Total cost: ${result.get('total_cost', 0):.4f}")
     print(f"  Confidence: {result.get('confidence', 0):.2f}")

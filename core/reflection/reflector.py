@@ -17,8 +17,6 @@ Production features:
 from __future__ import annotations
 
 import json
-import time
-from typing import Any, Dict, List, Optional
 
 import httpx
 
@@ -100,7 +98,7 @@ class Reflector:
         """
         try:
             return await self._llm_reflect(step_result, step, state)
-        except Exception as e:
+        except Exception:
             # Fallback to heuristic reflection
             return self._heuristic_reflect(step_result, step)
 

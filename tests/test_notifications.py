@@ -4,8 +4,6 @@ TAOS Tests — Notification Engine.
 Tests Notification Config loading, payload building, and task integration.
 """
 
-import pytest
-import time
 from taos.core.notifications.models import (
     NotificationChannel,
     NotificationEvent,

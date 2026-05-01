@@ -9,9 +9,9 @@ from __future__ import annotations
 import pytest
 
 from taos.config.constants import GoalComplexity
-from taos.core.planner.plan_validator import PlanValidator, ValidationResult, validate_goal
+from taos.core.planner.plan_validator import PlanValidator, validate_goal
 from taos.core.state.state_schema import PlanObject, PlanStep
-from taos.core.validation.goal_validator import GoalValidator, GoalValidationResult
+from taos.core.validation.goal_validator import GoalValidator
 
 
 # ═══════════════════════════════════════════════════════════
