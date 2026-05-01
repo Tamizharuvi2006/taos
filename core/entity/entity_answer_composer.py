@@ -76,8 +76,13 @@ class EntityAnswerComposer:
             )
         ranked = EntityEvidenceRanker().rank(evidence_rows)
         profiles = ProfileDiscovery().rank_profiles(profile_candidates)
+        requested_attribute = str(entity_query.requested_attribute or "").strip().lower()
+        if requested_attribute in {"official_website", "website"}:
+            return self._official_website_answer(entity_query=entity_query, ranked=ranked)
+        if entity_query.intent == EntityIntent.LEGITIMACY_CHECK or requested_attribute in {"legitimacy", "business_legitimacy"}:
+            return self._business_legitimacy_answer(entity_query=entity_query, ranked=ranked)
         if entity_query.intent in {EntityIntent.OFFICIAL_SOCIAL_PROFILE, EntityIntent.LINKEDIN_PROFILE}:
-            return self._profile_answer(entity_query, profiles)
+            return self._profile_answer(entity_query, profiles, ranked=ranked)
         candidates = [row.candidate_name for row in ranked if row.candidate_name]
         counts = Counter(candidates)
         official_found = any(
@@ -253,10 +258,40 @@ class EntityAnswerComposer:
             alternatives=tuple(name for name, _ in counts.most_common()[1:]),
         )
 
-    def _profile_answer(self, entity_query: EntityQuery, profiles: List[EntityProfileCandidate]) -> EntityAnswer:
+    def _profile_answer(
+        self,
+        entity_query: EntityQuery,
+        profiles: List[EntityProfileCandidate],
+        *,
+        ranked: List[EntityEvidence],
+    ) -> EntityAnswer:
         if not profiles:
+            linkedin_rows = [row for row in ranked if row.source_type in {"company_linkedin", "person_linkedin", "verified_social_link"}]
+            if linkedin_rows:
+                best_row = linkedin_rows[0]
+                link = str(best_row.url or "").strip()
+                label = str(best_row.title or best_row.candidate_name or link or "LinkedIn candidate profile").strip()
+                candidate_note = "Multiple candidate profile signals were found; verify the exact company page." if len(linkedin_rows) > 1 else "This is a candidate public profile signal and should be verified."
+                return EntityAnswer(
+                    mode="profile_link_result",
+                    answer=f"The likely profile result for {entity_query.entity_name} is {link or label}.",
+                    confidence="Medium",
+                    why="Public LinkedIn/profile evidence exists but no high-confidence official-link profile candidate was fully confirmed.",
+                    uncertainty=candidate_note,
+                    verification_state="candidate",
+                    selected_candidate=link or label,
+                    candidate_count=len(linkedin_rows),
+                    official_source_found=False,
+                    linkedin_source_found=True,
+                    registry_source_found=False,
+                    evidence_strength="candidate",
+                    source_agreement="partial",
+                    disambiguation_needed=len(linkedin_rows) > 1,
+                    confidence_reason="A public LinkedIn/profile signal is present, but source-of-record confirmation is limited.",
+                    sources_checked=tuple(_source_labels(linkedin_rows)),
+                )
             return EntityAnswer(
-                mode="profile_unverified",
+                mode="profile_link_result",
                 answer=f"I did not find a public profile I can treat as official for {entity_query.entity_name}.",
                 confidence="Low",
                 why="No safe public candidate profile was supplied.",
@@ -268,12 +303,11 @@ class EntityAnswerComposer:
                 sources_checked=(),
             )
         best = profiles[0]
-        mode = "profile_likely_official" if best.confidence >= 0.82 else "profile_unverified"
         confidence = "Medium-high" if best.confidence >= 0.82 else "Medium" if best.confidence >= 0.55 else "Low"
         verification_state = "confirmed" if best.confidence >= 0.82 else "candidate"
         confidence_reason = "The candidate profile was ranked using official-link, public verification, handle/name, and domain signals."
         return EntityAnswer(
-            mode=mode,
+            mode="profile_link_result",
             answer=f"The likely public {best.platform} profile is {best.handle}.",
             confidence=confidence,
             why="The candidate profile was ranked using official-link, name/handle, and domain-match signals.",
@@ -290,6 +324,127 @@ class EntityAnswerComposer:
             confidence_reason=confidence_reason,
             sources_checked=(best.url or best.handle,),
             alternatives=tuple(profile.handle for profile in profiles[1:3]),
+        )
+
+    def _official_website_answer(self, *, entity_query: EntityQuery, ranked: List[EntityEvidence]) -> EntityAnswer:
+        if not ranked:
+            return EntityAnswer(
+                mode="official_website_result",
+                answer=f"I could not find a usable official website signal for {entity_query.entity_name}.",
+                confidence="Low",
+                why="No usable public website evidence was found.",
+                uncertainty="This does not prove there is no website; only that current evidence was insufficient.",
+                verification_state="not_verified",
+                official_source_found=False,
+                linkedin_source_found=False,
+                registry_source_found=False,
+                evidence_strength="weak",
+                source_agreement="unknown",
+                confidence_reason="No usable public website evidence survived ranking.",
+            )
+        website_rows = [row for row in ranked if row.source_type == "official_website"]
+        if website_rows:
+            best = website_rows[0]
+            link = str(best.url or "").strip()
+            return EntityAnswer(
+                mode="official_website_result",
+                answer=f"The likely official website for {entity_query.entity_name} is {link or best.title}.",
+                confidence="Medium",
+                why="An official-domain style source was ranked highest among public website evidence.",
+                uncertainty="Treat this as a likely/candidate official website unless corroborated by additional official signals.",
+                verification_state="candidate",
+                selected_candidate=link or best.title,
+                candidate_count=len(website_rows),
+                official_source_found=True,
+                linkedin_source_found=any(row.source_type in {"company_linkedin", "person_linkedin"} for row in ranked),
+                registry_source_found=any(row.source_type in {"government_registry", "registry_directory"} for row in ranked),
+                evidence_strength="candidate",
+                source_agreement="partial" if len(website_rows) > 1 else "supported",
+                confidence_reason="A direct company-domain style source is present, but strict source-of-record confirmation is still limited.",
+                sources_checked=tuple(_source_labels(ranked)),
+            )
+        fallback = ranked[0]
+        return EntityAnswer(
+            mode="official_website_result",
+            answer=f"I found website candidates for {entity_query.entity_name}, but none can be safely confirmed as the official site yet.",
+            confidence="Low",
+            why="Only aggregator/directory/general-web evidence was available.",
+            uncertainty="This is candidate website evidence, not confirmed official domain proof.",
+            verification_state="candidate",
+            selected_candidate=str(fallback.url or fallback.title or "").strip(),
+            candidate_count=len(ranked),
+            official_source_found=False,
+            linkedin_source_found=any(row.source_type in {"company_linkedin", "person_linkedin"} for row in ranked),
+            registry_source_found=any(row.source_type in {"government_registry", "registry_directory"} for row in ranked),
+            evidence_strength="candidate",
+            source_agreement="mixed",
+            confidence_reason="No official-domain evidence was found; only lower-confidence web candidates exist.",
+            sources_checked=tuple(_source_labels(ranked)),
+        )
+
+    def _business_legitimacy_answer(self, *, entity_query: EntityQuery, ranked: List[EntityEvidence]) -> EntityAnswer:
+        website_found = any(row.source_type == "official_website" for row in ranked)
+        linkedin_found = any(row.source_type in {"company_linkedin", "person_linkedin", "verified_social_link"} for row in ranked)
+        registry_found = any(row.source_type in {"government_registry", "registry_directory"} for row in ranked)
+        public_presence_supported = bool(website_found or linkedin_found or registry_found)
+        legal_registration_verified = bool(any(row.source_type == "government_registry" for row in ranked))
+
+        if not ranked:
+            return EntityAnswer(
+                mode="business_legitimacy_result",
+                answer=f"I could not find enough public evidence to assess whether {entity_query.entity_name} has a reliable company presence.",
+                confidence="Low",
+                why="No usable website/profile/registry evidence was available.",
+                uncertainty="This is not legal verification and does not prove non-existence.",
+                verification_state="not_verified",
+                official_source_found=False,
+                linkedin_source_found=False,
+                registry_source_found=False,
+                evidence_strength="weak",
+                source_agreement="unknown",
+                confidence_reason="No usable public legitimacy evidence survived ranking.",
+            )
+
+        if public_presence_supported:
+            legal_line = (
+                "Legal/registry verification is supported by source-of-record evidence."
+                if legal_registration_verified
+                else "Legal registration is not verified from source-of-record registry evidence in this result set."
+            )
+            answer = (
+                f"Public online presence for {entity_query.entity_name} is supported by current evidence. "
+                f"{legal_line}"
+            )
+            return EntityAnswer(
+                mode="business_legitimacy_result",
+                answer=answer,
+                confidence="Medium" if legal_registration_verified else "Low",
+                why="Legitimacy was assessed using website/profile/registry evidence instead of role attribution.",
+                uncertainty="Public presence support is not the same as legal registration proof unless registry evidence is present.",
+                verification_state="candidate",
+                official_source_found=website_found,
+                linkedin_source_found=linkedin_found,
+                registry_source_found=registry_found,
+                evidence_strength="candidate",
+                source_agreement="partial",
+                confidence_reason="At least one public presence source exists; legal verification depends on registry-level evidence.",
+                sources_checked=tuple(_source_labels(ranked)),
+            )
+
+        return EntityAnswer(
+            mode="business_legitimacy_result",
+            answer=f"I did not find strong public presence evidence for {entity_query.entity_name} in the current result set.",
+            confidence="Low",
+            why="Only weak/indirect evidence was available.",
+            uncertainty="This does not prove the company is fake; it indicates low-confidence public evidence.",
+            verification_state="not_verified",
+            official_source_found=False,
+            linkedin_source_found=False,
+            registry_source_found=False,
+            evidence_strength="weak",
+            source_agreement="unknown",
+            confidence_reason="No strong website/profile/registry evidence was found.",
+            sources_checked=tuple(_source_labels(ranked)),
         )
 
 

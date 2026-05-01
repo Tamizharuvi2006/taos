@@ -7560,6 +7560,7 @@ class OrchestrationEngine:
                 queries=queries,
                 provider_connectivity_failed=provider_connectivity_failed,
                 provider_error_safe=provider_error_text[:180],
+                lookup_type_hint=str(handoff.get("entity_handoff_lookup_type") or ""),
             )
 
         extract_candidates = list(ranked_rows[: min(8, len(ranked_rows))])
@@ -7868,6 +7869,7 @@ class OrchestrationEngine:
             queries=queries,
             provider_connectivity_failed=provider_connectivity_failed and verification_state == "not_verified",
             provider_error_safe=provider_error_text[:180],
+            lookup_type_hint=str(handoff.get("entity_handoff_lookup_type") or ""),
         )
         await self._store_research_profile_cache(
             goal=goal,
@@ -8696,8 +8698,10 @@ class OrchestrationEngine:
         queries: List[str],
         provider_connectivity_failed: bool = False,
         provider_error_safe: str = "",
+        lookup_type_hint: str = "",
     ) -> str:
-        from taos.core.entity import EntityAnswerComposer, EntityEvidence, EntityIntentDetector
+        from taos.core.entity import EntityAnswerComposer, EntityEvidence, EntityIntent, EntityIntentDetector
+        from dataclasses import replace
 
         evidence = list(evidence_rows or [])[:6]
         verification = str(verification_state or "not_verified").strip().lower()
@@ -8776,6 +8780,15 @@ class OrchestrationEngine:
             return bool(role_claim and bool(row.get("role_applies_to_person")))
 
         entity_query = EntityIntentDetector().detect(goal)
+        hint = str(lookup_type_hint or "").strip().lower()
+        if hint == "official_website":
+            entity_query = replace(entity_query, requested_attribute="official_website", intent=EntityIntent.COMPANY_DETAILS)
+        elif hint == "business_legitimacy":
+            entity_query = replace(entity_query, requested_attribute="business_legitimacy", intent=EntityIntent.LEGITIMACY_CHECK)
+        elif hint == "linkedin_profile":
+            entity_query = replace(entity_query, requested_attribute="linkedin_profile", intent=EntityIntent.LINKEDIN_PROFILE)
+        if not entity_query.has_entity and str(entity_label or "").strip():
+            entity_query = replace(entity_query, entity_name=str(entity_label or "").strip())
         entity_evidence = [
             EntityEvidence(
                 title=str(row.get("title") or "").strip(),
@@ -8824,12 +8837,24 @@ class OrchestrationEngine:
         stats.update(
             {
                 "entity_answer_mode": answer_obj.mode,
+                "entity_answer_mode_source": "query_frame_handoff" if str(lookup_type_hint or "").strip() else "legacy_intent",
                 "verification_state": answer_obj.verification_state or verification,
                 "selected_candidate": answer_obj.selected_candidate,
                 "candidate_count": int(answer_obj.candidate_count or 0),
                 "official_source_found": bool(answer_obj.official_source_found),
                 "linkedin_source_found": bool(answer_obj.linkedin_source_found),
                 "registry_source_found": bool(answer_obj.registry_source_found),
+                "entity_profile_link_found": bool(answer_obj.linkedin_source_found),
+                "entity_official_website_found": bool(answer_obj.official_source_found),
+                "entity_registry_evidence_found": bool(answer_obj.registry_source_found),
+                "entity_business_presence_supported": bool(
+                    answer_obj.mode == "business_legitimacy_result"
+                    and (answer_obj.official_source_found or answer_obj.linkedin_source_found or answer_obj.registry_source_found)
+                ),
+                "entity_legal_registration_verified": bool(
+                    answer_obj.mode == "business_legitimacy_result" and answer_obj.registry_source_found
+                ),
+                "entity_answer_limitations": str(answer_obj.uncertainty or "").strip(),
                 "requested_role": str(answer_obj.requested_role or "").strip(),
                 "supported_role": str(answer_obj.supported_role or "").strip(),
                 "role_match": bool(answer_obj.role_match),
@@ -8854,12 +8879,24 @@ class OrchestrationEngine:
                 "intent": "entity_lookup",
                 "entity_name": entity_label,
                 "answer_mode": answer_obj.mode,
+                "answer_mode_source": "query_frame_handoff" if str(lookup_type_hint or "").strip() else "legacy_intent",
                 "verification_state": answer_obj.verification_state or verification,
                 "selected_candidate": answer_obj.selected_candidate,
                 "candidate_count": int(answer_obj.candidate_count or 0),
                 "official_source_found": bool(answer_obj.official_source_found),
                 "linkedin_source_found": bool(answer_obj.linkedin_source_found),
                 "registry_source_found": bool(answer_obj.registry_source_found),
+                "entity_profile_link_found": bool(answer_obj.linkedin_source_found),
+                "entity_official_website_found": bool(answer_obj.official_source_found),
+                "entity_registry_evidence_found": bool(answer_obj.registry_source_found),
+                "entity_business_presence_supported": bool(
+                    answer_obj.mode == "business_legitimacy_result"
+                    and (answer_obj.official_source_found or answer_obj.linkedin_source_found or answer_obj.registry_source_found)
+                ),
+                "entity_legal_registration_verified": bool(
+                    answer_obj.mode == "business_legitimacy_result" and answer_obj.registry_source_found
+                ),
+                "entity_answer_limitations": str(answer_obj.uncertainty or "").strip(),
                 "requested_role": str(answer_obj.requested_role or "").strip(),
                 "supported_role": str(answer_obj.supported_role or "").strip(),
                 "role_match": bool(answer_obj.role_match),
@@ -8879,6 +8916,22 @@ class OrchestrationEngine:
         self._set_trace_value("verification_state", answer_obj.verification_state or verification)
         self._set_trace_value("selected_candidate", answer_obj.selected_candidate)
         self._set_trace_value("entity_answer_mode", answer_obj.mode)
+        self._set_trace_value("entity_answer_mode_source", "query_frame_handoff" if str(lookup_type_hint or "").strip() else "legacy_intent")
+        self._set_trace_value("entity_profile_link_found", bool(answer_obj.linkedin_source_found))
+        self._set_trace_value("entity_official_website_found", bool(answer_obj.official_source_found))
+        self._set_trace_value(
+            "entity_business_presence_supported",
+            bool(
+                answer_obj.mode == "business_legitimacy_result"
+                and (answer_obj.official_source_found or answer_obj.linkedin_source_found or answer_obj.registry_source_found)
+            ),
+        )
+        self._set_trace_value("entity_registry_evidence_found", bool(answer_obj.registry_source_found))
+        self._set_trace_value(
+            "entity_legal_registration_verified",
+            bool(answer_obj.mode == "business_legitimacy_result" and answer_obj.registry_source_found),
+        )
+        self._set_trace_value("entity_answer_limitations", str(answer_obj.uncertainty or "").strip())
         self._set_trace_value("confidence_reason", answer_obj.confidence_reason)
         self._set_trace_value("requested_role", answer_obj.requested_role)
         self._set_trace_value("supported_role", answer_obj.supported_role)
