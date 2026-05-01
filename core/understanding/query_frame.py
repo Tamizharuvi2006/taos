@@ -56,7 +56,7 @@ class QueryFrameBuilder:
         re.compile(r"^\s*(?P<entity>.+?)\s+official\s+site\s*$", re.I),
     )
     _REAL_COMPANY_PATTERNS = (
-        re.compile(r"^\s*is\s+(?P<entity>.+?)\s+a\s+real\s+company\??\s*$", re.I),
+        re.compile(r"^\s*is\s+(?P<entity>.+?)\s+(?:a\s+)?real\s+company\??\s*$", re.I),
         re.compile(r"^\s*(?P<entity>.+?)\s+உண்மையான\s+company\s+ஆ\??\s*$", re.I),
     )
 

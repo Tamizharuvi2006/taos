@@ -79,6 +79,7 @@ from taos.core.semantic.tone_profile import GLOBAL_TONE_PROFILER, ToneResult
 from taos.core.routing import RouteDecider
 from taos.core.search import SearchDepthRouter, SearchLite, SearchResultCache
 from taos.core.understanding.universal_understanding_gateway import UniversalUnderstandingGateway, frame_to_trace_summary
+from taos.core.understanding.query_frame import QueryFrameBuilder
 from taos.core.fast_path import FastPathEngine, QueryCache
 from taos.core.output.response_formatter import ResponseFormatter
 from taos.core.output.templates import TemplateFormatter
@@ -193,6 +194,7 @@ class OrchestrationEngine:
         self._request_interpreter = RequestInterpreter()
         self._route_decider = RouteDecider()
         self._universal_understanding = UniversalUnderstandingGateway()
+        self._query_frame_builder = QueryFrameBuilder()
         self._search_depth_router = SearchDepthRouter()
         self._search_result_cache = SearchResultCache()
         self._search_lite = SearchLite(cache=self._search_result_cache)
@@ -438,6 +440,10 @@ class OrchestrationEngine:
                 boundary=deterministic_route.boundary,
                 used_llm=deterministic_route.used_llm,
             )
+            query_frame_observation = self._build_query_frame_observation(
+                query=goal,
+                selected_route=selected_route,
+            )
 
             if not isinstance(classification.metadata, dict):
                 classification.metadata = {}
@@ -467,6 +473,7 @@ class OrchestrationEngine:
                     "search_depth_reason": search_depth_decision.reason,
                     "search_depth_confidence": search_depth_decision.confidence,
                     "universal_understanding": universal_summary,
+                    "query_frame_observation": query_frame_observation,
                 }
             )
 
@@ -489,7 +496,17 @@ class OrchestrationEngine:
             self._set_trace_value("route_decision", route_decision)
             self._set_trace_value("route_boundary_summary", route_boundary_summary)
             self._set_trace_value("universal_understanding", universal_summary)
+            self._set_trace_value("query_frame", query_frame_observation)
             self._set_trace_value("meaning_frame", dict(universal_summary.get("meaning_frame") or {}))
+            self._log(
+                "engine.query_frame_observe",
+                request_id=self._active_request_id,
+                current_route=selected_route,
+                query_frame_intent_family=str(query_frame_observation.get("query_frame_suggested_family") or "unknown"),
+                entity_name=str(query_frame_observation.get("entity_name") or ""),
+                requested_role=str(query_frame_observation.get("requested_role") or ""),
+                route_alignment=str(query_frame_observation.get("route_alignment") or "unknown"),
+            )
             self._set_trace_value(
                 "planning_handoff",
                 {
@@ -2666,6 +2683,7 @@ class OrchestrationEngine:
             "routing_profile": None,
             "route_decision": None,
             "route_boundary_summary": None,
+            "query_frame": None,
             "planning_handoff": None,
             "planner_path": None,
             "dag_name": None,
@@ -3174,6 +3192,7 @@ class OrchestrationEngine:
             "routing_profile": self._trace_data.get("routing_profile"),
             "route_decision": self._trace_data.get("route_decision"),
             "route_boundary_summary": self._trace_data.get("route_boundary_summary"),
+            "query_frame": self._trace_data.get("query_frame"),
             "planning_handoff": self._trace_data.get("planning_handoff"),
             "planner_path": planner_path,
             "dag_name": dag_name,
@@ -3209,6 +3228,49 @@ class OrchestrationEngine:
             "trust_block": trust_block,
             "evidence_matrix_summary": evidence_report.get("summary"),
         }
+
+    def _build_query_frame_observation(self, *, query: str, selected_route: str) -> Dict[str, Any]:
+        frame = self._query_frame_builder.build(query)
+        intent_family = str(frame.intent or "unknown").strip().lower() or "unknown"
+        alignment = self._compute_query_frame_route_alignment(
+            selected_route=selected_route,
+            query_frame_suggested_family=intent_family,
+        )
+        return {
+            "canonical_query": str(frame.canonical_query or "").strip(),
+            "original_query": str(frame.original_query or "").strip(),
+            "detected_language": str(frame.detected_language or "en").strip().lower(),
+            "intent_family": intent_family,
+            "entity_name": str(frame.entity or "").strip(),
+            "requested_role": str(frame.role or "").strip().lower(),
+            "profile_target": str(frame.lookup_type or "").strip().lower(),
+            "evidence_need": "public_web_evidence" if intent_family == "entity_lookup" else "unknown",
+            "ambiguity_flags": [],
+            "normalized_terms": [part for part in re.findall(r"[a-z0-9]+", str(frame.normalized_query or "").lower()) if part][:20],
+            "current_selected_route": str(selected_route or "").strip().lower(),
+            "query_frame_suggested_family": intent_family,
+            "route_alignment": alignment["route_alignment"],
+            "mismatch_reason": alignment["mismatch_reason"],
+        }
+
+    def _compute_query_frame_route_alignment(
+        self,
+        *,
+        selected_route: str,
+        query_frame_suggested_family: str,
+    ) -> Dict[str, str]:
+        selected = str(selected_route or "").strip().lower()
+        suggested = str(query_frame_suggested_family or "").strip().lower()
+        if suggested in {"", "unknown"}:
+            return {"route_alignment": "unknown", "mismatch_reason": ""}
+        if suggested == "entity_lookup":
+            if selected == "entity_lookup":
+                return {"route_alignment": "aligned", "mismatch_reason": ""}
+            return {
+                "route_alignment": "mismatch",
+                "mismatch_reason": "query_frame_entity_lookup_but_selected_route_differs",
+            }
+        return {"route_alignment": "unknown", "mismatch_reason": ""}
 
     def _calibrate_research_confidence(
         self,

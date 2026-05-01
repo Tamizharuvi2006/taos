@@ -187,6 +187,7 @@ def normalize_contract_payload(payload: Dict[str, Any]) -> Dict[str, Any]:
         "route_confidence",
         "route_decision",
         "route_boundary_summary",
+        "query_frame",
         "doc_context_active",
         "evidence_matrix_summary",
         "freshness_summary",

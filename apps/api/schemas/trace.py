@@ -294,6 +294,10 @@ class TraceResponse(BaseModel):
         default=None,
         description="Phase 107 route ownership and boundary guard summary.",
     )
+    query_frame: Optional[Dict[str, Any]] = Field(
+        default=None,
+        description="Observe-only QueryFrame runtime summary for route-alignment debugging.",
+    )
     planning_handoff: Optional[Dict[str, Any]] = Field(
         default=None,
         description="Planner handoff payload carrying raw/normalized/rewritten query and routing constraints.",
