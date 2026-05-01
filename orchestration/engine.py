@@ -6609,21 +6609,23 @@ class OrchestrationEngine:
             stats["official_source_count"] = int(source_quality_summary.get("official_source_count") or 0)
         if not deduped:
             candidate_rows = preselected_rows or ranked_rows or search_rows
+            sparse_fallback_rows = [dict(row) for row in candidate_rows if isinstance(row, dict)]
+            sparse_agreement = self._compute_research_agreement(
+                sparse_fallback_rows,
+                freshness_mode=freshness_mode,
+                goal=goal,
+                high_stakes_mode=high_stakes_mode,
+            )
+            sparse_fallback = None
             if preselected_rows or ranked_rows:
-                agreement = self._compute_research_agreement(
-                    candidate_rows,
-                    freshness_mode=freshness_mode,
+                sparse_fallback = self._build_research_evidence_fallback(
                     goal=goal,
+                    evidence_rows=sparse_fallback_rows,
+                    freshness_mode=freshness_mode,
+                    agreement=sparse_agreement,
                     high_stakes_mode=high_stakes_mode,
                 )
-                fallback = self._build_research_evidence_fallback(
-                    goal=goal,
-                    evidence_rows=candidate_rows,
-                    freshness_mode=freshness_mode,
-                    agreement=agreement,
-                    high_stakes_mode=high_stakes_mode,
-                )
-                if fallback:
+                if sparse_fallback:
                     self._mark_trace_fallback(
                         reason="research_evidence_fallback",
                         freshness_status="recovered",
@@ -6636,7 +6638,7 @@ class OrchestrationEngine:
                         summary="Ranking/quality filters were sparse; returned structured evidence fallback.",
                     )
                     self._log("engine.research_role_flow", role_flow=role_flow)
-                    return fallback
+                    return sparse_fallback
             self._mark_trace_fallback(
                 reason="profile_evidence_mismatch" if profile_mode else "search_sparse",
                 freshness_status="failed",
@@ -6660,7 +6662,28 @@ class OrchestrationEngine:
                         }
                     )
                 stats["source_rows"] = [r for r in sparse_rows if str(r.get("link") or "").strip()]
+                if sparse_fallback:
+                    stats["search_sparse_fallback_used"] = True
             self._log("engine.research_role_flow", role_flow=role_flow)
+            if sparse_fallback:
+                self._append_direct_trace_step(
+                    step_type="reason",
+                    status="failed",
+                    tool="source_ranker",
+                    summary="Search rows were sparse after quality filters; returned structured evidence fallback from available rows.",
+                )
+                self._mark_trace_fallback(
+                    reason="research_evidence_fallback",
+                    freshness_status="recovered",
+                    freshness_note="Quality filters rejected rows; returned snippet-level evidence fallback from available search results.",
+                )
+                await self._store_research_profile_cache(
+                    goal=goal,
+                    answer=sparse_fallback,
+                    evidence_rows=sparse_fallback_rows,
+                    agreement=sparse_agreement,
+                )
+                return sparse_fallback
             no_result = self._no_result_handler.build(
                 goal=goal,
                 checked_queries=queries,
@@ -9231,6 +9254,12 @@ class OrchestrationEngine:
         else:
             lines.append("- Treat this as the best-supported answer from current retrievable evidence, not a guarantee that no newer source exists.")
 
+        lines.append("")
+        lines.append("Timeline (newest evidence first)")
+        for idx, row in enumerate(evidence_rows[:6], start=1):
+            date_hint = row.get("date_hint") or row.get("published_at") or "date n/a"
+            title = re.sub(r"\s+", " ", (row.get("title") or "").strip())[:120] or f"Source {idx}"
+            lines.append(f"- [{date_hint}] {title} [S{idx}]")
         lines.extend(["", "Sources:"])
         for idx, row in enumerate(evidence_rows[:6], start=1):
             title = (row.get("title") or "").strip() or f"Source {idx}"
