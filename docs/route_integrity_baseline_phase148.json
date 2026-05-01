@@ -1,0 +1,25 @@
+{
+  "mismatches": [
+    {
+      "case_id": "ambiguous_1",
+      "expected_type": "deep_research",
+      "observed_type": "clarification",
+      "route_label": "clarification",
+      "owner": "clarification_fallback"
+    },
+    {
+      "case_id": "adversarial_1",
+      "expected_type": "standard_task",
+      "observed_type": "no_search",
+      "route_label": "no_search",
+      "owner": "direct_llm_no_tools"
+    },
+    {
+      "case_id": "tamil_mix_1",
+      "expected_type": "standard_task",
+      "observed_type": "no_search",
+      "route_label": "no_search",
+      "owner": "direct_llm_no_tools"
+    }
+  ]
+}
