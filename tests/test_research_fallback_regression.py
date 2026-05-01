@@ -489,9 +489,6 @@ async def test_profile_cache_lookup_skips_old_event_style_answers(monkeypatch):
                 }
             ]
 
-    class _FakeMemory:
-        async def retrieve_research_profiles(self, *args, **kwargs):
-            return await _fake_retrieve(*args, **kwargs)
     monkeypatch.setattr(engine, "_get_firestore_memory", lambda: _FakeMemory())
     out = await engine._lookup_research_profile_cache(
         goal="can u tell me who is the ceo of relyce infotech",
