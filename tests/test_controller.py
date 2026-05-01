@@ -8,20 +8,16 @@ and safety checks in the Controller.
 from __future__ import annotations
 
 import pytest
-import time
-from unittest.mock import MagicMock
 
 from taos.config.constants import FSMState, ErrorType
 from taos.core.controller.controller import Controller, ControllerError
 from taos.core.controller.transitions import TransitionEngine
-from taos.core.state.state_manager import StateManager
 from taos.core.state.state_schema import (
     GlobalState,
     PlanObject,
     PlanStep,
     StepResult,
     ReflectionResult,
-    StateDelta,
 )
 
 

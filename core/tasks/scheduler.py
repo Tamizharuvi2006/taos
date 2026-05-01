@@ -20,7 +20,6 @@ import time
 from typing import Optional
 
 from taos.core.tasks.task_manager import TaskManager
-from taos.core.tasks.task_model import TaskStatus
 from taos.infra.logging.logger import TAOSLogger
 
 

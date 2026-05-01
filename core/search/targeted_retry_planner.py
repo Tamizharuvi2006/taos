@@ -13,7 +13,6 @@ class TargetedRetryPlanner:
     ) -> Dict[str, object]:
         meaning = dict(meaning_frame or {})
         quality = dict(quality_summary or {})
-        plan = dict(query_plan_summary or {})
         entities = [str(item) for item in meaning.get("protected_entities") or [] if str(item).strip()]
         subject = str(meaning.get("primary_subject") or "").strip()
         relation = str(meaning.get("relation") or "").strip()

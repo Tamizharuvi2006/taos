@@ -16,7 +16,6 @@ def build_meaning_frame(frame: IntentFrame) -> MeaningFrame:
         ]
     ).lower()
     product = str(frame.entities.get("product") or frame.entities.get("company") or frame.object or "").strip()
-    company = str(frame.entities.get("company") or "").strip()
     protected = _protected_entities(frame)
     drifts = _disallowed_drifts(frame=frame, protected_entities=protected, text=text)
     claim_type = _claim_type(frame)

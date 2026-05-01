@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from pathlib import Path
 
 from scripts.run_messy_query_live_qa import (
     DEFAULT_CASES,

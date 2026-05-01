@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from threading import RLock
 from typing import Any, Dict, List
 
-from .import_review_model import ImportReviewItem, ImportReviewSession
+from .import_review_model import ImportReviewSession
 from .memory_exporter import export_ai_profile
 from .memory_import_analyzer import analyze_memory_import
 from .sensitive_memory_filter import check_sensitive_memory

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict, List
+from typing import Dict
 
 from .memory_space_store import MemorySpaceStore
 from .shared_memory_permissions import can_read

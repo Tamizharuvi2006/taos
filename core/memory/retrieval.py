@@ -10,9 +10,8 @@ Production features:
 
 from __future__ import annotations
 
-import time
 from dataclasses import dataclass
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, List, Optional, Set
 
 from taos.config.constants import DEFAULT_RECENCY_WEIGHT, DEFAULT_RELEVANCE_WEIGHT
 from taos.core.memory.memory_store import MemoryEntry, MemoryStore

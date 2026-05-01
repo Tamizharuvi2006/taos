@@ -3,7 +3,6 @@ from __future__ import annotations
 from taos.core.memory.context_pack import ContextPackBuilder
 from taos.core.memory.conversation_memory_manager import ConversationMessage
 from taos.core.memory.conversation_window import select_recent_messages
-from taos.core.memory.memory_policy import MemoryPolicy
 from taos.core.memory.rolling_summary import RollingSummary
 from taos.core.memory.user_memory_model import UserMemory
 

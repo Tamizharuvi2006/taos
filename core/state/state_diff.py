@@ -9,9 +9,8 @@ Used for:
 
 from __future__ import annotations
 
-import json
 from dataclasses import dataclass, field
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List
 
 from taos.core.state.state_schema import GlobalState
 

@@ -13,10 +13,10 @@ def _service() -> tuple[MemoryPortabilityService, UserMemoryStore]:
 
 def test_export_excludes_deleted_disabled_and_sensitive_memories() -> None:
     service, store = _service()
-    active = store.create(UserMemory(user_id="u1", content="Assistant style: friendly Tanglish mentor.", tags=["assistant_style"]))
-    disabled = store.create(UserMemory(user_id="u1", content="Disabled memory", status="disabled"))
+    store.create(UserMemory(user_id="u1", content="Assistant style: friendly Tanglish mentor.", tags=["assistant_style"]))
+    store.create(UserMemory(user_id="u1", content="Disabled memory", status="disabled"))
     deleted = store.create(UserMemory(user_id="u1", content="Deleted memory"))
-    secret = store.create(UserMemory(user_id="u1", content="API key is sk-secret123456"))
+    store.create(UserMemory(user_id="u1", content="API key is sk-secret123456"))
     store.delete("u1", deleted.id)
 
     exported = service.export_profile("u1", preferred_name="Tamizh")

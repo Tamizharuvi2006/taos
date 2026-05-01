@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import re
 import time
-from typing import Any, Dict, Iterable, List, Optional
+from typing import Any, Dict, Iterable, List
 
 
 @dataclass

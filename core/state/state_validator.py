@@ -10,7 +10,7 @@ Validates:
 
 from __future__ import annotations
 
-from typing import Dict, FrozenSet, Optional, Set
+from typing import Dict, FrozenSet, Optional
 
 from taos.config.constants import FSMState
 from taos.core.state.state_schema import GlobalState, StateDelta

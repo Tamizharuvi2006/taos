@@ -10,7 +10,7 @@ Provides:
 
 from __future__ import annotations
 
-from typing import List, Optional
+from typing import List
 
 from taos.config.settings import get_settings
 from taos.core.state.state_schema import ReflectionResult

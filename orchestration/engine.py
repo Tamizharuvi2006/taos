@@ -25,7 +25,6 @@ import json
 import os
 import re
 import time
-import traceback
 import httpx
 from datetime import datetime, timezone
 from typing import Any, Deque, Dict, List, Optional, TYPE_CHECKING
@@ -45,10 +44,9 @@ from taos.core.agents import (
     PlannerAgent,
     ResearchAgent,
 )
-from taos.core.controller.controller import Controller, ControllerError
+from taos.core.controller.controller import Controller
 from taos.core.debate import DebateSystem
 from taos.core.execution.executor import Executor
-from taos.core.execution.result_handler import ResultHandler
 from taos.core.execution.step_runner import StepRunner
 from taos.core.feedback import FeedbackMemoryEngine
 from taos.core.loop.loop_guard import LoopGuard
@@ -56,7 +54,7 @@ from taos.core.loop.termination import TerminationChecker, build_final_result
 from taos.core.memory.memory_manager import MemoryManager
 from taos.core.persistence import FirestoreMemorySchema
 from taos.core.planner.decomposition import GoalDecomposer
-from taos.core.planner.planner import Planner, PlannerError
+from taos.core.planner.planner import Planner
 from taos.core.planner.plan_memory import PlanMemoryStore
 from taos.core.planner.plan_validator import PlanValidator
 from taos.core.reflection.confidence import ConfidenceScorer
@@ -6610,25 +6608,37 @@ class OrchestrationEngine:
             stats["rejected_source_count"] = int(source_quality_summary.get("rejected_count") or 0)
             stats["official_source_count"] = int(source_quality_summary.get("official_source_count") or 0)
         if not deduped:
-            allow_sparse_fallback = bool(ranked_rows)
-            sparse_fallback_rows = [dict(row) for row in search_rows if isinstance(row, dict)]
+            candidate_rows = preselected_rows or ranked_rows or search_rows
+            sparse_fallback_rows = [dict(row) for row in candidate_rows if isinstance(row, dict)]
             sparse_agreement = self._compute_research_agreement(
                 sparse_fallback_rows,
                 freshness_mode=freshness_mode,
                 goal=goal,
                 high_stakes_mode=high_stakes_mode,
             )
-            sparse_fallback = (
-                self._build_research_evidence_fallback(
+            sparse_fallback = None
+            if preselected_rows or ranked_rows:
+                sparse_fallback = self._build_research_evidence_fallback(
                     goal=goal,
                     evidence_rows=sparse_fallback_rows,
                     freshness_mode=freshness_mode,
                     agreement=sparse_agreement,
                     high_stakes_mode=high_stakes_mode,
                 )
-                if allow_sparse_fallback
-                else None
-            )
+                if sparse_fallback:
+                    self._mark_trace_fallback(
+                        reason="research_evidence_fallback",
+                        freshness_status="recovered",
+                        freshness_note="Search returned candidate rows but ranking/quality filters were sparse; returned cautious evidence fallback.",
+                    )
+                    self._append_direct_trace_step(
+                        step_type="reason",
+                        status="failed",
+                        tool="evidence_ranker",
+                        summary="Ranking/quality filters were sparse; returned structured evidence fallback.",
+                    )
+                    self._log("engine.research_role_flow", role_flow=role_flow)
+                    return sparse_fallback
             self._mark_trace_fallback(
                 reason="profile_evidence_mismatch" if profile_mode else "search_sparse",
                 freshness_status="failed",
@@ -6848,18 +6858,18 @@ class OrchestrationEngine:
                 official_source_required=official_source_required,
             )
             recovered_rows = list(recovery.get("recovered_rows") or [])
-            self._update_research_evidence_trace(recovered_rows or deduped)
+            fallback_rows = recovered_rows or deduped or preselected_rows or ranked_rows or search_rows
+            self._update_research_evidence_trace(fallback_rows)
             fallback_reason = "research_timeout" if extract_rejections.get("stage_timeout") else "extract_failed"
             agreement = self._compute_research_agreement(
-                recovered_rows or deduped,
+                fallback_rows,
                 freshness_mode=freshness_mode,
                 goal=goal,
                 high_stakes_mode=high_stakes_mode,
             )
-            evidence_seed = recovered_rows or deduped or search_rows
             fallback = self._build_research_evidence_fallback(
                 goal=goal,
-                evidence_rows=evidence_seed,
+                evidence_rows=fallback_rows,
                 freshness_mode=freshness_mode,
                 agreement=agreement,
                 high_stakes_mode=high_stakes_mode,
@@ -6887,7 +6897,7 @@ class OrchestrationEngine:
                 await self._store_research_profile_cache(
                     goal=goal,
                     answer=fallback,
-                    evidence_rows=evidence_seed,
+                    evidence_rows=fallback_rows,
                     agreement=agreement,
                 )
                 return fallback
@@ -9202,6 +9212,19 @@ class OrchestrationEngine:
             quality = row.get("extraction_quality", row.get("extract_quality_score", "n/a"))
             lines.append(f"- [{date_hint}] {claim} - {provider} ({tier}, quality={quality}) [S{idx}]")
 
+        timeline_rows = list(evidence_rows[:6])
+        timeline_rows.sort(
+            key=lambda row: (
+                self._extract_date_from_text(str(row.get("date_hint") or row.get("published_at") or "")) or datetime.min
+            ),
+            reverse=True,
+        )
+        lines.extend(["", "Timeline (newest evidence first)"])
+        for idx, row in enumerate(timeline_rows, start=1):
+            date_hint = row.get("date_hint") or row.get("published_at") or "date n/a"
+            title = re.sub(r"\s+", " ", (row.get("title") or "").strip())[:120] or f"Source {idx}"
+            lines.append(f"- [{date_hint}] {title} [S{idx}]")
+
         lines.extend(["", "Confidence"])
         if agreement_level == "high" and not conflict_detected and not stale_detected:
             lines.append("- High, because multiple usable sources survived quality checks.")
@@ -9237,7 +9260,6 @@ class OrchestrationEngine:
             date_hint = row.get("date_hint") or row.get("published_at") or "date n/a"
             title = re.sub(r"\s+", " ", (row.get("title") or "").strip())[:120] or f"Source {idx}"
             lines.append(f"- [{date_hint}] {title} [S{idx}]")
-
         lines.extend(["", "Sources:"])
         for idx, row in enumerate(evidence_rows[:6], start=1):
             title = (row.get("title") or "").strip() or f"Source {idx}"

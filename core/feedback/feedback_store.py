@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections import Counter
-from typing import Dict, Iterable, List
+from typing import Dict, List
 
 from .feedback_model import UserFeedback
 

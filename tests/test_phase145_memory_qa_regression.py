@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from pathlib import Path
 
 from taos.scripts.run_memory_qa import JSON_REPORT, MD_REPORT, load_cases, run_mock, write_reports
 

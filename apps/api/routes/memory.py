@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List
 
-from fastapi import APIRouter, Body, Request
+from fastapi import APIRouter, Request
 from pydantic import BaseModel, Field
 
 from taos.apps.api.auth_context import require_uid

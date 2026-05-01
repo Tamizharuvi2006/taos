@@ -5,7 +5,7 @@ from __future__ import annotations
 import asyncio
 import time
 from collections import defaultdict, deque
-from typing import Any, Dict, List, Optional, Set
+from typing import Any, Dict, Optional, Set
 
 from taos.core.workflows.models import Workflow, WorkflowRun, WorkflowRunStatus, WorkflowNode
 from taos.infra.logging.logger import TAOSLogger

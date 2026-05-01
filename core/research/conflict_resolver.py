@@ -112,7 +112,7 @@ class ConflictResolver:
                 refs.append(f"S{idx}")
             if len(refs) >= 4:
                 break
-        return refs or ([f"S1"] if rows and positive else [])
+        return refs or (["S1"] if rows and positive else [])
 
     def _topic_key(self, claim: str) -> str:
         tokens = [t for t in re.findall(r"[a-z0-9]{4,}", claim.lower()) if t not in {"this", "that", "with", "from", "have", "were", "will"}]

@@ -234,8 +234,8 @@ class TestTaskManager:
         assert len(tasks) == 2
 
     def test_list_by_status(self, manager):
-        t1 = manager.create_task(goal="active", trigger_type=TriggerType.TIME_BASED,
-                                  schedule=ScheduleConfig.daily())
+        manager.create_task(goal="active", trigger_type=TriggerType.TIME_BASED,
+                            schedule=ScheduleConfig.daily())
         manager.create_task(goal="pending")
         active = manager.list_tasks(status=TaskStatus.ACTIVE)
         assert len(active) == 1
@@ -276,7 +276,7 @@ class TestTaskManager:
         assert stats["active"] >= 1
 
     def test_get_due_tasks(self, manager):
-        task = manager.create_task(
+        manager.create_task(
             goal="due now",
             trigger_type=TriggerType.TIME_BASED,
             schedule=ScheduleConfig(interval_seconds=60, run_immediately=True),

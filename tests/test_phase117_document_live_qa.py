@@ -6,7 +6,6 @@ from taos.scripts.run_document_live_qa import (
     DocumentQACase,
     load_cases,
     run_cases,
-    validate_case,
     write_report,
 )
 

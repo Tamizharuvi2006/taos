@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
 import os
-import re
 from typing import List
 
 from taos.core.semantic.query_normalizer import normalize_user_query

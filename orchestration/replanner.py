@@ -16,7 +16,7 @@ PRD Reference: §22
 
 from __future__ import annotations
 
-from typing import Any, Dict, List, Optional
+from typing import List, Optional
 
 from taos.config.settings import get_settings
 from taos.core.planner.planner import Planner, PlannerError

@@ -476,21 +476,22 @@ def test_profile_evidence_fallback_avoids_event_level_language():
 async def test_profile_cache_lookup_skips_old_event_style_answers(monkeypatch):
     engine = OrchestrationEngine()
 
-    async def _fake_retrieve(*args, **kwargs):
-        return [
-            {
-                "answer": (
-                    "As of 2026-04-18, this update is grounded in event-level evidence.\n"
-                    "The event is corroborated."
-                ),
-                "agreement": {"official_source_found": False},
-            }
-        ]
+    class _FakeMemory:
+        async def retrieve_research_profiles(self, *args, **kwargs):
+            return [
+                {
+                    "answer": (
+                        "As of 2026-04-18, this update is grounded in event-level evidence.\n"
+                        "The event is corroborated."
+                    ),
+                    "agreement": {"official_source_found": False},
+                    "verification_state": "confirmed",
+                }
+            ]
 
     class _FakeMemory:
         async def retrieve_research_profiles(self, *args, **kwargs):
             return await _fake_retrieve(*args, **kwargs)
-
     monkeypatch.setattr(engine, "_get_firestore_memory", lambda: _FakeMemory())
     out = await engine._lookup_research_profile_cache(
         goal="can u tell me who is the ceo of relyce infotech",

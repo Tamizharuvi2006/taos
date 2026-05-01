@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from difflib import SequenceMatcher
-from typing import Dict, Iterable, List
+from typing import Dict, Iterable
 
 from .disambiguation_models import DisambiguationResult, EntityCandidate
 
