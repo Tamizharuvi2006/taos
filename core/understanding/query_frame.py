@@ -1,15 +1,20 @@
 from __future__ import annotations
 
 from dataclasses import asdict, dataclass, field
+import os
 import re
 from typing import List
 
 from taos.core.semantic.query_normalizer import normalize_user_query
-
-
-_TAMIL_RE = re.compile(r"[\u0B80-\u0BFF]")
-_DEVANAGARI_RE = re.compile(r"[\u0900-\u097F]")
-_SPANISH_MARKER_RE = re.compile(r"[¿¡]|(?:\bqui[eé]n\b)|(?:\bfund[oó]\b)", re.I)
+from taos.core.understanding.query_canonicalizer import (
+    BaseQueryCanonicalizer,
+    CanonicalizationResult,
+    NullQueryCanonicalizer,
+    SemanticQueryCanonicalizer,
+    validate_canonicalization_result,
+)
+from taos.core.understanding.query_fastpath_rules import RuleBasedFastPathCanonicalizer
+from taos.core.understanding.query_language import detect_language_profile
 
 
 @dataclass(frozen=True)
@@ -26,151 +31,136 @@ class QueryFrame:
     answer_language: str
     search_queries: List[str] = field(default_factory=list)
     confidence: float = 0.0
-    source: str = "phase148a_query_frame_builder"
+    source: str = "query_frame_builder"
+    warnings: List[str] = field(default_factory=list)
+    ambiguity_flags: List[str] = field(default_factory=list)
+    language_confidence: float = 0.0
+    mixed_language_flag: bool = False
+    transliteration_detected: bool = False
 
     def as_dict(self) -> dict[str, object]:
         return asdict(self)
 
 
 class QueryFrameBuilder:
-    _FOUNDER_PATTERNS = (
-        re.compile(r"^\s*who\s+founded\s+(?P<entity>.+?)\s*$", re.I),
-        re.compile(r"^\s*who\s+started\s+(?P<entity>.+?)\s*$", re.I),
-        re.compile(r"^\s*who\s+is\s+the\s+founder\s+of\s+(?P<entity>.+?)\s*$", re.I),
-        re.compile(r"^\s*(?P<entity>.+?)\s+யாரால்\s+தொடங்கப்பட்டது\??\s*$", re.I),
-        re.compile(r"^\s*(?P<entity>.+?)\s+की\s+स्थापना\s+किसने\s+की\??\s*$", re.I),
-        re.compile(r"^\s*¿?\s*qui[eé]n\s+fund[oó]\s+(?P<entity>.+?)\??\s*$", re.I),
-    )
-    _CEO_PATTERNS = (
-        re.compile(r"^\s*who\s+is\s+the\s+ceo\s+of\s+(?P<entity>.+?)\s*$", re.I),
-        re.compile(r"^\s*(?P<entity>.+?)\s+ceo\s+யார்\??\s*$", re.I),
-        re.compile(r"^\s*(?P<entity>.+?)\s+का\s+ceo\s+कौन\s+है\??\s*$", re.I),
-        re.compile(r"^\s*¿?\s*qui[eé]n\s+es\s+el\s+ceo\s+de\s+(?P<entity>.+?)\??\s*$", re.I),
-    )
-    _LINKEDIN_PATTERNS = (
-        re.compile(r"^\s*find\s+linkedin\s+(?:of|for)\s+(?P<entity>.+?)\s*$", re.I),
-        re.compile(r"^\s*(?P<entity>.+?)\s+linkedin\s+கண்டுபிடி\s*$", re.I),
-    )
-    _OFFICIAL_WEBSITE_PATTERNS = (
-        re.compile(r"^\s*(?P<entity>.+?)\s+official\s+website\s*$", re.I),
-        re.compile(r"^\s*(?P<entity>.+?)\s+official\s+site\s*$", re.I),
-    )
-    _REAL_COMPANY_PATTERNS = (
-        re.compile(r"^\s*is\s+(?P<entity>.+?)\s+(?:a\s+)?real\s+company\??\s*$", re.I),
-        re.compile(r"^\s*(?P<entity>.+?)\s+உண்மையான\s+company\s+ஆ\??\s*$", re.I),
-    )
+    MIN_FASTPATH_CONFIDENCE = 0.80
+    MIN_SEMANTIC_CONFIDENCE = 0.75
+
+    def __init__(
+        self,
+        *,
+        semantic_canonicalizer: BaseQueryCanonicalizer | None = None,
+        fastpath: RuleBasedFastPathCanonicalizer | None = None,
+    ) -> None:
+        self._fastpath = fastpath or RuleBasedFastPathCanonicalizer()
+        self._semantic = semantic_canonicalizer or SemanticQueryCanonicalizer()
 
     def build(self, query: str) -> QueryFrame:
         original_query = str(query or "").strip()
         normalized_query = normalize_user_query(original_query)
-        detected_language = self._detect_language(original_query)
-        detected_script = self._detect_script(original_query)
+        language = detect_language_profile(original_query)
 
-        match = self._first_match(normalized_query, self._FOUNDER_PATTERNS)
-        if match:
-            entity = self._clean_entity(match.group("entity"))
-            canonical = f"who founded {entity}"
-            return self._frame(
+        fast = self._fastpath.canonicalize(
+            normalized_query=normalized_query,
+            language_profile=language,
+        )
+        if fast and float(fast.confidence) >= self.MIN_FASTPATH_CONFIDENCE:
+            return self._build_frame(
                 original_query=original_query,
                 normalized_query=normalized_query,
-                detected_language=detected_language,
-                detected_script=detected_script,
-                canonical_query=canonical,
-                intent="entity_lookup",
-                lookup_type="founder_lookup",
-                entity=entity,
-                role="founder",
-                answer_language=detected_language,
-                confidence=0.96 if detected_language == "en" else 0.92,
+                detected_language=language.detected_language,
+                detected_script=language.detected_script,
+                canonical_query=fast.canonical_query,
+                intent=fast.intent,
+                lookup_type=fast.lookup_type,
+                entity=fast.entity,
+                role=fast.role,
+                answer_language=language.answer_language,
+                confidence=float(fast.confidence),
+                source=fast.source,
+                warnings=[],
+                ambiguity_flags=[],
+                language_confidence=language.language_confidence,
+                mixed_language_flag=language.mixed_language_flag,
+                transliteration_detected=language.transliteration_detected,
             )
 
-        match = self._first_match(normalized_query, self._CEO_PATTERNS)
-        if match:
-            entity = self._clean_entity(match.group("entity"))
-            canonical = f"who is the CEO of {entity}"
-            return self._frame(
+        if self._semantic_enabled():
+            semantic_raw = self._semantic.canonicalize(original_query)
+            semantic = validate_canonicalization_result(
+                CanonicalizationResult(
+                    **{
+                        **semantic_raw.__dict__,
+                        "original_query": original_query,
+                        "normalized_query": normalized_query,
+                        "detected_language": semantic_raw.detected_language or language.detected_language,
+                        "detected_script": semantic_raw.detected_script or language.detected_script,
+                        "answer_language": semantic_raw.answer_language or language.answer_language,
+                    }
+                )
+            )
+            if semantic.intent != "unknown" and float(semantic.confidence) >= self.MIN_SEMANTIC_CONFIDENCE:
+                return self._build_frame(
+                    original_query=original_query,
+                    normalized_query=normalized_query,
+                    detected_language=semantic.detected_language,
+                    detected_script=semantic.detected_script,
+                    canonical_query=semantic.canonical_query,
+                    intent=semantic.intent,
+                    lookup_type=semantic.lookup_type,
+                    entity=semantic.entity,
+                    role=semantic.role,
+                    answer_language=semantic.answer_language,
+                    confidence=semantic.confidence,
+                    source=semantic.source,
+                    warnings=list(semantic.warnings or []),
+                    ambiguity_flags=list(semantic.ambiguity_flags or []),
+                    language_confidence=language.language_confidence,
+                    mixed_language_flag=language.mixed_language_flag,
+                    transliteration_detected=language.transliteration_detected,
+                )
+            return self._unknown_frame(
                 original_query=original_query,
                 normalized_query=normalized_query,
-                detected_language=detected_language,
-                detected_script=detected_script,
-                canonical_query=canonical,
-                intent="entity_lookup",
-                lookup_type="ceo_lookup",
-                entity=entity,
-                role="ceo",
-                answer_language=detected_language,
-                confidence=0.96 if detected_language == "en" else 0.92,
+                language=language,
+                warnings=list(semantic.warnings or ["semantic_low_confidence_or_unknown"]),
             )
 
-        match = self._first_match(normalized_query, self._LINKEDIN_PATTERNS)
-        if match:
-            entity = self._clean_entity(match.group("entity"))
-            canonical = f"find LinkedIn of {entity}"
-            return self._frame(
-                original_query=original_query,
-                normalized_query=normalized_query,
-                detected_language=detected_language,
-                detected_script=detected_script,
-                canonical_query=canonical,
-                intent="entity_lookup",
-                lookup_type="linkedin_profile",
-                entity=entity,
-                role="",
-                answer_language=detected_language,
-                confidence=0.95 if detected_language == "en" else 0.9,
-            )
-
-        match = self._first_match(normalized_query, self._OFFICIAL_WEBSITE_PATTERNS)
-        if match:
-            entity = self._clean_entity(match.group("entity"))
-            canonical = f"{entity} official website"
-            return self._frame(
-                original_query=original_query,
-                normalized_query=normalized_query,
-                detected_language=detected_language,
-                detected_script=detected_script,
-                canonical_query=canonical,
-                intent="entity_lookup",
-                lookup_type="official_website",
-                entity=entity,
-                role="",
-                answer_language=detected_language,
-                confidence=0.94,
-            )
-
-        match = self._first_match(normalized_query, self._REAL_COMPANY_PATTERNS)
-        if match:
-            entity = self._clean_entity(match.group("entity"))
-            canonical = f"is {entity} a real company"
-            return self._frame(
-                original_query=original_query,
-                normalized_query=normalized_query,
-                detected_language=detected_language,
-                detected_script=detected_script,
-                canonical_query=canonical,
-                intent="entity_lookup",
-                lookup_type="business_legitimacy",
-                entity=entity,
-                role="",
-                answer_language=detected_language,
-                confidence=0.94 if detected_language == "en" else 0.89,
-            )
-
-        return self._frame(
+        return self._unknown_frame(
             original_query=original_query,
             normalized_query=normalized_query,
-            detected_language=detected_language,
-            detected_script=detected_script,
+            language=language,
+            warnings=["semantic_canonicalizer_disabled"],
+        )
+
+    @staticmethod
+    def _semantic_enabled() -> bool:
+        observe_only = str(os.getenv("QUERY_FRAME_OBSERVE_ONLY", "true")).strip().lower() == "true"
+        _ = observe_only  # explicit read for phase policy visibility, no behavioral effect here.
+        return str(os.getenv("QUERY_FRAME_SEMANTIC_CANONICALIZER_ENABLED", "false")).strip().lower() == "true"
+
+    def _unknown_frame(self, *, original_query: str, normalized_query: str, language, warnings: list[str]) -> QueryFrame:
+        return self._build_frame(
+            original_query=original_query,
+            normalized_query=normalized_query,
+            detected_language=language.detected_language,
+            detected_script=language.detected_script,
             canonical_query=normalized_query,
             intent="unknown",
             lookup_type="unknown",
             entity="",
             role="",
-            answer_language=detected_language,
+            answer_language=language.answer_language,
             confidence=0.0,
+            source="unknown_fallback",
+            warnings=warnings,
+            ambiguity_flags=[],
+            language_confidence=language.language_confidence,
+            mixed_language_flag=language.mixed_language_flag,
+            transliteration_detected=language.transliteration_detected,
         )
 
-    def _frame(
+    def _build_frame(
         self,
         *,
         original_query: str,
@@ -184,55 +174,90 @@ class QueryFrameBuilder:
         role: str,
         answer_language: str,
         confidence: float,
+        source: str,
+        warnings: list[str],
+        ambiguity_flags: list[str],
+        language_confidence: float,
+        mixed_language_flag: bool,
+        transliteration_detected: bool,
     ) -> QueryFrame:
-        search_queries = [canonical_query]
+        search_queries = [str(canonical_query or "").strip()]
         if original_query and original_query != canonical_query:
             search_queries.append(original_query)
         return QueryFrame(
             original_query=original_query,
             normalized_query=normalized_query,
-            detected_language=detected_language,
-            detected_script=detected_script,
-            canonical_query=canonical_query,
-            intent=intent,
-            lookup_type=lookup_type,
-            entity=entity,
-            role=role,
-            answer_language=answer_language,
+            detected_language=str(detected_language or "unknown"),
+            detected_script=str(detected_script or "Unknown"),
+            canonical_query=str(canonical_query or "").strip(),
+            intent=str(intent or "unknown"),
+            lookup_type=str(lookup_type or "unknown"),
+            entity=str(entity or "").strip(),
+            role=str(role or "").strip().lower(),
+            answer_language=str(answer_language or detected_language or "unknown"),
             search_queries=search_queries,
-            confidence=round(float(confidence), 3),
+            confidence=round(float(confidence or 0.0), 3),
+            source=str(source or "query_frame_builder"),
+            warnings=list(warnings or []),
+            ambiguity_flags=list(ambiguity_flags or []),
+            language_confidence=round(float(language_confidence or 0.0), 3),
+            mixed_language_flag=bool(mixed_language_flag),
+            transliteration_detected=bool(transliteration_detected),
         )
 
-    @staticmethod
-    def _first_match(text: str, patterns: tuple[re.Pattern[str], ...]) -> re.Match[str] | None:
-        for pattern in patterns:
-            match = pattern.match(text)
-            if match:
-                return match
-        return None
 
-    @staticmethod
-    def _clean_entity(value: str) -> str:
-        text = re.sub(r"^[\"'`]+|[\"'`?!.]+$", "", str(value or "").strip())
-        text = re.sub(r"\s+", " ", text)
-        return text.strip()
+def compare_query_frame_to_selected_route(query_frame: QueryFrame, selected_route: str) -> dict[str, str]:
+    selected = str(selected_route or "").strip().lower()
+    suggested = str(query_frame.intent or "unknown").strip().lower()
+    confidence = float(query_frame.confidence or 0.0)
+    if suggested in {"", "unknown"}:
+        return {
+            "current_selected_route": selected,
+            "query_frame_suggested_family": "unknown",
+            "route_alignment": "unknown",
+            "mismatch_reason": "query_frame_unsupported",
+        }
+    if confidence < 0.5:
+        return {
+            "current_selected_route": selected,
+            "query_frame_suggested_family": suggested,
+            "route_alignment": "unknown",
+            "mismatch_reason": "query_frame_low_confidence",
+        }
+    if suggested == "entity_lookup":
+        if selected == "entity_lookup":
+            return {
+                "current_selected_route": selected,
+                "query_frame_suggested_family": suggested,
+                "route_alignment": "aligned",
+                "mismatch_reason": "",
+            }
+        reason_map = {
+            "standard_task": "current_route_standard_but_query_frame_entity_lookup",
+            "deep_research": "current_route_research_but_query_frame_entity_lookup",
+            "official_search": "current_route_research_but_query_frame_entity_lookup",
+            "news_search": "current_route_research_but_query_frame_entity_lookup",
+            "comparison_search": "current_route_research_but_query_frame_entity_lookup",
+        }
+        return {
+            "current_selected_route": selected,
+            "query_frame_suggested_family": suggested,
+            "route_alignment": "mismatch",
+            "mismatch_reason": reason_map.get(selected, "route_unknown"),
+        }
+    return {
+        "current_selected_route": selected,
+        "query_frame_suggested_family": suggested,
+        "route_alignment": "unknown",
+        "mismatch_reason": "route_unknown",
+    }
 
-    @staticmethod
-    def _detect_language(query: str) -> str:
-        text = str(query or "")
-        if _TAMIL_RE.search(text):
-            return "ta"
-        if _DEVANAGARI_RE.search(text):
-            return "hi"
-        if _SPANISH_MARKER_RE.search(text):
-            return "es"
-        return "en"
 
-    @staticmethod
-    def _detect_script(query: str) -> str:
-        text = str(query or "")
-        if _TAMIL_RE.search(text):
-            return "Tamil"
-        if _DEVANAGARI_RE.search(text):
-            return "Devanagari"
-        return "Latin"
+# Backward-compatible exports for existing tests/import sites.
+__all__ = [
+    "QueryFrame",
+    "QueryFrameBuilder",
+    "compare_query_frame_to_selected_route",
+    "CanonicalizationResult",
+    "NullQueryCanonicalizer",
+]

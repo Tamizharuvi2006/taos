@@ -79,7 +79,7 @@ from taos.core.semantic.tone_profile import GLOBAL_TONE_PROFILER, ToneResult
 from taos.core.routing import RouteDecider
 from taos.core.search import SearchDepthRouter, SearchLite, SearchResultCache
 from taos.core.understanding.universal_understanding_gateway import UniversalUnderstandingGateway, frame_to_trace_summary
-from taos.core.understanding.query_frame import QueryFrameBuilder
+from taos.core.understanding.query_frame import QueryFrameBuilder, compare_query_frame_to_selected_route
 from taos.core.fast_path import FastPathEngine, QueryCache
 from taos.core.output.response_formatter import ResponseFormatter
 from taos.core.output.templates import TemplateFormatter
@@ -444,6 +444,7 @@ class OrchestrationEngine:
                 query=goal,
                 selected_route=selected_route,
             )
+            self._set_query_frame_telemetry(query_frame_observation)
 
             if not isinstance(classification.metadata, dict):
                 classification.metadata = {}
@@ -2684,6 +2685,13 @@ class OrchestrationEngine:
             "route_decision": None,
             "route_boundary_summary": None,
             "query_frame": None,
+            "query_frame_mismatch_count": 0,
+            "query_frame_aligned_count": 0,
+            "query_frame_unknown_count": 0,
+            "query_frame_supported_multilingual_count": 0,
+            "query_frame_semantic_fallback_used_count": 0,
+            "query_frame_fastpath_used_count": 0,
+            "query_frame_low_confidence_count": 0,
             "planning_handoff": None,
             "planner_path": None,
             "dag_name": None,
@@ -3193,6 +3201,13 @@ class OrchestrationEngine:
             "route_decision": self._trace_data.get("route_decision"),
             "route_boundary_summary": self._trace_data.get("route_boundary_summary"),
             "query_frame": self._trace_data.get("query_frame"),
+            "query_frame_mismatch_count": self._trace_data.get("query_frame_mismatch_count"),
+            "query_frame_aligned_count": self._trace_data.get("query_frame_aligned_count"),
+            "query_frame_unknown_count": self._trace_data.get("query_frame_unknown_count"),
+            "query_frame_supported_multilingual_count": self._trace_data.get("query_frame_supported_multilingual_count"),
+            "query_frame_semantic_fallback_used_count": self._trace_data.get("query_frame_semantic_fallback_used_count"),
+            "query_frame_fastpath_used_count": self._trace_data.get("query_frame_fastpath_used_count"),
+            "query_frame_low_confidence_count": self._trace_data.get("query_frame_low_confidence_count"),
             "planning_handoff": self._trace_data.get("planning_handoff"),
             "planner_path": planner_path,
             "dag_name": dag_name,
@@ -3232,45 +3247,46 @@ class OrchestrationEngine:
     def _build_query_frame_observation(self, *, query: str, selected_route: str) -> Dict[str, Any]:
         frame = self._query_frame_builder.build(query)
         intent_family = str(frame.intent or "unknown").strip().lower() or "unknown"
-        alignment = self._compute_query_frame_route_alignment(
-            selected_route=selected_route,
-            query_frame_suggested_family=intent_family,
-        )
+        alignment = compare_query_frame_to_selected_route(frame, selected_route)
         return {
             "canonical_query": str(frame.canonical_query or "").strip(),
             "original_query": str(frame.original_query or "").strip(),
+            "normalized_query": str(frame.normalized_query or "").strip(),
             "detected_language": str(frame.detected_language or "en").strip().lower(),
+            "answer_language": str(frame.answer_language or frame.detected_language or "en").strip().lower(),
+            "detected_script": str(frame.detected_script or "Latin"),
             "intent_family": intent_family,
+            "lookup_type": str(frame.lookup_type or "").strip().lower(),
             "entity_name": str(frame.entity or "").strip(),
             "requested_role": str(frame.role or "").strip().lower(),
             "profile_target": str(frame.lookup_type or "").strip().lower(),
             "evidence_need": "public_web_evidence" if intent_family == "entity_lookup" else "unknown",
-            "ambiguity_flags": [],
+            "ambiguity_flags": list(frame.ambiguity_flags or []),
+            "warnings": list(frame.warnings or []),
+            "confidence": float(frame.confidence or 0.0),
+            "source": str(frame.source or ""),
+            "search_queries": list(frame.search_queries or []),
             "normalized_terms": [part for part in re.findall(r"[a-z0-9]+", str(frame.normalized_query or "").lower()) if part][:20],
-            "current_selected_route": str(selected_route or "").strip().lower(),
-            "query_frame_suggested_family": intent_family,
-            "route_alignment": alignment["route_alignment"],
-            "mismatch_reason": alignment["mismatch_reason"],
+            "current_selected_route": str(alignment.get("current_selected_route") or "").strip().lower(),
+            "query_frame_suggested_family": str(alignment.get("query_frame_suggested_family") or "unknown"),
+            "route_alignment": str(alignment.get("route_alignment") or "unknown"),
+            "mismatch_reason": str(alignment.get("mismatch_reason") or ""),
         }
 
-    def _compute_query_frame_route_alignment(
-        self,
-        *,
-        selected_route: str,
-        query_frame_suggested_family: str,
-    ) -> Dict[str, str]:
-        selected = str(selected_route or "").strip().lower()
-        suggested = str(query_frame_suggested_family or "").strip().lower()
-        if suggested in {"", "unknown"}:
-            return {"route_alignment": "unknown", "mismatch_reason": ""}
-        if suggested == "entity_lookup":
-            if selected == "entity_lookup":
-                return {"route_alignment": "aligned", "mismatch_reason": ""}
-            return {
-                "route_alignment": "mismatch",
-                "mismatch_reason": "query_frame_entity_lookup_but_selected_route_differs",
-            }
-        return {"route_alignment": "unknown", "mismatch_reason": ""}
+    def _set_query_frame_telemetry(self, query_frame_observation: Dict[str, Any]) -> None:
+        alignment = str(query_frame_observation.get("route_alignment") or "unknown").strip().lower()
+        intent_family = str(query_frame_observation.get("query_frame_suggested_family") or "unknown").strip().lower()
+        stats = {
+            "query_frame_mismatch_count": 1 if alignment == "mismatch" else 0,
+            "query_frame_aligned_count": 1 if alignment == "aligned" else 0,
+            "query_frame_unknown_count": 1 if alignment == "unknown" else 0,
+            "query_frame_supported_multilingual_count": 1 if intent_family != "unknown" else 0,
+            "query_frame_semantic_fallback_used_count": 1 if "semantic" in str(query_frame_observation.get("source") or "").lower() else 0,
+            "query_frame_fastpath_used_count": 1 if "fast_path" in str(query_frame_observation.get("source") or "").lower() else 0,
+            "query_frame_low_confidence_count": 1 if str(query_frame_observation.get("mismatch_reason") or "") == "query_frame_low_confidence" else 0,
+        }
+        for key, value in stats.items():
+            self._set_trace_value(key, int(value))
 
     def _calibrate_research_confidence(
         self,

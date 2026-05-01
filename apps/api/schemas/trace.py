@@ -298,6 +298,13 @@ class TraceResponse(BaseModel):
         default=None,
         description="Observe-only QueryFrame runtime summary for route-alignment debugging.",
     )
+    query_frame_mismatch_count: Optional[int] = Field(default=0, description="Observe-only QueryFrame mismatch counter for this request.")
+    query_frame_aligned_count: Optional[int] = Field(default=0, description="Observe-only QueryFrame aligned counter for this request.")
+    query_frame_unknown_count: Optional[int] = Field(default=0, description="Observe-only QueryFrame unknown-alignment counter for this request.")
+    query_frame_supported_multilingual_count: Optional[int] = Field(default=0, description="Observe-only QueryFrame supported multilingual signal counter for this request.")
+    query_frame_semantic_fallback_used_count: Optional[int] = Field(default=0, description="Observe-only count for semantic canonicalizer fallback usage.")
+    query_frame_fastpath_used_count: Optional[int] = Field(default=0, description="Observe-only count for deterministic fast-path canonicalizer usage.")
+    query_frame_low_confidence_count: Optional[int] = Field(default=0, description="Observe-only count for low-confidence canonicalizer outcomes.")
     planning_handoff: Optional[Dict[str, Any]] = Field(
         default=None,
         description="Planner handoff payload carrying raw/normalized/rewritten query and routing constraints.",
