@@ -1,0 +1,66 @@
+[
+  {
+    "id": "fast_message",
+    "query": "hi",
+    "expected_route": "fast_message",
+    "concurrency": 5,
+    "max_p95_ms": 1000,
+    "request_count": 10
+  },
+  {
+    "id": "package_vite_cached",
+    "query": "current vite version",
+    "expected_route": "fast_search",
+    "concurrency": 5,
+    "max_p95_ms": 1500,
+    "request_count": 10
+  },
+  {
+    "id": "no_search_explain",
+    "query": "explain closures in JavaScript simply",
+    "expected_route": "no_search",
+    "concurrency": 3,
+    "max_p95_ms": 3000,
+    "request_count": 10
+  },
+  {
+    "id": "official_search",
+    "query": "official Firebase pricing update",
+    "expected_route": "official_search",
+    "concurrency": 2,
+    "max_p95_ms": 18000,
+    "request_count": 10
+  },
+  {
+    "id": "entity_lookup_company_role",
+    "query": "who is the ceo of relyce infotech",
+    "expected_route": "entity_lookup",
+    "concurrency": 2,
+    "max_p95_ms": 6000,
+    "request_count": 8
+  },
+  {
+    "id": "news_search_latest",
+    "query": "latest OpenAI news today",
+    "expected_route": "news_search",
+    "concurrency": 2,
+    "max_p95_ms": 12000,
+    "request_count": 8
+  },
+  {
+    "id": "doc_mode_short",
+    "query": "from this pdf give important 16 marks",
+    "expected_route": "doc_mode",
+    "concurrency": 1,
+    "max_p95_ms": 5000,
+    "request_count": 6
+  },
+  {
+    "id": "deep_research_small",
+    "query": "compare top vector databases for RAG this month",
+    "expected_route": "deep_search",
+    "concurrency": 2,
+    "max_p95_ms": 16000,
+    "request_count": 10
+  }
+]

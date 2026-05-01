@@ -1,0 +1,156 @@
+{
+  "generated_at": "2026-04-11T09:11:54.317721+00:00",
+  "base_url": "http://127.0.0.1:8000",
+  "case_count": 6,
+  "completed_count": 6,
+  "failed_count": 0,
+  "overall_score": 0.816,
+  "metric_averages": {
+    "clarity": 0.917,
+    "correctness": 0.822,
+    "grounding_trust": 0.742,
+    "uncertainty_honesty": 0.792,
+    "citation_quality": 0.55,
+    "confidence_calibration": 0.85,
+    "followup_usefulness": 0.875,
+    "mode_consistency": 0.925,
+    "error_case_intelligence": 0.867
+  },
+  "recommendations": [
+    "Increase claim-level citation coverage and ensure at least top claims include [S#] markers with source cards."
+  ],
+  "metrics": [
+    "clarity",
+    "correctness",
+    "grounding_trust",
+    "uncertainty_honesty",
+    "citation_quality",
+    "confidence_calibration",
+    "followup_usefulness",
+    "mode_consistency",
+    "error_case_intelligence"
+  ],
+  "results": [
+    {
+      "case_id": "news_conflict_1",
+      "query": "latest update on a ceasefire claim with conflicting reports",
+      "expected_type": "deep_research",
+      "observed_type": "deep_research",
+      "scores": {
+        "clarity": 0.95,
+        "correctness": 0.9,
+        "grounding_trust": 0.85,
+        "uncertainty_honesty": 0.9,
+        "citation_quality": 0.85,
+        "confidence_calibration": 0.95,
+        "followup_usefulness": 0.9,
+        "mode_consistency": 0.95,
+        "error_case_intelligence": 1.0
+      },
+      "overall_score": 0.917,
+      "summary": "excellent",
+      "status": "ok"
+    },
+    {
+      "case_id": "official_required_1",
+      "query": "official statement on RBI policy announcement",
+      "expected_type": "deep_research",
+      "observed_type": "deep_research",
+      "scores": {
+        "clarity": 0.75,
+        "correctness": 0.9,
+        "grounding_trust": 0.65,
+        "uncertainty_honesty": 0.9,
+        "citation_quality": 0.65,
+        "confidence_calibration": 0.65,
+        "followup_usefulness": 0.9,
+        "mode_consistency": 0.95,
+        "error_case_intelligence": 0.85
+      },
+      "overall_score": 0.8,
+      "summary": "good",
+      "status": "ok"
+    },
+    {
+      "case_id": "weak_evidence_1",
+      "query": "rumors about unreleased phone features",
+      "expected_type": "deep_research",
+      "observed_type": "deep_research",
+      "scores": {
+        "clarity": 0.95,
+        "correctness": 0.783,
+        "grounding_trust": 0.85,
+        "uncertainty_honesty": 0.9,
+        "citation_quality": 0.65,
+        "confidence_calibration": 0.65,
+        "followup_usefulness": 0.9,
+        "mode_consistency": 0.95,
+        "error_case_intelligence": 0.7
+      },
+      "overall_score": 0.815,
+      "summary": "good",
+      "status": "ok"
+    },
+    {
+      "case_id": "doc_exam_1",
+      "query": "give important 16 mark questions from this",
+      "expected_type": "doc_mode",
+      "observed_type": "doc_mode",
+      "scores": {
+        "clarity": 0.95,
+        "correctness": 0.9,
+        "grounding_trust": 0.85,
+        "uncertainty_honesty": 0.85,
+        "citation_quality": 0.5,
+        "confidence_calibration": 0.95,
+        "followup_usefulness": 0.9,
+        "mode_consistency": 0.9,
+        "error_case_intelligence": 0.85
+      },
+      "overall_score": 0.85,
+      "summary": "excellent",
+      "status": "ok"
+    },
+    {
+      "case_id": "standard_task_1",
+      "query": "write a python function to reverse string",
+      "expected_type": "standard_task",
+      "observed_type": "standard_task",
+      "scores": {
+        "clarity": 0.95,
+        "correctness": 0.9,
+        "grounding_trust": 0.5,
+        "uncertainty_honesty": 0.85,
+        "citation_quality": 0.0,
+        "confidence_calibration": 0.95,
+        "followup_usefulness": 0.75,
+        "mode_consistency": 0.85,
+        "error_case_intelligence": 0.85
+      },
+      "overall_score": 0.733,
+      "summary": "good",
+      "status": "ok"
+    },
+    {
+      "case_id": "no_results_case_1",
+      "query": "find verified source for a niche rumor with no reliable coverage",
+      "expected_type": "deep_research",
+      "observed_type": "deep_research",
+      "scores": {
+        "clarity": 0.95,
+        "correctness": 0.55,
+        "grounding_trust": 0.75,
+        "uncertainty_honesty": 0.35,
+        "citation_quality": 0.65,
+        "confidence_calibration": 0.95,
+        "followup_usefulness": 0.9,
+        "mode_consistency": 0.95,
+        "error_case_intelligence": 0.95
+      },
+      "overall_score": 0.778,
+      "summary": "good",
+      "status": "ok"
+    }
+  ],
+  "failures": []
+}

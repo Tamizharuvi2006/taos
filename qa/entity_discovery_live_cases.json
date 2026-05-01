@@ -1,0 +1,31 @@
+[
+  {
+    "id": "ceo_lookup_local_company",
+    "query": "who is ceo of relyce infotech",
+    "expected_entity_type": "company",
+    "expected_intent": "ceo_lookup",
+    "requires_entity_lanes": ["official_website", "linkedin", "news_articles", "registry_directory"]
+  },
+  {
+    "id": "founder_lookup_local_company",
+    "query": "who founded relyce infotech",
+    "expected_intent": "founder_lookup"
+  },
+  {
+    "id": "instagram_profile_company",
+    "query": "find official instagram of relyce infotech",
+    "expected_intent": "official_social_profile",
+    "requires_social_lane": true
+  },
+  {
+    "id": "linkedin_company_profile",
+    "query": "find linkedin of relyce infotech",
+    "expected_intent": "linkedin_profile",
+    "requires_linkedin_lane": true
+  },
+  {
+    "id": "legitimacy_check",
+    "query": "is relyce infotech real company",
+    "expected_intent": "legitimacy_check"
+  }
+]

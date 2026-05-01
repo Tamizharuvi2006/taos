@@ -1,0 +1,27 @@
+[
+  {
+    "id": "doc_general_summary",
+    "file": "qa/fixtures/sample_ai_notes.pdf",
+    "question": "summarize this document",
+    "mode": "general_doc_assist"
+  },
+  {
+    "id": "doc_important_questions",
+    "file": "qa/fixtures/sample_marks_exam_notes.pdf",
+    "question": "give important 16 mark questions",
+    "mode": "important_questions"
+  },
+  {
+    "id": "doc_specific_fact",
+    "file": "qa/fixtures/sample_policy_doc.pdf",
+    "question": "what does the document say about eligibility?",
+    "mode": "general_doc_assist"
+  },
+  {
+    "id": "doc_unknown_answer",
+    "file": "qa/fixtures/sample_policy_doc.pdf",
+    "question": "what is the CEO name?",
+    "mode": "general_doc_assist",
+    "expect_uncertain": true
+  }
+]

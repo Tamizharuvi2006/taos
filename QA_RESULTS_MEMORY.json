@@ -1,0 +1,56 @@
+{
+  "mode": "mock",
+  "total": 5,
+  "passed": 5,
+  "failed": 0,
+  "pass_rate": 1.0,
+  "cases": [
+    {
+      "id": "explicit_remember",
+      "input": "remember that I prefer concise answers",
+      "passed": true,
+      "checks": {
+        "memory_saved_matches_expected": true
+      },
+      "notes": []
+    },
+    {
+      "id": "secret_not_saved",
+      "input": "remember my API key is sk-abc123456",
+      "passed": true,
+      "checks": {
+        "memory_saved_matches_expected": true
+      },
+      "notes": [
+        "Secrets, API keys, passwords, and tokens are never saved."
+      ]
+    },
+    {
+      "id": "forget_memory",
+      "input": "forget that I prefer concise answers",
+      "passed": true,
+      "checks": {
+        "memory_deleted": true
+      },
+      "notes": []
+    },
+    {
+      "id": "recall_project",
+      "input": "what phase are we on in TAOS?",
+      "passed": true,
+      "checks": {
+        "project_memory_used": true
+      },
+      "notes": []
+    },
+    {
+      "id": "false_memory_guard",
+      "input": "what do you remember about my favorite food?",
+      "passed": true,
+      "checks": {
+        "no_fake_memory": true
+      },
+      "notes": []
+    }
+  ]
+}

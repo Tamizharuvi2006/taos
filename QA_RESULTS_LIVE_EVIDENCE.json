@@ -1,0 +1,3289 @@
+{
+  "phase": "147",
+  "mode": "live",
+  "base_url": "http://127.0.0.1:8000",
+  "timestamp": "2026-05-01T07:15:54.506049+00:00",
+  "total": 10,
+  "passed": 5,
+  "failed": 5,
+  "pass_rate": 0.5,
+  "live_blockers": [
+    "<urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+    "[WinError 10054] An existing connection was forcibly closed by the remote host"
+  ],
+  "provider_diagnostics": {
+    "timestamp": "2026-05-01T07:14:55.789433+00:00",
+    "search_provider_name": "serper",
+    "extract_provider_name": "web_extract",
+    "search_api_key_present": true,
+    "search_endpoint_configured": true,
+    "live_provider_configured": true,
+    "search_provider_ready": true,
+    "extract_provider_ready": true,
+    "external_network_ready": true,
+    "dns_resolution_ok": true,
+    "proxy_detected": false,
+    "provider_mode": "live",
+    "last_provider_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+    "search_http_status": 200,
+    "search_error_type": "",
+    "search_error_safe": "",
+    "search_query": "Relyce Infotech Founder CEO",
+    "search_query_known": "who is the ceo of microsoft",
+    "extract_url": "https://www.microsoft.com/en-us/about",
+    "linkedin_extract_reference": "https://www.linkedin.com/company/relyce-infotech",
+    "search_results_count": 5,
+    "search_domains": [
+      "amarinfotech.com",
+      "ill.eu",
+      "in.linkedin.com",
+      "instagram.com",
+      "rocketreach.co"
+    ],
+    "search_results": [
+      {
+        "title": "Relyce infotech Information - RocketReach",
+        "url": "https://rocketreach.co/relyce-infotech-profile_b6fff776c6523a5a",
+        "domain": "rocketreach.co",
+        "snippet": "Relyce infotech Questions. Who is the Founder of Relyce infotech? Ukenthiran A is the Founder of Relyce infotech. How many people are employed at Relyce ..."
+      },
+      {
+        "title": "Relyce infotech - LinkedIn",
+        "url": "https://in.linkedin.com/company/relyce-infotech",
+        "domain": "in.linkedin.com",
+        "snippet": "Core Team : Ukenthiran A Founder & CEO of Relyce infotech Dharsan L | Tamizharuvi p | GOHULA KANNAN | Naveenkumar Sivarajan | keerthana S #Startup ..."
+      },
+      {
+        "title": "Meet Our Team - Team Experience Keeps Us Curious - Amar Infotech",
+        "url": "https://www.amarinfotech.com/meet-our-team.html",
+        "domain": "amarinfotech.com",
+        "snippet": "Mr. Hitesh Ramoliya is the Founder & CEO of Amar InfoTech, bringing over 18 years of experience in web and mobile application development, enterprise software ..."
+      },
+      {
+        "title": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and ...",
+        "url": "https://www.instagram.com/p/CQ6EqcqjV7F/",
+        "domain": "instagram.com",
+        "snippet": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and array of services ! Provide Customization in Tally as per customer requirement. Dedicated Support ..."
+      },
+      {
+        "title": "Home - ILL Neutrons for Society",
+        "url": "https://www.ill.eu/",
+        "domain": "ill.eu",
+        "snippet": "This 60-page edition offers a concise overview of last year's key scientific highlights, technical developments, and reactor operations, along with insights ..."
+      }
+    ],
+    "search_known_results_count": 5,
+    "search_known_domains": [
+      "britannica.com",
+      "en.wikipedia.org",
+      "linkedin.com",
+      "news.microsoft.com",
+      "x.com"
+    ],
+    "search_known_results": [
+      {
+        "title": "Satya Nadella - Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Satya_Nadella",
+        "domain": "en.wikipedia.org",
+        "snippet": "Satya Narayana Nadella (born 19 August 1967) is an Indian-American business executive. He is the chairman and chief executive officer (CEO) of Microsoft, ..."
+      },
+      {
+        "title": "Satya Nadella - Chairman and CEO at Microsoft - LinkedIn",
+        "url": "https://www.linkedin.com/in/satyanadella",
+        "domain": "linkedin.com",
+        "snippet": "As chairman and CEO of Microsoft, I define my mission and that of my company as empowering every person and every organization on the planet to achieve more."
+      },
+      {
+        "title": "Satya Nadella - Microsoft Source",
+        "url": "https://news.microsoft.com/source/exec/satya-nadella/",
+        "domain": "news.microsoft.com",
+        "snippet": "Satya Nadella is Chairman and Chief Executive Officer of Microsoft. Before being named CEO in February 2014, Nadella held leadership roles in both enterprise ..."
+      },
+      {
+        "title": "Satya Nadella (@satyanadella) / Posts / X - Twitter",
+        "url": "https://x.com/satyanadella",
+        "domain": "x.com",
+        "snippet": "Satya Nadella (@satyanadella) - Posts - Chairman and CEO at Microsoft | X (formerly Twitter)"
+      },
+      {
+        "title": "Satya Nadella | Biography & Facts | Britannica Money",
+        "url": "https://www.britannica.com/money/Satya-Nadella",
+        "domain": "britannica.com",
+        "snippet": "Satya Nadella (born August 19, 1967, Hyderabad, India) is an Indian-born business executive who was CEO of the computer software company Microsoft from 2014."
+      }
+    ],
+    "search_request_debug": {
+      "method": "POST",
+      "endpoint_host": "google.serper.dev",
+      "endpoint_path": "/search",
+      "body_keys": [
+        "q"
+      ],
+      "has_q": true,
+      "content_type": "application/json",
+      "auth_header_present": true,
+      "http_status": 200,
+      "response_error_preview": "{\"searchParameters\":{\"q\":\"Relyce Infotech Founder CEO\",\"type\":\"search\",\"engine\":\"google\"},\"answerBox\":{\"snippet\":\"Ukenthiran A - Relyce infotech | LinkedIn.\",\"snippetHighlighted\":[\"Ukenthiran A\"],\"tit"
+    },
+    "search_known_request_debug": {
+      "method": "POST",
+      "endpoint_host": "google.serper.dev",
+      "endpoint_path": "/search",
+      "body_keys": [
+        "q"
+      ],
+      "has_q": true,
+      "content_type": "application/json",
+      "auth_header_present": true,
+      "http_status": 200,
+      "response_error_preview": "{\"searchParameters\":{\"q\":\"who is the ceo of microsoft\",\"type\":\"search\",\"engine\":\"google\"},\"organic\":[{\"title\":\"Satya Nadella - Wikipedia\",\"link\":\"https://en.wikipedia.org/wiki/Satya_Nadella\",\"snippet\""
+    },
+    "extract_status": "success",
+    "extract_adapter": "web_extract",
+    "extract_error_type": "",
+    "extract_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+    "linkedin_snippet_preservation": {
+      "candidate_name": "Ukenthiran A",
+      "supported_role": "founder_ceo",
+      "role_match": true,
+      "company_match": true,
+      "target_entity_match": true
+    },
+    "provider_health": {
+      "serper": {
+        "name": "serper",
+        "state": "closed",
+        "failures": 0,
+        "last_error": null,
+        "fallback_used": false,
+        "cache_used": false,
+        "circuit_opened": false
+      },
+      "web_extract": {
+        "name": "web_extract",
+        "state": "closed",
+        "failures": 0,
+        "last_error": null,
+        "fallback_used": false,
+        "cache_used": false,
+        "circuit_opened": false
+      }
+    }
+  },
+  "results": [
+    {
+      "id": "relyce_ceo_role_truth",
+      "query": "who is the ceo of relyce infotech",
+      "category": "entity_role",
+      "mode": "live",
+      "ok": true,
+      "failed_checks": [],
+      "elapsed_ms": 8752.29,
+      "selected_route": "entity_lookup",
+      "owner": "entity_lookup_pipeline",
+      "answer_mode": "best_supported_candidate",
+      "final_answer": "Answer\nThe best-supported public evidence points to Ukenthiran A as founder ceo of Relyce Infotech.\n\nWhat public evidence supports\nThe available evidence supports the requested role: ceo.\n\nEvidence\n- Ukenthiran A (company linkedin; supports: founder_ceo; exact company match)\n- Hari Balaji (company linkedin; supports: ceo; exact company match)\n- Ukenthiran A (search snippet; supports: founder_ceo; exact company match)\n- Relyce infotech's Post - LinkedIn (reputable news; supports: founder; exact company match)\n\nConfidence\nMedium (candidate)\n\nWhat this does not prove\nThis is LinkedIn-supported candidate evidence, not source-of-record or registry-confirmed proof.\n\nBottom line\nUse this as the current best-supported public ceo candidate, but verify against an official website or registry if you need legal or current source-of-record confirmation.\n\nSources checked:\n- Relyce Infotech official website\n- Relyce Infotech about team leadership\n- Relyce Infotech about us leadership CEO\n- Relyce Infotech team founder CEO\n\nVerification policy:\n- conflicting role evidence",
+      "exact_claim_verified": false,
+      "role_match": true,
+      "source_tiers_found": [
+        "tier1",
+        "tier3",
+        "tier2"
+      ],
+      "search_queries_generated": [
+        "Relyce Infotech official website",
+        "Relyce Infotech about team leadership",
+        "Relyce Infotech about us leadership CEO",
+        "Relyce Infotech team founder CEO"
+      ],
+      "search_lanes_used": [
+        "official_website",
+        "linkedin",
+        "registry_directory",
+        "news_articles",
+        "general_web"
+      ],
+      "provider_returned_count": 0,
+      "domains_returned": [
+        "amarinfotech.com",
+        "in.linkedin.com",
+        "linkedin.com"
+      ],
+      "returned_titles": [],
+      "returned_snippets": [],
+      "extracted_urls_attempted": [],
+      "extraction_statuses": [],
+      "rejected_sources": [],
+      "rejected_sources_count": 1,
+      "usable_sources_count": 2,
+      "conflict_detected": true,
+      "confidence_reason": "Public signals point to one candidate, but the role is not confirmed by a stronger official or corroborated source set.",
+      "evidence_matrix": [
+        {
+          "source_title": "https://in.linkedin.com/company/relyce-infotech",
+          "domain": "in.linkedin.com",
+          "source_type": "company_linkedin",
+          "tier": "tier1",
+          "extracted_claim": "",
+          "supported_role": "founder_ceo",
+          "requested_role": "ceo",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://in.linkedin.com/company/hivemind-sist",
+          "domain": "in.linkedin.com",
+          "source_type": "company_linkedin",
+          "tier": "tier3",
+          "extracted_claim": "",
+          "supported_role": "founder_ceo",
+          "requested_role": "ceo",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://www.linkedin.com/posts/relyce-infotech_startup-sathybama-startuptn-activity-7373280710671003648-GZkn",
+          "domain": "linkedin.com",
+          "source_type": "search_snippet",
+          "tier": "tier2",
+          "extracted_claim": "",
+          "supported_role": "founder_ceo",
+          "requested_role": "ceo",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://www.amarinfotech.com/meet-our-team.html",
+          "domain": "amarinfotech.com",
+          "source_type": "official_website",
+          "tier": "tier1",
+          "extracted_claim": "",
+          "supported_role": "founder_ceo",
+          "requested_role": "ceo",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://in.linkedin.com/in/ukenthiran-a-3603022b4",
+          "domain": "in.linkedin.com",
+          "source_type": "search_snippet",
+          "tier": "tier3",
+          "extracted_claim": "",
+          "supported_role": "founder_ceo",
+          "requested_role": "ceo",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        }
+      ],
+      "trust_metadata": {
+        "verification_state": "candidate",
+        "requested_role": "ceo",
+        "supported_role": "founder_ceo",
+        "role_match": true,
+        "role_mismatch_reason": "",
+        "conflict_detected": true,
+        "exact_role_verified": false,
+        "evidence_strength": "medium",
+        "strongest_source_type": "company_linkedin",
+        "official_source_found": false,
+        "linkedin_source_found": true,
+        "registry_source_found": false,
+        "selected_candidate": "Ukenthiran A",
+        "candidate_count": 2,
+        "search_depth_used": "escalated",
+        "search_lanes_used": [
+          "official_website",
+          "linkedin",
+          "registry_directory",
+          "news_articles",
+          "general_web"
+        ],
+        "source_tiers_found": [
+          "tier1",
+          "tier3",
+          "tier2"
+        ],
+        "answer_mode": "best_supported_candidate",
+        "confidence_reason": "Public signals point to one candidate, but the role is not confirmed by a stronger official or corroborated source set.",
+        "freshness_status": "Failed",
+        "related_evidence_used": false
+      },
+      "provider_diagnostics": {
+        "timestamp": "2026-05-01T07:14:55.789433+00:00",
+        "search_provider_name": "serper",
+        "extract_provider_name": "web_extract",
+        "search_api_key_present": true,
+        "search_endpoint_configured": true,
+        "live_provider_configured": true,
+        "search_provider_ready": true,
+        "extract_provider_ready": true,
+        "external_network_ready": true,
+        "dns_resolution_ok": true,
+        "proxy_detected": false,
+        "provider_mode": "live",
+        "last_provider_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "search_http_status": 200,
+        "search_error_type": "",
+        "search_error_safe": "",
+        "search_query": "Relyce Infotech Founder CEO",
+        "search_query_known": "who is the ceo of microsoft",
+        "extract_url": "https://www.microsoft.com/en-us/about",
+        "linkedin_extract_reference": "https://www.linkedin.com/company/relyce-infotech",
+        "search_results_count": 5,
+        "search_domains": [
+          "amarinfotech.com",
+          "ill.eu",
+          "in.linkedin.com",
+          "instagram.com",
+          "rocketreach.co"
+        ],
+        "search_results": [
+          {
+            "title": "Relyce infotech Information - RocketReach",
+            "url": "https://rocketreach.co/relyce-infotech-profile_b6fff776c6523a5a",
+            "domain": "rocketreach.co",
+            "snippet": "Relyce infotech Questions. Who is the Founder of Relyce infotech? Ukenthiran A is the Founder of Relyce infotech. How many people are employed at Relyce ..."
+          },
+          {
+            "title": "Relyce infotech - LinkedIn",
+            "url": "https://in.linkedin.com/company/relyce-infotech",
+            "domain": "in.linkedin.com",
+            "snippet": "Core Team : Ukenthiran A Founder & CEO of Relyce infotech Dharsan L | Tamizharuvi p | GOHULA KANNAN | Naveenkumar Sivarajan | keerthana S #Startup ..."
+          },
+          {
+            "title": "Meet Our Team - Team Experience Keeps Us Curious - Amar Infotech",
+            "url": "https://www.amarinfotech.com/meet-our-team.html",
+            "domain": "amarinfotech.com",
+            "snippet": "Mr. Hitesh Ramoliya is the Founder & CEO of Amar InfoTech, bringing over 18 years of experience in web and mobile application development, enterprise software ..."
+          },
+          {
+            "title": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and ...",
+            "url": "https://www.instagram.com/p/CQ6EqcqjV7F/",
+            "domain": "instagram.com",
+            "snippet": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and array of services ! Provide Customization in Tally as per customer requirement. Dedicated Support ..."
+          },
+          {
+            "title": "Home - ILL Neutrons for Society",
+            "url": "https://www.ill.eu/",
+            "domain": "ill.eu",
+            "snippet": "This 60-page edition offers a concise overview of last year's key scientific highlights, technical developments, and reactor operations, along with insights ..."
+          }
+        ],
+        "search_known_results_count": 5,
+        "search_known_domains": [
+          "britannica.com",
+          "en.wikipedia.org",
+          "linkedin.com",
+          "news.microsoft.com",
+          "x.com"
+        ],
+        "search_known_results": [
+          {
+            "title": "Satya Nadella - Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Satya_Nadella",
+            "domain": "en.wikipedia.org",
+            "snippet": "Satya Narayana Nadella (born 19 August 1967) is an Indian-American business executive. He is the chairman and chief executive officer (CEO) of Microsoft, ..."
+          },
+          {
+            "title": "Satya Nadella - Chairman and CEO at Microsoft - LinkedIn",
+            "url": "https://www.linkedin.com/in/satyanadella",
+            "domain": "linkedin.com",
+            "snippet": "As chairman and CEO of Microsoft, I define my mission and that of my company as empowering every person and every organization on the planet to achieve more."
+          },
+          {
+            "title": "Satya Nadella - Microsoft Source",
+            "url": "https://news.microsoft.com/source/exec/satya-nadella/",
+            "domain": "news.microsoft.com",
+            "snippet": "Satya Nadella is Chairman and Chief Executive Officer of Microsoft. Before being named CEO in February 2014, Nadella held leadership roles in both enterprise ..."
+          },
+          {
+            "title": "Satya Nadella (@satyanadella) / Posts / X - Twitter",
+            "url": "https://x.com/satyanadella",
+            "domain": "x.com",
+            "snippet": "Satya Nadella (@satyanadella) - Posts - Chairman and CEO at Microsoft | X (formerly Twitter)"
+          },
+          {
+            "title": "Satya Nadella | Biography & Facts | Britannica Money",
+            "url": "https://www.britannica.com/money/Satya-Nadella",
+            "domain": "britannica.com",
+            "snippet": "Satya Nadella (born August 19, 1967, Hyderabad, India) is an Indian-born business executive who was CEO of the computer software company Microsoft from 2014."
+          }
+        ],
+        "search_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"Relyce Infotech Founder CEO\",\"type\":\"search\",\"engine\":\"google\"},\"answerBox\":{\"snippet\":\"Ukenthiran A - Relyce infotech | LinkedIn.\",\"snippetHighlighted\":[\"Ukenthiran A\"],\"tit"
+        },
+        "search_known_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"who is the ceo of microsoft\",\"type\":\"search\",\"engine\":\"google\"},\"organic\":[{\"title\":\"Satya Nadella - Wikipedia\",\"link\":\"https://en.wikipedia.org/wiki/Satya_Nadella\",\"snippet\""
+        },
+        "extract_status": "success",
+        "extract_adapter": "web_extract",
+        "extract_error_type": "",
+        "extract_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "linkedin_snippet_preservation": {
+          "candidate_name": "Ukenthiran A",
+          "supported_role": "founder_ceo",
+          "role_match": true,
+          "company_match": true,
+          "target_entity_match": true
+        },
+        "provider_health": {
+          "serper": {
+            "name": "serper",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          },
+          "web_extract": {
+            "name": "web_extract",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          }
+        }
+      },
+      "pass_reason": "The case correctly stayed unverified and avoided overclaiming.",
+      "http_status": 200,
+      "http_error": "",
+      "live_blocker": ""
+    },
+    {
+      "id": "relyce_founder_role_truth",
+      "query": "who is the founder of relyce infotech",
+      "category": "entity_role",
+      "mode": "live",
+      "ok": true,
+      "failed_checks": [],
+      "elapsed_ms": 5038.15,
+      "selected_route": "entity_lookup",
+      "owner": "entity_lookup_pipeline",
+      "answer_mode": "role_mismatch_not_verified",
+      "final_answer": "Answer\nI could not verify that this person is the founder of Relyce Infotech.\n\nWhat public evidence supports\nThe available evidence supports founder, not founder.\n\nEvidence\n- Bhogollic | LinkedIn (company linkedin; supports: founder; exact company match)\n\nConfidence\nLow (not_verified)\n\nWhat this does not prove\nAvailable public evidence supports a different role, not the requested one. (no_exact_role_evidence)\n\nBottom line\nDo not treat the person as founder unless official or stronger evidence confirms that exact role; current public evidence only supports founder.\n\nSources checked:\n- Relyce Infotech official website\n- Relyce Infotech about team leadership\n- Relyce Infotech about us leadership FOUNDER\n- Relyce Infotech team founder FOUNDER\n\nVerification policy:\n- role mismatch only",
+      "exact_claim_verified": false,
+      "role_match": false,
+      "source_tiers_found": [
+        "tier1"
+      ],
+      "search_queries_generated": [
+        "Relyce Infotech official website",
+        "Relyce Infotech about team leadership",
+        "Relyce Infotech about us leadership FOUNDER",
+        "Relyce Infotech team founder FOUNDER"
+      ],
+      "search_lanes_used": [
+        "official_website",
+        "linkedin",
+        "registry_directory",
+        "news_articles",
+        "general_web"
+      ],
+      "provider_returned_count": 0,
+      "domains_returned": [
+        "in.linkedin.com",
+        "linkedin.com",
+        "relyceinfotech.com"
+      ],
+      "returned_titles": [],
+      "returned_snippets": [],
+      "extracted_urls_attempted": [],
+      "extraction_statuses": [],
+      "rejected_sources": [],
+      "rejected_sources_count": 0,
+      "usable_sources_count": 0,
+      "conflict_detected": false,
+      "confidence_reason": "Available evidence supports a different public role than the one requested, so the exact role is not verified.",
+      "evidence_matrix": [
+        {
+          "source_title": "https://in.linkedin.com/company/relyce-infotech",
+          "domain": "in.linkedin.com",
+          "source_type": "company_linkedin",
+          "tier": "tier1",
+          "extracted_claim": "",
+          "supported_role": "founder",
+          "requested_role": "founder",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://in.linkedin.com/company/bhogolic",
+          "domain": "in.linkedin.com",
+          "source_type": "company_linkedin",
+          "tier": "tier1",
+          "extracted_claim": "",
+          "supported_role": "founder",
+          "requested_role": "founder",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://www.linkedin.com/company/astra-dyne-global",
+          "domain": "linkedin.com",
+          "source_type": "company_linkedin",
+          "tier": "tier1",
+          "extracted_claim": "",
+          "supported_role": "founder",
+          "requested_role": "founder",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://www.linkedin.com/posts/relyce-infotech_startup-sathybama-startuptn-activity-7373280710671003648-GZkn",
+          "domain": "linkedin.com",
+          "source_type": "search_snippet",
+          "tier": "tier3",
+          "extracted_claim": "",
+          "supported_role": "founder",
+          "requested_role": "founder",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://relyceinfotech.com/internship",
+          "domain": "relyceinfotech.com",
+          "source_type": "search_snippet",
+          "tier": "tier3",
+          "extracted_claim": "",
+          "supported_role": "founder",
+          "requested_role": "founder",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        }
+      ],
+      "trust_metadata": {
+        "verification_state": "not_verified",
+        "requested_role": "founder",
+        "supported_role": "founder",
+        "role_match": false,
+        "role_mismatch_reason": "no_exact_role_evidence",
+        "conflict_detected": false,
+        "exact_role_verified": false,
+        "evidence_strength": "weak",
+        "strongest_source_type": "company_linkedin",
+        "official_source_found": false,
+        "linkedin_source_found": true,
+        "registry_source_found": false,
+        "selected_candidate": "",
+        "candidate_count": 0,
+        "search_depth_used": "escalated",
+        "search_lanes_used": [
+          "official_website",
+          "linkedin",
+          "registry_directory",
+          "news_articles",
+          "general_web"
+        ],
+        "source_tiers_found": [
+          "tier1"
+        ],
+        "answer_mode": "role_mismatch_not_verified",
+        "confidence_reason": "Available evidence supports a different public role than the one requested, so the exact role is not verified.",
+        "freshness_status": "Failed",
+        "related_evidence_used": false
+      },
+      "provider_diagnostics": {
+        "timestamp": "2026-05-01T07:14:55.789433+00:00",
+        "search_provider_name": "serper",
+        "extract_provider_name": "web_extract",
+        "search_api_key_present": true,
+        "search_endpoint_configured": true,
+        "live_provider_configured": true,
+        "search_provider_ready": true,
+        "extract_provider_ready": true,
+        "external_network_ready": true,
+        "dns_resolution_ok": true,
+        "proxy_detected": false,
+        "provider_mode": "live",
+        "last_provider_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "search_http_status": 200,
+        "search_error_type": "",
+        "search_error_safe": "",
+        "search_query": "Relyce Infotech Founder CEO",
+        "search_query_known": "who is the ceo of microsoft",
+        "extract_url": "https://www.microsoft.com/en-us/about",
+        "linkedin_extract_reference": "https://www.linkedin.com/company/relyce-infotech",
+        "search_results_count": 5,
+        "search_domains": [
+          "amarinfotech.com",
+          "ill.eu",
+          "in.linkedin.com",
+          "instagram.com",
+          "rocketreach.co"
+        ],
+        "search_results": [
+          {
+            "title": "Relyce infotech Information - RocketReach",
+            "url": "https://rocketreach.co/relyce-infotech-profile_b6fff776c6523a5a",
+            "domain": "rocketreach.co",
+            "snippet": "Relyce infotech Questions. Who is the Founder of Relyce infotech? Ukenthiran A is the Founder of Relyce infotech. How many people are employed at Relyce ..."
+          },
+          {
+            "title": "Relyce infotech - LinkedIn",
+            "url": "https://in.linkedin.com/company/relyce-infotech",
+            "domain": "in.linkedin.com",
+            "snippet": "Core Team : Ukenthiran A Founder & CEO of Relyce infotech Dharsan L | Tamizharuvi p | GOHULA KANNAN | Naveenkumar Sivarajan | keerthana S #Startup ..."
+          },
+          {
+            "title": "Meet Our Team - Team Experience Keeps Us Curious - Amar Infotech",
+            "url": "https://www.amarinfotech.com/meet-our-team.html",
+            "domain": "amarinfotech.com",
+            "snippet": "Mr. Hitesh Ramoliya is the Founder & CEO of Amar InfoTech, bringing over 18 years of experience in web and mobile application development, enterprise software ..."
+          },
+          {
+            "title": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and ...",
+            "url": "https://www.instagram.com/p/CQ6EqcqjV7F/",
+            "domain": "instagram.com",
+            "snippet": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and array of services ! Provide Customization in Tally as per customer requirement. Dedicated Support ..."
+          },
+          {
+            "title": "Home - ILL Neutrons for Society",
+            "url": "https://www.ill.eu/",
+            "domain": "ill.eu",
+            "snippet": "This 60-page edition offers a concise overview of last year's key scientific highlights, technical developments, and reactor operations, along with insights ..."
+          }
+        ],
+        "search_known_results_count": 5,
+        "search_known_domains": [
+          "britannica.com",
+          "en.wikipedia.org",
+          "linkedin.com",
+          "news.microsoft.com",
+          "x.com"
+        ],
+        "search_known_results": [
+          {
+            "title": "Satya Nadella - Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Satya_Nadella",
+            "domain": "en.wikipedia.org",
+            "snippet": "Satya Narayana Nadella (born 19 August 1967) is an Indian-American business executive. He is the chairman and chief executive officer (CEO) of Microsoft, ..."
+          },
+          {
+            "title": "Satya Nadella - Chairman and CEO at Microsoft - LinkedIn",
+            "url": "https://www.linkedin.com/in/satyanadella",
+            "domain": "linkedin.com",
+            "snippet": "As chairman and CEO of Microsoft, I define my mission and that of my company as empowering every person and every organization on the planet to achieve more."
+          },
+          {
+            "title": "Satya Nadella - Microsoft Source",
+            "url": "https://news.microsoft.com/source/exec/satya-nadella/",
+            "domain": "news.microsoft.com",
+            "snippet": "Satya Nadella is Chairman and Chief Executive Officer of Microsoft. Before being named CEO in February 2014, Nadella held leadership roles in both enterprise ..."
+          },
+          {
+            "title": "Satya Nadella (@satyanadella) / Posts / X - Twitter",
+            "url": "https://x.com/satyanadella",
+            "domain": "x.com",
+            "snippet": "Satya Nadella (@satyanadella) - Posts - Chairman and CEO at Microsoft | X (formerly Twitter)"
+          },
+          {
+            "title": "Satya Nadella | Biography & Facts | Britannica Money",
+            "url": "https://www.britannica.com/money/Satya-Nadella",
+            "domain": "britannica.com",
+            "snippet": "Satya Nadella (born August 19, 1967, Hyderabad, India) is an Indian-born business executive who was CEO of the computer software company Microsoft from 2014."
+          }
+        ],
+        "search_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"Relyce Infotech Founder CEO\",\"type\":\"search\",\"engine\":\"google\"},\"answerBox\":{\"snippet\":\"Ukenthiran A - Relyce infotech | LinkedIn.\",\"snippetHighlighted\":[\"Ukenthiran A\"],\"tit"
+        },
+        "search_known_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"who is the ceo of microsoft\",\"type\":\"search\",\"engine\":\"google\"},\"organic\":[{\"title\":\"Satya Nadella - Wikipedia\",\"link\":\"https://en.wikipedia.org/wiki/Satya_Nadella\",\"snippet\""
+        },
+        "extract_status": "success",
+        "extract_adapter": "web_extract",
+        "extract_error_type": "",
+        "extract_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "linkedin_snippet_preservation": {
+          "candidate_name": "Ukenthiran A",
+          "supported_role": "founder_ceo",
+          "role_match": true,
+          "company_match": true,
+          "target_entity_match": true
+        },
+        "provider_health": {
+          "serper": {
+            "name": "serper",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          },
+          "web_extract": {
+            "name": "web_extract",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          }
+        }
+      },
+      "pass_reason": "The case correctly stayed unverified and avoided overclaiming.",
+      "http_status": 200,
+      "http_error": "",
+      "live_blocker": ""
+    },
+    {
+      "id": "relyce_official_site",
+      "query": "relyce infotech official website",
+      "category": "entity_profile",
+      "mode": "live",
+      "ok": true,
+      "failed_checks": [],
+      "elapsed_ms": 7273.96,
+      "selected_route": "entity_lookup",
+      "owner": "entity_lookup_pipeline",
+      "answer_mode": "best_supported_candidate",
+      "final_answer": "Answer\nThe best-supported public evidence points to Ukenthiran A as founder ceo of Relyce Infotech.\n\nWhat public evidence supports\nThe available evidence supports the requested role: requested role.\n\nEvidence\n- Ukenthiran A (company linkedin; supports: founder_ceo; exact company match)\n- Hari Balaji (company linkedin; supports: ceo; exact company match)\n- Ukenthiran A (search snippet; supports: founder_ceo; exact company match)\n- Relyce infotech's Post - LinkedIn (reputable news; supports: founder; exact company match)\n\nConfidence\nMedium (candidate)\n\nWhat this does not prove\nThis is LinkedIn-supported candidate evidence, not source-of-record or registry-confirmed proof.\n\nBottom line\nUse this as the current best-supported public requested fact candidate, but verify against an official website or registry if you need legal or current source-of-record confirmation.\n\nSources checked:\n- Relyce Infotech official website\n- Relyce Infotech about team leadership\n- Relyce Infotech about us leadership CEO\n- Relyce Infotech team founder CEO\n\nVerification policy:\n- conflicting role evidence",
+      "exact_claim_verified": false,
+      "role_match": true,
+      "source_tiers_found": [
+        "tier1",
+        "tier3",
+        "tier2"
+      ],
+      "search_queries_generated": [
+        "Relyce Infotech official website",
+        "Relyce Infotech about team leadership",
+        "Relyce Infotech about us leadership CEO",
+        "Relyce Infotech team founder CEO"
+      ],
+      "search_lanes_used": [
+        "official_website",
+        "linkedin",
+        "registry_directory",
+        "news_articles",
+        "general_web"
+      ],
+      "provider_returned_count": 0,
+      "domains_returned": [
+        "amarinfotech.com",
+        "in.linkedin.com",
+        "linkedin.com"
+      ],
+      "returned_titles": [],
+      "returned_snippets": [],
+      "extracted_urls_attempted": [],
+      "extraction_statuses": [],
+      "rejected_sources": [],
+      "rejected_sources_count": 2,
+      "usable_sources_count": 2,
+      "conflict_detected": true,
+      "confidence_reason": "Public signals point to one candidate, but the role is not confirmed by a stronger official or corroborated source set.",
+      "evidence_matrix": [
+        {
+          "source_title": "https://in.linkedin.com/company/relyce-infotech",
+          "domain": "in.linkedin.com",
+          "source_type": "company_linkedin",
+          "tier": "tier1",
+          "extracted_claim": "",
+          "supported_role": "founder_ceo",
+          "requested_role": "",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://in.linkedin.com/company/hivemind-sist",
+          "domain": "in.linkedin.com",
+          "source_type": "company_linkedin",
+          "tier": "tier3",
+          "extracted_claim": "",
+          "supported_role": "founder_ceo",
+          "requested_role": "",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://www.linkedin.com/posts/relyce-infotech_startup-sathybama-startuptn-activity-7373280710671003648-GZkn",
+          "domain": "linkedin.com",
+          "source_type": "search_snippet",
+          "tier": "tier2",
+          "extracted_claim": "",
+          "supported_role": "founder_ceo",
+          "requested_role": "",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://www.amarinfotech.com/meet-our-team.html",
+          "domain": "amarinfotech.com",
+          "source_type": "official_website",
+          "tier": "tier1",
+          "extracted_claim": "",
+          "supported_role": "founder_ceo",
+          "requested_role": "",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://www.amarinfotech.com/philip-muller-getgo-tours-testimonial.html",
+          "domain": "amarinfotech.com",
+          "source_type": "search_snippet",
+          "tier": "tier3",
+          "extracted_claim": "",
+          "supported_role": "founder_ceo",
+          "requested_role": "",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        }
+      ],
+      "trust_metadata": {
+        "verification_state": "candidate",
+        "requested_role": "",
+        "supported_role": "founder_ceo",
+        "role_match": true,
+        "role_mismatch_reason": "",
+        "conflict_detected": true,
+        "exact_role_verified": false,
+        "evidence_strength": "medium",
+        "strongest_source_type": "company_linkedin",
+        "official_source_found": false,
+        "linkedin_source_found": true,
+        "registry_source_found": false,
+        "selected_candidate": "Ukenthiran A",
+        "candidate_count": 2,
+        "search_depth_used": "standard",
+        "search_lanes_used": [
+          "official_website",
+          "linkedin",
+          "registry_directory",
+          "news_articles",
+          "general_web"
+        ],
+        "source_tiers_found": [
+          "tier1",
+          "tier3",
+          "tier2"
+        ],
+        "answer_mode": "best_supported_candidate",
+        "confidence_reason": "Public signals point to one candidate, but the role is not confirmed by a stronger official or corroborated source set.",
+        "freshness_status": "Failed",
+        "related_evidence_used": false
+      },
+      "provider_diagnostics": {
+        "timestamp": "2026-05-01T07:14:55.789433+00:00",
+        "search_provider_name": "serper",
+        "extract_provider_name": "web_extract",
+        "search_api_key_present": true,
+        "search_endpoint_configured": true,
+        "live_provider_configured": true,
+        "search_provider_ready": true,
+        "extract_provider_ready": true,
+        "external_network_ready": true,
+        "dns_resolution_ok": true,
+        "proxy_detected": false,
+        "provider_mode": "live",
+        "last_provider_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "search_http_status": 200,
+        "search_error_type": "",
+        "search_error_safe": "",
+        "search_query": "Relyce Infotech Founder CEO",
+        "search_query_known": "who is the ceo of microsoft",
+        "extract_url": "https://www.microsoft.com/en-us/about",
+        "linkedin_extract_reference": "https://www.linkedin.com/company/relyce-infotech",
+        "search_results_count": 5,
+        "search_domains": [
+          "amarinfotech.com",
+          "ill.eu",
+          "in.linkedin.com",
+          "instagram.com",
+          "rocketreach.co"
+        ],
+        "search_results": [
+          {
+            "title": "Relyce infotech Information - RocketReach",
+            "url": "https://rocketreach.co/relyce-infotech-profile_b6fff776c6523a5a",
+            "domain": "rocketreach.co",
+            "snippet": "Relyce infotech Questions. Who is the Founder of Relyce infotech? Ukenthiran A is the Founder of Relyce infotech. How many people are employed at Relyce ..."
+          },
+          {
+            "title": "Relyce infotech - LinkedIn",
+            "url": "https://in.linkedin.com/company/relyce-infotech",
+            "domain": "in.linkedin.com",
+            "snippet": "Core Team : Ukenthiran A Founder & CEO of Relyce infotech Dharsan L | Tamizharuvi p | GOHULA KANNAN | Naveenkumar Sivarajan | keerthana S #Startup ..."
+          },
+          {
+            "title": "Meet Our Team - Team Experience Keeps Us Curious - Amar Infotech",
+            "url": "https://www.amarinfotech.com/meet-our-team.html",
+            "domain": "amarinfotech.com",
+            "snippet": "Mr. Hitesh Ramoliya is the Founder & CEO of Amar InfoTech, bringing over 18 years of experience in web and mobile application development, enterprise software ..."
+          },
+          {
+            "title": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and ...",
+            "url": "https://www.instagram.com/p/CQ6EqcqjV7F/",
+            "domain": "instagram.com",
+            "snippet": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and array of services ! Provide Customization in Tally as per customer requirement. Dedicated Support ..."
+          },
+          {
+            "title": "Home - ILL Neutrons for Society",
+            "url": "https://www.ill.eu/",
+            "domain": "ill.eu",
+            "snippet": "This 60-page edition offers a concise overview of last year's key scientific highlights, technical developments, and reactor operations, along with insights ..."
+          }
+        ],
+        "search_known_results_count": 5,
+        "search_known_domains": [
+          "britannica.com",
+          "en.wikipedia.org",
+          "linkedin.com",
+          "news.microsoft.com",
+          "x.com"
+        ],
+        "search_known_results": [
+          {
+            "title": "Satya Nadella - Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Satya_Nadella",
+            "domain": "en.wikipedia.org",
+            "snippet": "Satya Narayana Nadella (born 19 August 1967) is an Indian-American business executive. He is the chairman and chief executive officer (CEO) of Microsoft, ..."
+          },
+          {
+            "title": "Satya Nadella - Chairman and CEO at Microsoft - LinkedIn",
+            "url": "https://www.linkedin.com/in/satyanadella",
+            "domain": "linkedin.com",
+            "snippet": "As chairman and CEO of Microsoft, I define my mission and that of my company as empowering every person and every organization on the planet to achieve more."
+          },
+          {
+            "title": "Satya Nadella - Microsoft Source",
+            "url": "https://news.microsoft.com/source/exec/satya-nadella/",
+            "domain": "news.microsoft.com",
+            "snippet": "Satya Nadella is Chairman and Chief Executive Officer of Microsoft. Before being named CEO in February 2014, Nadella held leadership roles in both enterprise ..."
+          },
+          {
+            "title": "Satya Nadella (@satyanadella) / Posts / X - Twitter",
+            "url": "https://x.com/satyanadella",
+            "domain": "x.com",
+            "snippet": "Satya Nadella (@satyanadella) - Posts - Chairman and CEO at Microsoft | X (formerly Twitter)"
+          },
+          {
+            "title": "Satya Nadella | Biography & Facts | Britannica Money",
+            "url": "https://www.britannica.com/money/Satya-Nadella",
+            "domain": "britannica.com",
+            "snippet": "Satya Nadella (born August 19, 1967, Hyderabad, India) is an Indian-born business executive who was CEO of the computer software company Microsoft from 2014."
+          }
+        ],
+        "search_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"Relyce Infotech Founder CEO\",\"type\":\"search\",\"engine\":\"google\"},\"answerBox\":{\"snippet\":\"Ukenthiran A - Relyce infotech | LinkedIn.\",\"snippetHighlighted\":[\"Ukenthiran A\"],\"tit"
+        },
+        "search_known_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"who is the ceo of microsoft\",\"type\":\"search\",\"engine\":\"google\"},\"organic\":[{\"title\":\"Satya Nadella - Wikipedia\",\"link\":\"https://en.wikipedia.org/wiki/Satya_Nadella\",\"snippet\""
+        },
+        "extract_status": "success",
+        "extract_adapter": "web_extract",
+        "extract_error_type": "",
+        "extract_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "linkedin_snippet_preservation": {
+          "candidate_name": "Ukenthiran A",
+          "supported_role": "founder_ceo",
+          "role_match": true,
+          "company_match": true,
+          "target_entity_match": true
+        },
+        "provider_health": {
+          "serper": {
+            "name": "serper",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          },
+          "web_extract": {
+            "name": "web_extract",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          }
+        }
+      },
+      "pass_reason": "The case matched route, trust metadata, and evidence requirements.",
+      "http_status": 200,
+      "http_error": "",
+      "live_blocker": ""
+    },
+    {
+      "id": "relyce_linkedin",
+      "query": "find linkedin of relyce infotech",
+      "category": "entity_profile",
+      "mode": "live",
+      "ok": false,
+      "failed_checks": [
+        "source_tiers_present"
+      ],
+      "elapsed_ms": 4694.72,
+      "selected_route": "entity_lookup",
+      "owner": "entity_lookup_pipeline",
+      "answer_mode": "unverified_no_answer",
+      "final_answer": "I need the company or person name before I can verify this public entity question.\n\nSources checked:\n- <entity> official website\n- <entity> about team leadership\n- <entity> about us leadership LINKEDIN_PROFILE\n- <entity> team founder LINKEDIN_PROFILE\n\nVerification policy:\n- role mismatch only",
+      "exact_claim_verified": false,
+      "role_match": false,
+      "source_tiers_found": [],
+      "search_queries_generated": [
+        "<entity> official website",
+        "<entity> about team leadership",
+        "<entity> about us leadership LINKEDIN_PROFILE",
+        "<entity> team founder LINKEDIN_PROFILE"
+      ],
+      "search_lanes_used": [],
+      "provider_returned_count": 0,
+      "domains_returned": [
+        "in.linkedin.com",
+        "linkedin.com",
+        "relyceinfotech.com",
+        "relyceinfotech.in"
+      ],
+      "returned_titles": [],
+      "returned_snippets": [],
+      "extracted_urls_attempted": [],
+      "extraction_statuses": [],
+      "rejected_sources": [],
+      "rejected_sources_count": 2,
+      "usable_sources_count": 0,
+      "conflict_detected": false,
+      "confidence_reason": "The entity name is missing, so no public evidence can be matched safely.",
+      "evidence_matrix": [
+        {
+          "source_title": "https://www.linkedin.com/company/relyce-infotech",
+          "domain": "linkedin.com",
+          "source_type": "company_linkedin",
+          "tier": "tier1",
+          "extracted_claim": "",
+          "supported_role": "",
+          "requested_role": "",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://in.linkedin.com/company/relyce-infotech",
+          "domain": "in.linkedin.com",
+          "source_type": "company_linkedin",
+          "tier": "tier1",
+          "extracted_claim": "",
+          "supported_role": "",
+          "requested_role": "",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://relyceinfotech.com",
+          "domain": "relyceinfotech.com",
+          "source_type": "search_snippet",
+          "tier": "tier3",
+          "extracted_claim": "",
+          "supported_role": "",
+          "requested_role": "",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://www.relyceinfotech.com",
+          "domain": "relyceinfotech.com",
+          "source_type": "search_snippet",
+          "tier": "tier3",
+          "extracted_claim": "",
+          "supported_role": "",
+          "requested_role": "",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://relyceinfotech.in",
+          "domain": "relyceinfotech.in",
+          "source_type": "search_snippet",
+          "tier": "tier3",
+          "extracted_claim": "",
+          "supported_role": "",
+          "requested_role": "",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        }
+      ],
+      "trust_metadata": {
+        "verification_state": "not_verified",
+        "requested_role": "",
+        "supported_role": "",
+        "role_match": false,
+        "role_mismatch_reason": "",
+        "conflict_detected": false,
+        "exact_role_verified": false,
+        "evidence_strength": "weak",
+        "strongest_source_type": "",
+        "official_source_found": false,
+        "linkedin_source_found": false,
+        "registry_source_found": false,
+        "selected_candidate": "",
+        "candidate_count": 0,
+        "search_depth_used": "standard",
+        "search_lanes_used": [],
+        "source_tiers_found": [],
+        "answer_mode": "unverified_no_answer",
+        "confidence_reason": "The entity name is missing, so no public evidence can be matched safely.",
+        "freshness_status": "Failed",
+        "related_evidence_used": false
+      },
+      "provider_diagnostics": {
+        "timestamp": "2026-05-01T07:14:55.789433+00:00",
+        "search_provider_name": "serper",
+        "extract_provider_name": "web_extract",
+        "search_api_key_present": true,
+        "search_endpoint_configured": true,
+        "live_provider_configured": true,
+        "search_provider_ready": true,
+        "extract_provider_ready": true,
+        "external_network_ready": true,
+        "dns_resolution_ok": true,
+        "proxy_detected": false,
+        "provider_mode": "live",
+        "last_provider_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "search_http_status": 200,
+        "search_error_type": "",
+        "search_error_safe": "",
+        "search_query": "Relyce Infotech Founder CEO",
+        "search_query_known": "who is the ceo of microsoft",
+        "extract_url": "https://www.microsoft.com/en-us/about",
+        "linkedin_extract_reference": "https://www.linkedin.com/company/relyce-infotech",
+        "search_results_count": 5,
+        "search_domains": [
+          "amarinfotech.com",
+          "ill.eu",
+          "in.linkedin.com",
+          "instagram.com",
+          "rocketreach.co"
+        ],
+        "search_results": [
+          {
+            "title": "Relyce infotech Information - RocketReach",
+            "url": "https://rocketreach.co/relyce-infotech-profile_b6fff776c6523a5a",
+            "domain": "rocketreach.co",
+            "snippet": "Relyce infotech Questions. Who is the Founder of Relyce infotech? Ukenthiran A is the Founder of Relyce infotech. How many people are employed at Relyce ..."
+          },
+          {
+            "title": "Relyce infotech - LinkedIn",
+            "url": "https://in.linkedin.com/company/relyce-infotech",
+            "domain": "in.linkedin.com",
+            "snippet": "Core Team : Ukenthiran A Founder & CEO of Relyce infotech Dharsan L | Tamizharuvi p | GOHULA KANNAN | Naveenkumar Sivarajan | keerthana S #Startup ..."
+          },
+          {
+            "title": "Meet Our Team - Team Experience Keeps Us Curious - Amar Infotech",
+            "url": "https://www.amarinfotech.com/meet-our-team.html",
+            "domain": "amarinfotech.com",
+            "snippet": "Mr. Hitesh Ramoliya is the Founder & CEO of Amar InfoTech, bringing over 18 years of experience in web and mobile application development, enterprise software ..."
+          },
+          {
+            "title": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and ...",
+            "url": "https://www.instagram.com/p/CQ6EqcqjV7F/",
+            "domain": "instagram.com",
+            "snippet": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and array of services ! Provide Customization in Tally as per customer requirement. Dedicated Support ..."
+          },
+          {
+            "title": "Home - ILL Neutrons for Society",
+            "url": "https://www.ill.eu/",
+            "domain": "ill.eu",
+            "snippet": "This 60-page edition offers a concise overview of last year's key scientific highlights, technical developments, and reactor operations, along with insights ..."
+          }
+        ],
+        "search_known_results_count": 5,
+        "search_known_domains": [
+          "britannica.com",
+          "en.wikipedia.org",
+          "linkedin.com",
+          "news.microsoft.com",
+          "x.com"
+        ],
+        "search_known_results": [
+          {
+            "title": "Satya Nadella - Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Satya_Nadella",
+            "domain": "en.wikipedia.org",
+            "snippet": "Satya Narayana Nadella (born 19 August 1967) is an Indian-American business executive. He is the chairman and chief executive officer (CEO) of Microsoft, ..."
+          },
+          {
+            "title": "Satya Nadella - Chairman and CEO at Microsoft - LinkedIn",
+            "url": "https://www.linkedin.com/in/satyanadella",
+            "domain": "linkedin.com",
+            "snippet": "As chairman and CEO of Microsoft, I define my mission and that of my company as empowering every person and every organization on the planet to achieve more."
+          },
+          {
+            "title": "Satya Nadella - Microsoft Source",
+            "url": "https://news.microsoft.com/source/exec/satya-nadella/",
+            "domain": "news.microsoft.com",
+            "snippet": "Satya Nadella is Chairman and Chief Executive Officer of Microsoft. Before being named CEO in February 2014, Nadella held leadership roles in both enterprise ..."
+          },
+          {
+            "title": "Satya Nadella (@satyanadella) / Posts / X - Twitter",
+            "url": "https://x.com/satyanadella",
+            "domain": "x.com",
+            "snippet": "Satya Nadella (@satyanadella) - Posts - Chairman and CEO at Microsoft | X (formerly Twitter)"
+          },
+          {
+            "title": "Satya Nadella | Biography & Facts | Britannica Money",
+            "url": "https://www.britannica.com/money/Satya-Nadella",
+            "domain": "britannica.com",
+            "snippet": "Satya Nadella (born August 19, 1967, Hyderabad, India) is an Indian-born business executive who was CEO of the computer software company Microsoft from 2014."
+          }
+        ],
+        "search_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"Relyce Infotech Founder CEO\",\"type\":\"search\",\"engine\":\"google\"},\"answerBox\":{\"snippet\":\"Ukenthiran A - Relyce infotech | LinkedIn.\",\"snippetHighlighted\":[\"Ukenthiran A\"],\"tit"
+        },
+        "search_known_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"who is the ceo of microsoft\",\"type\":\"search\",\"engine\":\"google\"},\"organic\":[{\"title\":\"Satya Nadella - Wikipedia\",\"link\":\"https://en.wikipedia.org/wiki/Satya_Nadella\",\"snippet\""
+        },
+        "extract_status": "success",
+        "extract_adapter": "web_extract",
+        "extract_error_type": "",
+        "extract_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "linkedin_snippet_preservation": {
+          "candidate_name": "Ukenthiran A",
+          "supported_role": "founder_ceo",
+          "role_match": true,
+          "company_match": true,
+          "target_entity_match": true
+        },
+        "provider_health": {
+          "serper": {
+            "name": "serper",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          },
+          "web_extract": {
+            "name": "web_extract",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          }
+        }
+      },
+      "pass_reason": "Failed checks: source_tiers_present",
+      "http_status": 200,
+      "http_error": "",
+      "live_blocker": ""
+    },
+    {
+      "id": "relyce_legitimacy",
+      "query": "is relyce infotech real company",
+      "category": "legitimacy",
+      "mode": "live",
+      "ok": true,
+      "failed_checks": [],
+      "elapsed_ms": 6661.27,
+      "selected_route": "entity_lookup",
+      "owner": "entity_lookup_pipeline",
+      "answer_mode": "role_mismatch_not_verified",
+      "final_answer": "Answer\nI could not verify that this person is the legitimacy of Relyce Infotech.\n\nWhat public evidence supports\nThe available evidence supports founder_ceo, not legitimacy.\n\nEvidence\n- Relyce infotech - LinkedIn (company linkedin; supports: founder_ceo; exact company match)\n- Relyce infotech's Post - LinkedIn (reputable news; supports: founder; exact company match)\n- Relyce infotech's Post - LinkedIn (search snippet; supports: founder_ceo; exact company match)\n- Madesh M | Unreal Engine 5 & VR Developer | 3D Artist - Blender (search snippet; supports: employee; exact company match)\n\nConfidence\nLow (not_verified)\n\nWhat this does not prove\nAvailable public evidence supports a different role, not the requested one. (supported_role_is_founder_ceo_not_legitimacy)\n\nBottom line\nDo not treat the person as legitimacy unless official or stronger evidence confirms that exact role; current public evidence only supports founder_ceo.\n\nSources checked:\n- Relyce Infotech official website\n- Relyce Infotech about team leadership\n- Relyce Infotech about us leadership LEGITIMACY\n- Relyce Infotech team founder LEGITIMACY\n\nVerification policy:\n- role mismatch only",
+      "exact_claim_verified": false,
+      "role_match": false,
+      "source_tiers_found": [
+        "tier1",
+        "tier2",
+        "tier3"
+      ],
+      "search_queries_generated": [
+        "Relyce Infotech official website",
+        "Relyce Infotech about team leadership",
+        "Relyce Infotech about us leadership LEGITIMACY",
+        "Relyce Infotech team founder LEGITIMACY"
+      ],
+      "search_lanes_used": [
+        "official_website",
+        "linkedin",
+        "registry_directory",
+        "news_articles",
+        "general_web"
+      ],
+      "provider_returned_count": 0,
+      "domains_returned": [
+        "in.linkedin.com",
+        "linkedin.com"
+      ],
+      "returned_titles": [],
+      "returned_snippets": [],
+      "extracted_urls_attempted": [],
+      "extraction_statuses": [],
+      "rejected_sources": [],
+      "rejected_sources_count": 3,
+      "usable_sources_count": 0,
+      "conflict_detected": false,
+      "confidence_reason": "Available evidence supports a different public role than the one requested, so the exact role is not verified.",
+      "evidence_matrix": [
+        {
+          "source_title": "https://in.linkedin.com/company/relyce-infotech",
+          "domain": "in.linkedin.com",
+          "source_type": "company_linkedin",
+          "tier": "tier1",
+          "extracted_claim": "",
+          "supported_role": "founder_ceo",
+          "requested_role": "legitimacy",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://www.linkedin.com/posts/relyce-infotech_startup-sathybama-startuptn-activity-7373280710671003648-GZkn",
+          "domain": "linkedin.com",
+          "source_type": "search_snippet",
+          "tier": "tier2",
+          "extracted_claim": "",
+          "supported_role": "founder_ceo",
+          "requested_role": "legitimacy",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://www.linkedin.com/posts/relyce-infotech_relyceinfotech-startupindia-entrepreneurship-activity-7345820638487433216-iPon",
+          "domain": "linkedin.com",
+          "source_type": "search_snippet",
+          "tier": "tier3",
+          "extracted_claim": "",
+          "supported_role": "founder_ceo",
+          "requested_role": "legitimacy",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://in.linkedin.com/in/monika-ravi-47a317375",
+          "domain": "in.linkedin.com",
+          "source_type": "search_snippet",
+          "tier": "tier3",
+          "extracted_claim": "",
+          "supported_role": "founder_ceo",
+          "requested_role": "legitimacy",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://in.linkedin.com/in/madesh-murugesan-b962aa2a0",
+          "domain": "in.linkedin.com",
+          "source_type": "search_snippet",
+          "tier": "tier3",
+          "extracted_claim": "",
+          "supported_role": "founder_ceo",
+          "requested_role": "legitimacy",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "Failed",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        }
+      ],
+      "trust_metadata": {
+        "verification_state": "not_verified",
+        "requested_role": "legitimacy",
+        "supported_role": "founder_ceo",
+        "role_match": false,
+        "role_mismatch_reason": "supported_role_is_founder_ceo_not_legitimacy",
+        "conflict_detected": false,
+        "exact_role_verified": false,
+        "evidence_strength": "weak",
+        "strongest_source_type": "company_linkedin",
+        "official_source_found": false,
+        "linkedin_source_found": true,
+        "registry_source_found": false,
+        "selected_candidate": "",
+        "candidate_count": 0,
+        "search_depth_used": "standard",
+        "search_lanes_used": [
+          "official_website",
+          "linkedin",
+          "registry_directory",
+          "news_articles",
+          "general_web"
+        ],
+        "source_tiers_found": [
+          "tier1",
+          "tier2",
+          "tier3"
+        ],
+        "answer_mode": "role_mismatch_not_verified",
+        "confidence_reason": "Available evidence supports a different public role than the one requested, so the exact role is not verified.",
+        "freshness_status": "Failed",
+        "related_evidence_used": false
+      },
+      "provider_diagnostics": {
+        "timestamp": "2026-05-01T07:14:55.789433+00:00",
+        "search_provider_name": "serper",
+        "extract_provider_name": "web_extract",
+        "search_api_key_present": true,
+        "search_endpoint_configured": true,
+        "live_provider_configured": true,
+        "search_provider_ready": true,
+        "extract_provider_ready": true,
+        "external_network_ready": true,
+        "dns_resolution_ok": true,
+        "proxy_detected": false,
+        "provider_mode": "live",
+        "last_provider_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "search_http_status": 200,
+        "search_error_type": "",
+        "search_error_safe": "",
+        "search_query": "Relyce Infotech Founder CEO",
+        "search_query_known": "who is the ceo of microsoft",
+        "extract_url": "https://www.microsoft.com/en-us/about",
+        "linkedin_extract_reference": "https://www.linkedin.com/company/relyce-infotech",
+        "search_results_count": 5,
+        "search_domains": [
+          "amarinfotech.com",
+          "ill.eu",
+          "in.linkedin.com",
+          "instagram.com",
+          "rocketreach.co"
+        ],
+        "search_results": [
+          {
+            "title": "Relyce infotech Information - RocketReach",
+            "url": "https://rocketreach.co/relyce-infotech-profile_b6fff776c6523a5a",
+            "domain": "rocketreach.co",
+            "snippet": "Relyce infotech Questions. Who is the Founder of Relyce infotech? Ukenthiran A is the Founder of Relyce infotech. How many people are employed at Relyce ..."
+          },
+          {
+            "title": "Relyce infotech - LinkedIn",
+            "url": "https://in.linkedin.com/company/relyce-infotech",
+            "domain": "in.linkedin.com",
+            "snippet": "Core Team : Ukenthiran A Founder & CEO of Relyce infotech Dharsan L | Tamizharuvi p | GOHULA KANNAN | Naveenkumar Sivarajan | keerthana S #Startup ..."
+          },
+          {
+            "title": "Meet Our Team - Team Experience Keeps Us Curious - Amar Infotech",
+            "url": "https://www.amarinfotech.com/meet-our-team.html",
+            "domain": "amarinfotech.com",
+            "snippet": "Mr. Hitesh Ramoliya is the Founder & CEO of Amar InfoTech, bringing over 18 years of experience in web and mobile application development, enterprise software ..."
+          },
+          {
+            "title": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and ...",
+            "url": "https://www.instagram.com/p/CQ6EqcqjV7F/",
+            "domain": "instagram.com",
+            "snippet": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and array of services ! Provide Customization in Tally as per customer requirement. Dedicated Support ..."
+          },
+          {
+            "title": "Home - ILL Neutrons for Society",
+            "url": "https://www.ill.eu/",
+            "domain": "ill.eu",
+            "snippet": "This 60-page edition offers a concise overview of last year's key scientific highlights, technical developments, and reactor operations, along with insights ..."
+          }
+        ],
+        "search_known_results_count": 5,
+        "search_known_domains": [
+          "britannica.com",
+          "en.wikipedia.org",
+          "linkedin.com",
+          "news.microsoft.com",
+          "x.com"
+        ],
+        "search_known_results": [
+          {
+            "title": "Satya Nadella - Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Satya_Nadella",
+            "domain": "en.wikipedia.org",
+            "snippet": "Satya Narayana Nadella (born 19 August 1967) is an Indian-American business executive. He is the chairman and chief executive officer (CEO) of Microsoft, ..."
+          },
+          {
+            "title": "Satya Nadella - Chairman and CEO at Microsoft - LinkedIn",
+            "url": "https://www.linkedin.com/in/satyanadella",
+            "domain": "linkedin.com",
+            "snippet": "As chairman and CEO of Microsoft, I define my mission and that of my company as empowering every person and every organization on the planet to achieve more."
+          },
+          {
+            "title": "Satya Nadella - Microsoft Source",
+            "url": "https://news.microsoft.com/source/exec/satya-nadella/",
+            "domain": "news.microsoft.com",
+            "snippet": "Satya Nadella is Chairman and Chief Executive Officer of Microsoft. Before being named CEO in February 2014, Nadella held leadership roles in both enterprise ..."
+          },
+          {
+            "title": "Satya Nadella (@satyanadella) / Posts / X - Twitter",
+            "url": "https://x.com/satyanadella",
+            "domain": "x.com",
+            "snippet": "Satya Nadella (@satyanadella) - Posts - Chairman and CEO at Microsoft | X (formerly Twitter)"
+          },
+          {
+            "title": "Satya Nadella | Biography & Facts | Britannica Money",
+            "url": "https://www.britannica.com/money/Satya-Nadella",
+            "domain": "britannica.com",
+            "snippet": "Satya Nadella (born August 19, 1967, Hyderabad, India) is an Indian-born business executive who was CEO of the computer software company Microsoft from 2014."
+          }
+        ],
+        "search_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"Relyce Infotech Founder CEO\",\"type\":\"search\",\"engine\":\"google\"},\"answerBox\":{\"snippet\":\"Ukenthiran A - Relyce infotech | LinkedIn.\",\"snippetHighlighted\":[\"Ukenthiran A\"],\"tit"
+        },
+        "search_known_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"who is the ceo of microsoft\",\"type\":\"search\",\"engine\":\"google\"},\"organic\":[{\"title\":\"Satya Nadella - Wikipedia\",\"link\":\"https://en.wikipedia.org/wiki/Satya_Nadella\",\"snippet\""
+        },
+        "extract_status": "success",
+        "extract_adapter": "web_extract",
+        "extract_error_type": "",
+        "extract_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "linkedin_snippet_preservation": {
+          "candidate_name": "Ukenthiran A",
+          "supported_role": "founder_ceo",
+          "role_match": true,
+          "company_match": true,
+          "target_entity_match": true
+        },
+        "provider_health": {
+          "serper": {
+            "name": "serper",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          },
+          "web_extract": {
+            "name": "web_extract",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          }
+        }
+      },
+      "pass_reason": "The case matched route, trust metadata, and evidence requirements.",
+      "http_status": 200,
+      "http_error": "",
+      "live_blocker": ""
+    },
+    {
+      "id": "known_ceo_official_company",
+      "query": "who is the ceo of microsoft",
+      "category": "entity_role",
+      "mode": "live",
+      "ok": true,
+      "failed_checks": [],
+      "elapsed_ms": 5302.08,
+      "selected_route": "entity_lookup",
+      "owner": "entity_lookup_pipeline",
+      "answer_mode": "verified_entity_fact",
+      "final_answer": "Answer\nThe best-supported public answer is Satya Nadella.\n\nWhat public evidence supports\nThe available evidence supports the requested role: ceo.\n\nEvidence\n- Satya Nadella (official website; supports: ceo; exact company match)\n- Satya Nadella (official website; supports: ceo; exact company match)\n- Microsoft | LinkedIn (company linkedin; supports: ceo; exact company match)\n- \u200fMicrosoft\u200f | LinkedIn (company linkedin; supports: ceo; exact company match)\n\nConfidence\nHigh (confirmed)\n\nWhat this does not prove\nStill verify recency if the role may have changed.\n\nBottom line\nUse this as the current best-supported public answer for ceo, while still checking recency if leadership may have changed.\n\nSources checked:\n- Microsoft official website\n- Microsoft about team leadership\n- Microsoft about us leadership CEO\n- Microsoft team founder CEO\n\nVerification policy:\n- official explicit role confirmation",
+      "exact_claim_verified": true,
+      "role_match": true,
+      "source_tiers_found": [
+        "tier1"
+      ],
+      "search_queries_generated": [
+        "Microsoft official website",
+        "Microsoft about team leadership",
+        "Microsoft about us leadership CEO",
+        "Microsoft team founder CEO"
+      ],
+      "search_lanes_used": [
+        "official_website",
+        "linkedin",
+        "registry_directory",
+        "news_articles",
+        "general_web"
+      ],
+      "provider_returned_count": 0,
+      "domains_returned": [
+        "blogs.microsoft.com",
+        "news.microsoft.com",
+        "pr.linkedin.com",
+        "se.linkedin.com"
+      ],
+      "returned_titles": [],
+      "returned_snippets": [],
+      "extracted_urls_attempted": [],
+      "extraction_statuses": [],
+      "rejected_sources": [],
+      "rejected_sources_count": 8,
+      "usable_sources_count": 1,
+      "conflict_detected": false,
+      "confidence_reason": "An official or source-of-record public source explicitly supports the role claim.",
+      "evidence_matrix": [
+        {
+          "source_title": "https://news.microsoft.com/source/leadership/",
+          "domain": "news.microsoft.com",
+          "source_type": "official_website",
+          "tier": "tier1",
+          "extracted_claim": "",
+          "supported_role": "ceo",
+          "requested_role": "ceo",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "High",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://news.microsoft.com/source/exec/satya-nadella/",
+          "domain": "news.microsoft.com",
+          "source_type": "official_website",
+          "tier": "tier1",
+          "extracted_claim": "",
+          "supported_role": "ceo",
+          "requested_role": "ceo",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "High",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://blogs.microsoft.com/blog/2025/07/24/recommitting-to-our-why-what-and-how/",
+          "domain": "blogs.microsoft.com",
+          "source_type": "official_website",
+          "tier": "tier1",
+          "extracted_claim": "",
+          "supported_role": "ceo",
+          "requested_role": "ceo",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "High",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://pr.linkedin.com/company/microsoft?trk=public_profile_experience-group-header",
+          "domain": "pr.linkedin.com",
+          "source_type": "company_linkedin",
+          "tier": "tier1",
+          "extracted_claim": "",
+          "supported_role": "ceo",
+          "requested_role": "ceo",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "High",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://se.linkedin.com/company/microsoft",
+          "domain": "se.linkedin.com",
+          "source_type": "company_linkedin",
+          "tier": "tier1",
+          "extracted_claim": "",
+          "supported_role": "ceo",
+          "requested_role": "ceo",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "High",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        }
+      ],
+      "trust_metadata": {
+        "verification_state": "confirmed",
+        "requested_role": "ceo",
+        "supported_role": "ceo",
+        "role_match": true,
+        "role_mismatch_reason": "",
+        "conflict_detected": false,
+        "exact_role_verified": true,
+        "evidence_strength": "strong",
+        "strongest_source_type": "official_website",
+        "official_source_found": true,
+        "linkedin_source_found": true,
+        "registry_source_found": false,
+        "selected_candidate": "Satya Nadella",
+        "candidate_count": 1,
+        "search_depth_used": "escalated",
+        "search_lanes_used": [
+          "official_website",
+          "linkedin",
+          "registry_directory",
+          "news_articles",
+          "general_web"
+        ],
+        "source_tiers_found": [
+          "tier1"
+        ],
+        "answer_mode": "verified_entity_fact",
+        "confidence_reason": "An official or source-of-record public source explicitly supports the role claim.",
+        "freshness_status": "High",
+        "related_evidence_used": false
+      },
+      "provider_diagnostics": {
+        "timestamp": "2026-05-01T07:14:55.789433+00:00",
+        "search_provider_name": "serper",
+        "extract_provider_name": "web_extract",
+        "search_api_key_present": true,
+        "search_endpoint_configured": true,
+        "live_provider_configured": true,
+        "search_provider_ready": true,
+        "extract_provider_ready": true,
+        "external_network_ready": true,
+        "dns_resolution_ok": true,
+        "proxy_detected": false,
+        "provider_mode": "live",
+        "last_provider_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "search_http_status": 200,
+        "search_error_type": "",
+        "search_error_safe": "",
+        "search_query": "Relyce Infotech Founder CEO",
+        "search_query_known": "who is the ceo of microsoft",
+        "extract_url": "https://www.microsoft.com/en-us/about",
+        "linkedin_extract_reference": "https://www.linkedin.com/company/relyce-infotech",
+        "search_results_count": 5,
+        "search_domains": [
+          "amarinfotech.com",
+          "ill.eu",
+          "in.linkedin.com",
+          "instagram.com",
+          "rocketreach.co"
+        ],
+        "search_results": [
+          {
+            "title": "Relyce infotech Information - RocketReach",
+            "url": "https://rocketreach.co/relyce-infotech-profile_b6fff776c6523a5a",
+            "domain": "rocketreach.co",
+            "snippet": "Relyce infotech Questions. Who is the Founder of Relyce infotech? Ukenthiran A is the Founder of Relyce infotech. How many people are employed at Relyce ..."
+          },
+          {
+            "title": "Relyce infotech - LinkedIn",
+            "url": "https://in.linkedin.com/company/relyce-infotech",
+            "domain": "in.linkedin.com",
+            "snippet": "Core Team : Ukenthiran A Founder & CEO of Relyce infotech Dharsan L | Tamizharuvi p | GOHULA KANNAN | Naveenkumar Sivarajan | keerthana S #Startup ..."
+          },
+          {
+            "title": "Meet Our Team - Team Experience Keeps Us Curious - Amar Infotech",
+            "url": "https://www.amarinfotech.com/meet-our-team.html",
+            "domain": "amarinfotech.com",
+            "snippet": "Mr. Hitesh Ramoliya is the Founder & CEO of Amar InfoTech, bringing over 18 years of experience in web and mobile application development, enterprise software ..."
+          },
+          {
+            "title": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and ...",
+            "url": "https://www.instagram.com/p/CQ6EqcqjV7F/",
+            "domain": "instagram.com",
+            "snippet": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and array of services ! Provide Customization in Tally as per customer requirement. Dedicated Support ..."
+          },
+          {
+            "title": "Home - ILL Neutrons for Society",
+            "url": "https://www.ill.eu/",
+            "domain": "ill.eu",
+            "snippet": "This 60-page edition offers a concise overview of last year's key scientific highlights, technical developments, and reactor operations, along with insights ..."
+          }
+        ],
+        "search_known_results_count": 5,
+        "search_known_domains": [
+          "britannica.com",
+          "en.wikipedia.org",
+          "linkedin.com",
+          "news.microsoft.com",
+          "x.com"
+        ],
+        "search_known_results": [
+          {
+            "title": "Satya Nadella - Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Satya_Nadella",
+            "domain": "en.wikipedia.org",
+            "snippet": "Satya Narayana Nadella (born 19 August 1967) is an Indian-American business executive. He is the chairman and chief executive officer (CEO) of Microsoft, ..."
+          },
+          {
+            "title": "Satya Nadella - Chairman and CEO at Microsoft - LinkedIn",
+            "url": "https://www.linkedin.com/in/satyanadella",
+            "domain": "linkedin.com",
+            "snippet": "As chairman and CEO of Microsoft, I define my mission and that of my company as empowering every person and every organization on the planet to achieve more."
+          },
+          {
+            "title": "Satya Nadella - Microsoft Source",
+            "url": "https://news.microsoft.com/source/exec/satya-nadella/",
+            "domain": "news.microsoft.com",
+            "snippet": "Satya Nadella is Chairman and Chief Executive Officer of Microsoft. Before being named CEO in February 2014, Nadella held leadership roles in both enterprise ..."
+          },
+          {
+            "title": "Satya Nadella (@satyanadella) / Posts / X - Twitter",
+            "url": "https://x.com/satyanadella",
+            "domain": "x.com",
+            "snippet": "Satya Nadella (@satyanadella) - Posts - Chairman and CEO at Microsoft | X (formerly Twitter)"
+          },
+          {
+            "title": "Satya Nadella | Biography & Facts | Britannica Money",
+            "url": "https://www.britannica.com/money/Satya-Nadella",
+            "domain": "britannica.com",
+            "snippet": "Satya Nadella (born August 19, 1967, Hyderabad, India) is an Indian-born business executive who was CEO of the computer software company Microsoft from 2014."
+          }
+        ],
+        "search_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"Relyce Infotech Founder CEO\",\"type\":\"search\",\"engine\":\"google\"},\"answerBox\":{\"snippet\":\"Ukenthiran A - Relyce infotech | LinkedIn.\",\"snippetHighlighted\":[\"Ukenthiran A\"],\"tit"
+        },
+        "search_known_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"who is the ceo of microsoft\",\"type\":\"search\",\"engine\":\"google\"},\"organic\":[{\"title\":\"Satya Nadella - Wikipedia\",\"link\":\"https://en.wikipedia.org/wiki/Satya_Nadella\",\"snippet\""
+        },
+        "extract_status": "success",
+        "extract_adapter": "web_extract",
+        "extract_error_type": "",
+        "extract_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "linkedin_snippet_preservation": {
+          "candidate_name": "Ukenthiran A",
+          "supported_role": "founder_ceo",
+          "role_match": true,
+          "company_match": true,
+          "target_entity_match": true
+        },
+        "provider_health": {
+          "serper": {
+            "name": "serper",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          },
+          "web_extract": {
+            "name": "web_extract",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          }
+        }
+      },
+      "pass_reason": "The case verified the exact role from stronger evidence.",
+      "http_status": 200,
+      "http_error": "",
+      "live_blocker": ""
+    },
+    {
+      "id": "known_founder_company",
+      "query": "who founded microsoft",
+      "category": "entity_role",
+      "mode": "live",
+      "ok": false,
+      "failed_checks": [
+        "source_tiers_present",
+        "requested_role_present",
+        "exact_role_verified"
+      ],
+      "elapsed_ms": 10198.41,
+      "selected_route": "entity_lookup",
+      "owner": "entity_lookup_pipeline",
+      "answer_mode": "unverified_no_answer",
+      "final_answer": "I need the company or person name before I can verify this public entity question.\n\nSources checked:\n- <entity> official website\n- <entity> about team leadership\n- <entity> about us leadership CEO\n- <entity> team founder CEO\n\nVerification policy:\n- single source explicit claim",
+      "exact_claim_verified": false,
+      "role_match": false,
+      "source_tiers_found": [],
+      "search_queries_generated": [
+        "<entity> official website",
+        "<entity> about team leadership",
+        "<entity> about us leadership CEO",
+        "<entity> team founder CEO"
+      ],
+      "search_lanes_used": [],
+      "provider_returned_count": 0,
+      "domains_returned": [
+        "cnbc.com",
+        "founderandceopod.com",
+        "ideaentity.com"
+      ],
+      "returned_titles": [],
+      "returned_snippets": [],
+      "extracted_urls_attempted": [],
+      "extraction_statuses": [],
+      "rejected_sources": [],
+      "rejected_sources_count": 3,
+      "usable_sources_count": 0,
+      "conflict_detected": false,
+      "confidence_reason": "The entity name is missing, so no public evidence can be matched safely.",
+      "evidence_matrix": [
+        {
+          "source_title": "https://www.ideaentity.com/leadership",
+          "domain": "ideaentity.com",
+          "source_type": "official_website",
+          "tier": "tier1",
+          "extracted_claim": "",
+          "supported_role": "",
+          "requested_role": "",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "High",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://www.cnbc.com/2026/04/22/microsofts-linkedin-makes-executive-daniel-shapero-its-new-ceo.html",
+          "domain": "cnbc.com",
+          "source_type": "search_snippet",
+          "tier": "tier3",
+          "extracted_claim": "",
+          "supported_role": "",
+          "requested_role": "",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "High",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        },
+        {
+          "source_title": "https://founderandceopod.com/",
+          "domain": "founderandceopod.com",
+          "source_type": "search_snippet",
+          "tier": "tier3",
+          "extracted_claim": "",
+          "supported_role": "",
+          "requested_role": "",
+          "supports_exact_claim": false,
+          "contradicts_claim": false,
+          "extraction_quality": 0.0,
+          "freshness": "High",
+          "usable_for_verification": false,
+          "rejection_reason": "source_link_only",
+          "company_match": false,
+          "target_entity_match": false,
+          "role_holder_detected": "",
+          "extracted_role": "",
+          "role_applies_to_person": false,
+          "source_relevance_score": 0.0,
+          "extraction_status": "source_link_only",
+          "evidence_source": "source_link"
+        }
+      ],
+      "trust_metadata": {
+        "verification_state": "not_verified",
+        "requested_role": "",
+        "supported_role": "",
+        "role_match": false,
+        "role_mismatch_reason": "",
+        "conflict_detected": false,
+        "exact_role_verified": false,
+        "evidence_strength": "weak",
+        "strongest_source_type": "",
+        "official_source_found": false,
+        "linkedin_source_found": false,
+        "registry_source_found": false,
+        "selected_candidate": "",
+        "candidate_count": 0,
+        "search_depth_used": "standard",
+        "search_lanes_used": [],
+        "source_tiers_found": [],
+        "answer_mode": "unverified_no_answer",
+        "confidence_reason": "The entity name is missing, so no public evidence can be matched safely.",
+        "freshness_status": "High",
+        "related_evidence_used": false
+      },
+      "provider_diagnostics": {
+        "timestamp": "2026-05-01T07:14:55.789433+00:00",
+        "search_provider_name": "serper",
+        "extract_provider_name": "web_extract",
+        "search_api_key_present": true,
+        "search_endpoint_configured": true,
+        "live_provider_configured": true,
+        "search_provider_ready": true,
+        "extract_provider_ready": true,
+        "external_network_ready": true,
+        "dns_resolution_ok": true,
+        "proxy_detected": false,
+        "provider_mode": "live",
+        "last_provider_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "search_http_status": 200,
+        "search_error_type": "",
+        "search_error_safe": "",
+        "search_query": "Relyce Infotech Founder CEO",
+        "search_query_known": "who is the ceo of microsoft",
+        "extract_url": "https://www.microsoft.com/en-us/about",
+        "linkedin_extract_reference": "https://www.linkedin.com/company/relyce-infotech",
+        "search_results_count": 5,
+        "search_domains": [
+          "amarinfotech.com",
+          "ill.eu",
+          "in.linkedin.com",
+          "instagram.com",
+          "rocketreach.co"
+        ],
+        "search_results": [
+          {
+            "title": "Relyce infotech Information - RocketReach",
+            "url": "https://rocketreach.co/relyce-infotech-profile_b6fff776c6523a5a",
+            "domain": "rocketreach.co",
+            "snippet": "Relyce infotech Questions. Who is the Founder of Relyce infotech? Ukenthiran A is the Founder of Relyce infotech. How many people are employed at Relyce ..."
+          },
+          {
+            "title": "Relyce infotech - LinkedIn",
+            "url": "https://in.linkedin.com/company/relyce-infotech",
+            "domain": "in.linkedin.com",
+            "snippet": "Core Team : Ukenthiran A Founder & CEO of Relyce infotech Dharsan L | Tamizharuvi p | GOHULA KANNAN | Naveenkumar Sivarajan | keerthana S #Startup ..."
+          },
+          {
+            "title": "Meet Our Team - Team Experience Keeps Us Curious - Amar Infotech",
+            "url": "https://www.amarinfotech.com/meet-our-team.html",
+            "domain": "amarinfotech.com",
+            "snippet": "Mr. Hitesh Ramoliya is the Founder & CEO of Amar InfoTech, bringing over 18 years of experience in web and mobile application development, enterprise software ..."
+          },
+          {
+            "title": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and ...",
+            "url": "https://www.instagram.com/p/CQ6EqcqjV7F/",
+            "domain": "instagram.com",
+            "snippet": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and array of services ! Provide Customization in Tally as per customer requirement. Dedicated Support ..."
+          },
+          {
+            "title": "Home - ILL Neutrons for Society",
+            "url": "https://www.ill.eu/",
+            "domain": "ill.eu",
+            "snippet": "This 60-page edition offers a concise overview of last year's key scientific highlights, technical developments, and reactor operations, along with insights ..."
+          }
+        ],
+        "search_known_results_count": 5,
+        "search_known_domains": [
+          "britannica.com",
+          "en.wikipedia.org",
+          "linkedin.com",
+          "news.microsoft.com",
+          "x.com"
+        ],
+        "search_known_results": [
+          {
+            "title": "Satya Nadella - Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Satya_Nadella",
+            "domain": "en.wikipedia.org",
+            "snippet": "Satya Narayana Nadella (born 19 August 1967) is an Indian-American business executive. He is the chairman and chief executive officer (CEO) of Microsoft, ..."
+          },
+          {
+            "title": "Satya Nadella - Chairman and CEO at Microsoft - LinkedIn",
+            "url": "https://www.linkedin.com/in/satyanadella",
+            "domain": "linkedin.com",
+            "snippet": "As chairman and CEO of Microsoft, I define my mission and that of my company as empowering every person and every organization on the planet to achieve more."
+          },
+          {
+            "title": "Satya Nadella - Microsoft Source",
+            "url": "https://news.microsoft.com/source/exec/satya-nadella/",
+            "domain": "news.microsoft.com",
+            "snippet": "Satya Nadella is Chairman and Chief Executive Officer of Microsoft. Before being named CEO in February 2014, Nadella held leadership roles in both enterprise ..."
+          },
+          {
+            "title": "Satya Nadella (@satyanadella) / Posts / X - Twitter",
+            "url": "https://x.com/satyanadella",
+            "domain": "x.com",
+            "snippet": "Satya Nadella (@satyanadella) - Posts - Chairman and CEO at Microsoft | X (formerly Twitter)"
+          },
+          {
+            "title": "Satya Nadella | Biography & Facts | Britannica Money",
+            "url": "https://www.britannica.com/money/Satya-Nadella",
+            "domain": "britannica.com",
+            "snippet": "Satya Nadella (born August 19, 1967, Hyderabad, India) is an Indian-born business executive who was CEO of the computer software company Microsoft from 2014."
+          }
+        ],
+        "search_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"Relyce Infotech Founder CEO\",\"type\":\"search\",\"engine\":\"google\"},\"answerBox\":{\"snippet\":\"Ukenthiran A - Relyce infotech | LinkedIn.\",\"snippetHighlighted\":[\"Ukenthiran A\"],\"tit"
+        },
+        "search_known_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"who is the ceo of microsoft\",\"type\":\"search\",\"engine\":\"google\"},\"organic\":[{\"title\":\"Satya Nadella - Wikipedia\",\"link\":\"https://en.wikipedia.org/wiki/Satya_Nadella\",\"snippet\""
+        },
+        "extract_status": "success",
+        "extract_adapter": "web_extract",
+        "extract_error_type": "",
+        "extract_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "linkedin_snippet_preservation": {
+          "candidate_name": "Ukenthiran A",
+          "supported_role": "founder_ceo",
+          "role_match": true,
+          "company_match": true,
+          "target_entity_match": true
+        },
+        "provider_health": {
+          "serper": {
+            "name": "serper",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          },
+          "web_extract": {
+            "name": "web_extract",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          }
+        }
+      },
+      "pass_reason": "Failed checks: source_tiers_present, requested_role_present, exact_role_verified",
+      "http_status": 200,
+      "http_error": "",
+      "live_blocker": ""
+    },
+    {
+      "id": "unknown_local_company_weak",
+      "query": "who is the ceo of tiny neem labs vellore",
+      "category": "entity_role",
+      "mode": "live",
+      "ok": false,
+      "failed_checks": [
+        "answer_not_empty",
+        "route_matches",
+        "owner_matches",
+        "evidence_matrix_present",
+        "source_tiers_present",
+        "requested_role_present"
+      ],
+      "elapsed_ms": 458.1,
+      "selected_route": "",
+      "owner": "",
+      "answer_mode": "",
+      "final_answer": "",
+      "exact_claim_verified": false,
+      "role_match": false,
+      "source_tiers_found": [],
+      "search_queries_generated": [],
+      "search_lanes_used": [],
+      "provider_returned_count": 0,
+      "domains_returned": [],
+      "returned_titles": [],
+      "returned_snippets": [],
+      "extracted_urls_attempted": [],
+      "extraction_statuses": [],
+      "rejected_sources": [],
+      "rejected_sources_count": 0,
+      "usable_sources_count": 0,
+      "conflict_detected": false,
+      "confidence_reason": "",
+      "evidence_matrix": [],
+      "trust_metadata": {
+        "verification_state": "",
+        "requested_role": "",
+        "supported_role": "",
+        "role_match": false,
+        "role_mismatch_reason": "",
+        "conflict_detected": false,
+        "exact_role_verified": false,
+        "evidence_strength": "",
+        "strongest_source_type": "",
+        "official_source_found": false,
+        "linkedin_source_found": false,
+        "registry_source_found": false,
+        "selected_candidate": "",
+        "candidate_count": 0,
+        "search_depth_used": "",
+        "search_lanes_used": [],
+        "source_tiers_found": [],
+        "answer_mode": "",
+        "confidence_reason": "",
+        "freshness_status": "",
+        "related_evidence_used": false
+      },
+      "provider_diagnostics": {
+        "timestamp": "2026-05-01T07:14:55.789433+00:00",
+        "search_provider_name": "serper",
+        "extract_provider_name": "web_extract",
+        "search_api_key_present": true,
+        "search_endpoint_configured": true,
+        "live_provider_configured": true,
+        "search_provider_ready": true,
+        "extract_provider_ready": true,
+        "external_network_ready": true,
+        "dns_resolution_ok": true,
+        "proxy_detected": false,
+        "provider_mode": "live",
+        "last_provider_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "search_http_status": 200,
+        "search_error_type": "",
+        "search_error_safe": "",
+        "search_query": "Relyce Infotech Founder CEO",
+        "search_query_known": "who is the ceo of microsoft",
+        "extract_url": "https://www.microsoft.com/en-us/about",
+        "linkedin_extract_reference": "https://www.linkedin.com/company/relyce-infotech",
+        "search_results_count": 5,
+        "search_domains": [
+          "amarinfotech.com",
+          "ill.eu",
+          "in.linkedin.com",
+          "instagram.com",
+          "rocketreach.co"
+        ],
+        "search_results": [
+          {
+            "title": "Relyce infotech Information - RocketReach",
+            "url": "https://rocketreach.co/relyce-infotech-profile_b6fff776c6523a5a",
+            "domain": "rocketreach.co",
+            "snippet": "Relyce infotech Questions. Who is the Founder of Relyce infotech? Ukenthiran A is the Founder of Relyce infotech. How many people are employed at Relyce ..."
+          },
+          {
+            "title": "Relyce infotech - LinkedIn",
+            "url": "https://in.linkedin.com/company/relyce-infotech",
+            "domain": "in.linkedin.com",
+            "snippet": "Core Team : Ukenthiran A Founder & CEO of Relyce infotech Dharsan L | Tamizharuvi p | GOHULA KANNAN | Naveenkumar Sivarajan | keerthana S #Startup ..."
+          },
+          {
+            "title": "Meet Our Team - Team Experience Keeps Us Curious - Amar Infotech",
+            "url": "https://www.amarinfotech.com/meet-our-team.html",
+            "domain": "amarinfotech.com",
+            "snippet": "Mr. Hitesh Ramoliya is the Founder & CEO of Amar InfoTech, bringing over 18 years of experience in web and mobile application development, enterprise software ..."
+          },
+          {
+            "title": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and ...",
+            "url": "https://www.instagram.com/p/CQ6EqcqjV7F/",
+            "domain": "instagram.com",
+            "snippet": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and array of services ! Provide Customization in Tally as per customer requirement. Dedicated Support ..."
+          },
+          {
+            "title": "Home - ILL Neutrons for Society",
+            "url": "https://www.ill.eu/",
+            "domain": "ill.eu",
+            "snippet": "This 60-page edition offers a concise overview of last year's key scientific highlights, technical developments, and reactor operations, along with insights ..."
+          }
+        ],
+        "search_known_results_count": 5,
+        "search_known_domains": [
+          "britannica.com",
+          "en.wikipedia.org",
+          "linkedin.com",
+          "news.microsoft.com",
+          "x.com"
+        ],
+        "search_known_results": [
+          {
+            "title": "Satya Nadella - Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Satya_Nadella",
+            "domain": "en.wikipedia.org",
+            "snippet": "Satya Narayana Nadella (born 19 August 1967) is an Indian-American business executive. He is the chairman and chief executive officer (CEO) of Microsoft, ..."
+          },
+          {
+            "title": "Satya Nadella - Chairman and CEO at Microsoft - LinkedIn",
+            "url": "https://www.linkedin.com/in/satyanadella",
+            "domain": "linkedin.com",
+            "snippet": "As chairman and CEO of Microsoft, I define my mission and that of my company as empowering every person and every organization on the planet to achieve more."
+          },
+          {
+            "title": "Satya Nadella - Microsoft Source",
+            "url": "https://news.microsoft.com/source/exec/satya-nadella/",
+            "domain": "news.microsoft.com",
+            "snippet": "Satya Nadella is Chairman and Chief Executive Officer of Microsoft. Before being named CEO in February 2014, Nadella held leadership roles in both enterprise ..."
+          },
+          {
+            "title": "Satya Nadella (@satyanadella) / Posts / X - Twitter",
+            "url": "https://x.com/satyanadella",
+            "domain": "x.com",
+            "snippet": "Satya Nadella (@satyanadella) - Posts - Chairman and CEO at Microsoft | X (formerly Twitter)"
+          },
+          {
+            "title": "Satya Nadella | Biography & Facts | Britannica Money",
+            "url": "https://www.britannica.com/money/Satya-Nadella",
+            "domain": "britannica.com",
+            "snippet": "Satya Nadella (born August 19, 1967, Hyderabad, India) is an Indian-born business executive who was CEO of the computer software company Microsoft from 2014."
+          }
+        ],
+        "search_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"Relyce Infotech Founder CEO\",\"type\":\"search\",\"engine\":\"google\"},\"answerBox\":{\"snippet\":\"Ukenthiran A - Relyce infotech | LinkedIn.\",\"snippetHighlighted\":[\"Ukenthiran A\"],\"tit"
+        },
+        "search_known_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"who is the ceo of microsoft\",\"type\":\"search\",\"engine\":\"google\"},\"organic\":[{\"title\":\"Satya Nadella - Wikipedia\",\"link\":\"https://en.wikipedia.org/wiki/Satya_Nadella\",\"snippet\""
+        },
+        "extract_status": "success",
+        "extract_adapter": "web_extract",
+        "extract_error_type": "",
+        "extract_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "linkedin_snippet_preservation": {
+          "candidate_name": "Ukenthiran A",
+          "supported_role": "founder_ceo",
+          "role_match": true,
+          "company_match": true,
+          "target_entity_match": true
+        },
+        "provider_health": {
+          "serper": {
+            "name": "serper",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          },
+          "web_extract": {
+            "name": "web_extract",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          }
+        }
+      },
+      "pass_reason": "Failed checks: answer_not_empty, route_matches, owner_matches, evidence_matrix_present, source_tiers_present, requested_role_present",
+      "http_status": 0,
+      "http_error": "[WinError 10054] An existing connection was forcibly closed by the remote host",
+      "live_blocker": "[WinError 10054] An existing connection was forcibly closed by the remote host"
+    },
+    {
+      "id": "claude_india_rumour",
+      "query": "india blocking claude rumour",
+      "category": "research_rumour",
+      "mode": "live",
+      "ok": false,
+      "failed_checks": [
+        "answer_not_empty",
+        "route_matches",
+        "owner_matches",
+        "evidence_matrix_present",
+        "source_tiers_present",
+        "research_lane_official_present",
+        "research_lane_news_present",
+        "research_lane_contradiction_present",
+        "research_lane_background_present",
+        "related_evidence_present"
+      ],
+      "elapsed_ms": 2033.87,
+      "selected_route": "",
+      "owner": "",
+      "answer_mode": "",
+      "final_answer": "",
+      "exact_claim_verified": false,
+      "role_match": false,
+      "source_tiers_found": [],
+      "search_queries_generated": [],
+      "search_lanes_used": [],
+      "provider_returned_count": 0,
+      "domains_returned": [],
+      "returned_titles": [],
+      "returned_snippets": [],
+      "extracted_urls_attempted": [],
+      "extraction_statuses": [],
+      "rejected_sources": [],
+      "rejected_sources_count": 0,
+      "usable_sources_count": 0,
+      "conflict_detected": false,
+      "confidence_reason": "",
+      "evidence_matrix": [],
+      "trust_metadata": {
+        "verification_state": "",
+        "requested_role": "",
+        "supported_role": "",
+        "role_match": false,
+        "role_mismatch_reason": "",
+        "conflict_detected": false,
+        "exact_role_verified": false,
+        "evidence_strength": "",
+        "strongest_source_type": "",
+        "official_source_found": false,
+        "linkedin_source_found": false,
+        "registry_source_found": false,
+        "selected_candidate": "",
+        "candidate_count": 0,
+        "search_depth_used": "",
+        "search_lanes_used": [],
+        "source_tiers_found": [],
+        "answer_mode": "",
+        "confidence_reason": "",
+        "freshness_status": "",
+        "related_evidence_used": false
+      },
+      "provider_diagnostics": {
+        "timestamp": "2026-05-01T07:14:55.789433+00:00",
+        "search_provider_name": "serper",
+        "extract_provider_name": "web_extract",
+        "search_api_key_present": true,
+        "search_endpoint_configured": true,
+        "live_provider_configured": true,
+        "search_provider_ready": true,
+        "extract_provider_ready": true,
+        "external_network_ready": true,
+        "dns_resolution_ok": true,
+        "proxy_detected": false,
+        "provider_mode": "live",
+        "last_provider_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "search_http_status": 200,
+        "search_error_type": "",
+        "search_error_safe": "",
+        "search_query": "Relyce Infotech Founder CEO",
+        "search_query_known": "who is the ceo of microsoft",
+        "extract_url": "https://www.microsoft.com/en-us/about",
+        "linkedin_extract_reference": "https://www.linkedin.com/company/relyce-infotech",
+        "search_results_count": 5,
+        "search_domains": [
+          "amarinfotech.com",
+          "ill.eu",
+          "in.linkedin.com",
+          "instagram.com",
+          "rocketreach.co"
+        ],
+        "search_results": [
+          {
+            "title": "Relyce infotech Information - RocketReach",
+            "url": "https://rocketreach.co/relyce-infotech-profile_b6fff776c6523a5a",
+            "domain": "rocketreach.co",
+            "snippet": "Relyce infotech Questions. Who is the Founder of Relyce infotech? Ukenthiran A is the Founder of Relyce infotech. How many people are employed at Relyce ..."
+          },
+          {
+            "title": "Relyce infotech - LinkedIn",
+            "url": "https://in.linkedin.com/company/relyce-infotech",
+            "domain": "in.linkedin.com",
+            "snippet": "Core Team : Ukenthiran A Founder & CEO of Relyce infotech Dharsan L | Tamizharuvi p | GOHULA KANNAN | Naveenkumar Sivarajan | keerthana S #Startup ..."
+          },
+          {
+            "title": "Meet Our Team - Team Experience Keeps Us Curious - Amar Infotech",
+            "url": "https://www.amarinfotech.com/meet-our-team.html",
+            "domain": "amarinfotech.com",
+            "snippet": "Mr. Hitesh Ramoliya is the Founder & CEO of Amar InfoTech, bringing over 18 years of experience in web and mobile application development, enterprise software ..."
+          },
+          {
+            "title": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and ...",
+            "url": "https://www.instagram.com/p/CQ6EqcqjV7F/",
+            "domain": "instagram.com",
+            "snippet": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and array of services ! Provide Customization in Tally as per customer requirement. Dedicated Support ..."
+          },
+          {
+            "title": "Home - ILL Neutrons for Society",
+            "url": "https://www.ill.eu/",
+            "domain": "ill.eu",
+            "snippet": "This 60-page edition offers a concise overview of last year's key scientific highlights, technical developments, and reactor operations, along with insights ..."
+          }
+        ],
+        "search_known_results_count": 5,
+        "search_known_domains": [
+          "britannica.com",
+          "en.wikipedia.org",
+          "linkedin.com",
+          "news.microsoft.com",
+          "x.com"
+        ],
+        "search_known_results": [
+          {
+            "title": "Satya Nadella - Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Satya_Nadella",
+            "domain": "en.wikipedia.org",
+            "snippet": "Satya Narayana Nadella (born 19 August 1967) is an Indian-American business executive. He is the chairman and chief executive officer (CEO) of Microsoft, ..."
+          },
+          {
+            "title": "Satya Nadella - Chairman and CEO at Microsoft - LinkedIn",
+            "url": "https://www.linkedin.com/in/satyanadella",
+            "domain": "linkedin.com",
+            "snippet": "As chairman and CEO of Microsoft, I define my mission and that of my company as empowering every person and every organization on the planet to achieve more."
+          },
+          {
+            "title": "Satya Nadella - Microsoft Source",
+            "url": "https://news.microsoft.com/source/exec/satya-nadella/",
+            "domain": "news.microsoft.com",
+            "snippet": "Satya Nadella is Chairman and Chief Executive Officer of Microsoft. Before being named CEO in February 2014, Nadella held leadership roles in both enterprise ..."
+          },
+          {
+            "title": "Satya Nadella (@satyanadella) / Posts / X - Twitter",
+            "url": "https://x.com/satyanadella",
+            "domain": "x.com",
+            "snippet": "Satya Nadella (@satyanadella) - Posts - Chairman and CEO at Microsoft | X (formerly Twitter)"
+          },
+          {
+            "title": "Satya Nadella | Biography & Facts | Britannica Money",
+            "url": "https://www.britannica.com/money/Satya-Nadella",
+            "domain": "britannica.com",
+            "snippet": "Satya Nadella (born August 19, 1967, Hyderabad, India) is an Indian-born business executive who was CEO of the computer software company Microsoft from 2014."
+          }
+        ],
+        "search_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"Relyce Infotech Founder CEO\",\"type\":\"search\",\"engine\":\"google\"},\"answerBox\":{\"snippet\":\"Ukenthiran A - Relyce infotech | LinkedIn.\",\"snippetHighlighted\":[\"Ukenthiran A\"],\"tit"
+        },
+        "search_known_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"who is the ceo of microsoft\",\"type\":\"search\",\"engine\":\"google\"},\"organic\":[{\"title\":\"Satya Nadella - Wikipedia\",\"link\":\"https://en.wikipedia.org/wiki/Satya_Nadella\",\"snippet\""
+        },
+        "extract_status": "success",
+        "extract_adapter": "web_extract",
+        "extract_error_type": "",
+        "extract_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "linkedin_snippet_preservation": {
+          "candidate_name": "Ukenthiran A",
+          "supported_role": "founder_ceo",
+          "role_match": true,
+          "company_match": true,
+          "target_entity_match": true
+        },
+        "provider_health": {
+          "serper": {
+            "name": "serper",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          },
+          "web_extract": {
+            "name": "web_extract",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          }
+        }
+      },
+      "pass_reason": "Failed checks: answer_not_empty, route_matches, owner_matches, evidence_matrix_present, source_tiers_present, research_lane_official_present, research_lane_news_present, research_lane_contradiction_present, research_lane_background_present, related_evidence_present",
+      "http_status": 0,
+      "http_error": "<urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+      "live_blocker": "<urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+    },
+    {
+      "id": "claude_supported_countries_official",
+      "query": "official supported countries Claude India",
+      "category": "official_claim",
+      "mode": "live",
+      "ok": false,
+      "failed_checks": [
+        "answer_not_empty",
+        "route_matches",
+        "owner_matches",
+        "evidence_matrix_present",
+        "source_tiers_present",
+        "research_lane_official_present",
+        "official_source_present"
+      ],
+      "elapsed_ms": 2034.85,
+      "selected_route": "",
+      "owner": "",
+      "answer_mode": "",
+      "final_answer": "",
+      "exact_claim_verified": false,
+      "role_match": false,
+      "source_tiers_found": [],
+      "search_queries_generated": [],
+      "search_lanes_used": [],
+      "provider_returned_count": 0,
+      "domains_returned": [],
+      "returned_titles": [],
+      "returned_snippets": [],
+      "extracted_urls_attempted": [],
+      "extraction_statuses": [],
+      "rejected_sources": [],
+      "rejected_sources_count": 0,
+      "usable_sources_count": 0,
+      "conflict_detected": false,
+      "confidence_reason": "",
+      "evidence_matrix": [],
+      "trust_metadata": {
+        "verification_state": "",
+        "requested_role": "",
+        "supported_role": "",
+        "role_match": false,
+        "role_mismatch_reason": "",
+        "conflict_detected": false,
+        "exact_role_verified": false,
+        "evidence_strength": "",
+        "strongest_source_type": "",
+        "official_source_found": false,
+        "linkedin_source_found": false,
+        "registry_source_found": false,
+        "selected_candidate": "",
+        "candidate_count": 0,
+        "search_depth_used": "",
+        "search_lanes_used": [],
+        "source_tiers_found": [],
+        "answer_mode": "",
+        "confidence_reason": "",
+        "freshness_status": "",
+        "related_evidence_used": false
+      },
+      "provider_diagnostics": {
+        "timestamp": "2026-05-01T07:14:55.789433+00:00",
+        "search_provider_name": "serper",
+        "extract_provider_name": "web_extract",
+        "search_api_key_present": true,
+        "search_endpoint_configured": true,
+        "live_provider_configured": true,
+        "search_provider_ready": true,
+        "extract_provider_ready": true,
+        "external_network_ready": true,
+        "dns_resolution_ok": true,
+        "proxy_detected": false,
+        "provider_mode": "live",
+        "last_provider_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "search_http_status": 200,
+        "search_error_type": "",
+        "search_error_safe": "",
+        "search_query": "Relyce Infotech Founder CEO",
+        "search_query_known": "who is the ceo of microsoft",
+        "extract_url": "https://www.microsoft.com/en-us/about",
+        "linkedin_extract_reference": "https://www.linkedin.com/company/relyce-infotech",
+        "search_results_count": 5,
+        "search_domains": [
+          "amarinfotech.com",
+          "ill.eu",
+          "in.linkedin.com",
+          "instagram.com",
+          "rocketreach.co"
+        ],
+        "search_results": [
+          {
+            "title": "Relyce infotech Information - RocketReach",
+            "url": "https://rocketreach.co/relyce-infotech-profile_b6fff776c6523a5a",
+            "domain": "rocketreach.co",
+            "snippet": "Relyce infotech Questions. Who is the Founder of Relyce infotech? Ukenthiran A is the Founder of Relyce infotech. How many people are employed at Relyce ..."
+          },
+          {
+            "title": "Relyce infotech - LinkedIn",
+            "url": "https://in.linkedin.com/company/relyce-infotech",
+            "domain": "in.linkedin.com",
+            "snippet": "Core Team : Ukenthiran A Founder & CEO of Relyce infotech Dharsan L | Tamizharuvi p | GOHULA KANNAN | Naveenkumar Sivarajan | keerthana S #Startup ..."
+          },
+          {
+            "title": "Meet Our Team - Team Experience Keeps Us Curious - Amar Infotech",
+            "url": "https://www.amarinfotech.com/meet-our-team.html",
+            "domain": "amarinfotech.com",
+            "snippet": "Mr. Hitesh Ramoliya is the Founder & CEO of Amar InfoTech, bringing over 18 years of experience in web and mobile application development, enterprise software ..."
+          },
+          {
+            "title": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and ...",
+            "url": "https://www.instagram.com/p/CQ6EqcqjV7F/",
+            "domain": "instagram.com",
+            "snippet": "Aarish Khan Founder and Owner of Bezzie InfoTech providing and array of services ! Provide Customization in Tally as per customer requirement. Dedicated Support ..."
+          },
+          {
+            "title": "Home - ILL Neutrons for Society",
+            "url": "https://www.ill.eu/",
+            "domain": "ill.eu",
+            "snippet": "This 60-page edition offers a concise overview of last year's key scientific highlights, technical developments, and reactor operations, along with insights ..."
+          }
+        ],
+        "search_known_results_count": 5,
+        "search_known_domains": [
+          "britannica.com",
+          "en.wikipedia.org",
+          "linkedin.com",
+          "news.microsoft.com",
+          "x.com"
+        ],
+        "search_known_results": [
+          {
+            "title": "Satya Nadella - Wikipedia",
+            "url": "https://en.wikipedia.org/wiki/Satya_Nadella",
+            "domain": "en.wikipedia.org",
+            "snippet": "Satya Narayana Nadella (born 19 August 1967) is an Indian-American business executive. He is the chairman and chief executive officer (CEO) of Microsoft, ..."
+          },
+          {
+            "title": "Satya Nadella - Chairman and CEO at Microsoft - LinkedIn",
+            "url": "https://www.linkedin.com/in/satyanadella",
+            "domain": "linkedin.com",
+            "snippet": "As chairman and CEO of Microsoft, I define my mission and that of my company as empowering every person and every organization on the planet to achieve more."
+          },
+          {
+            "title": "Satya Nadella - Microsoft Source",
+            "url": "https://news.microsoft.com/source/exec/satya-nadella/",
+            "domain": "news.microsoft.com",
+            "snippet": "Satya Nadella is Chairman and Chief Executive Officer of Microsoft. Before being named CEO in February 2014, Nadella held leadership roles in both enterprise ..."
+          },
+          {
+            "title": "Satya Nadella (@satyanadella) / Posts / X - Twitter",
+            "url": "https://x.com/satyanadella",
+            "domain": "x.com",
+            "snippet": "Satya Nadella (@satyanadella) - Posts - Chairman and CEO at Microsoft | X (formerly Twitter)"
+          },
+          {
+            "title": "Satya Nadella | Biography & Facts | Britannica Money",
+            "url": "https://www.britannica.com/money/Satya-Nadella",
+            "domain": "britannica.com",
+            "snippet": "Satya Nadella (born August 19, 1967, Hyderabad, India) is an Indian-born business executive who was CEO of the computer software company Microsoft from 2014."
+          }
+        ],
+        "search_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"Relyce Infotech Founder CEO\",\"type\":\"search\",\"engine\":\"google\"},\"answerBox\":{\"snippet\":\"Ukenthiran A - Relyce infotech | LinkedIn.\",\"snippetHighlighted\":[\"Ukenthiran A\"],\"tit"
+        },
+        "search_known_request_debug": {
+          "method": "POST",
+          "endpoint_host": "google.serper.dev",
+          "endpoint_path": "/search",
+          "body_keys": [
+            "q"
+          ],
+          "has_q": true,
+          "content_type": "application/json",
+          "auth_header_present": true,
+          "http_status": 200,
+          "response_error_preview": "{\"searchParameters\":{\"q\":\"who is the ceo of microsoft\",\"type\":\"search\",\"engine\":\"google\"},\"organic\":[{\"title\":\"Satya Nadella - Wikipedia\",\"link\":\"https://en.wikipedia.org/wiki/Satya_Nadella\",\"snippet\""
+        },
+        "extract_status": "success",
+        "extract_adapter": "web_extract",
+        "extract_error_type": "",
+        "extract_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+        "linkedin_snippet_preservation": {
+          "candidate_name": "Ukenthiran A",
+          "supported_role": "founder_ceo",
+          "role_match": true,
+          "company_match": true,
+          "target_entity_match": true
+        },
+        "provider_health": {
+          "serper": {
+            "name": "serper",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          },
+          "web_extract": {
+            "name": "web_extract",
+            "state": "closed",
+            "failures": 0,
+            "last_error": null,
+            "fallback_used": false,
+            "cache_used": false,
+            "circuit_opened": false
+          }
+        }
+      },
+      "pass_reason": "Failed checks: answer_not_empty, route_matches, owner_matches, evidence_matrix_present, source_tiers_present, research_lane_official_present, official_source_present",
+      "http_status": 0,
+      "http_error": "<urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>",
+      "live_blocker": "<urlopen error [WinError 10061] No connection could be made because the target machine actively refused it>"
+    }
+  ]
+}

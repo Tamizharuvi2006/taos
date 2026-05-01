@@ -1,0 +1,29 @@
+[
+  {
+    "id": "messy_rumour_claude_india",
+    "query": "research that indai is lovking claudde rumour",
+    "category": "typo-heavy rumours",
+    "expected_intent": "rumour_verification",
+    "forbid_primary_raw_query": true,
+    "forbid_generic_no_result": true
+  },
+  {
+    "id": "official_required_pricing",
+    "query": "firebase pricing changed?",
+    "category": "official source required",
+    "expected_intent": "current_lookup",
+    "requires_official": true
+  },
+  {
+    "id": "regional_availability",
+    "query": "gemini not working in europe true?",
+    "category": "regional availability",
+    "expected_intent": "rumour_verification"
+  },
+  {
+    "id": "broken_english_access",
+    "query": "claude india work agala?",
+    "category": "broken English",
+    "expected_intent": "rumour_verification"
+  }
+]

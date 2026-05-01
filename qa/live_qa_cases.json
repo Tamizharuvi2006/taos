@@ -1,0 +1,61 @@
+[
+  {
+    "id": "fast_message_greeting",
+    "query": "hey buddy",
+    "expected_route": "fast_message",
+    "expected_owner": "direct",
+    "max_latency_ms": 1000
+  },
+  {
+    "id": "no_search_explain",
+    "query": "explain JavaScript closures simply",
+    "expected_route": "no_search",
+    "expected_owner": "direct",
+    "max_latency_ms": 3000
+  },
+  {
+    "id": "package_vite_typo",
+    "query": "current vite versio",
+    "expected_route": "fast_search",
+    "expected_owner": "search_lite",
+    "requires_source_of_record": true,
+    "max_latency_ms": 4000
+  },
+  {
+    "id": "package_react",
+    "query": "current react version",
+    "expected_route": "fast_search",
+    "expected_owner": "search_lite",
+    "requires_source_of_record": true,
+    "max_latency_ms": 4000
+  },
+  {
+    "id": "official_firebase",
+    "query": "official Firebase pricing update",
+    "expected_route": "official_search",
+    "expected_owner": "research_pipeline",
+    "requires_official_source": true,
+    "min_coverage": 0.7
+  },
+  {
+    "id": "news_openai_models",
+    "query": "latest OpenAI API model changes",
+    "expected_route": "news_search",
+    "expected_owner": "research_pipeline",
+    "requires_freshness": true,
+    "min_coverage": 0.65
+  },
+  {
+    "id": "comparison_rag_vector_db",
+    "query": "current best vector databases for RAG",
+    "expected_route": "comparison_search",
+    "expected_owner": "research_pipeline",
+    "requires_answer_mode": true
+  },
+  {
+    "id": "clarification_ambiguous",
+    "query": "do that thing from before",
+    "expected_route": "clarification",
+    "expected_owner": "clarification"
+  }
+]

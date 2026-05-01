@@ -1,0 +1,63 @@
+[
+  {
+    "case_id": "current_news_query",
+    "category": "current_news",
+    "query": "Latest updates on Red Sea shipping attacks current status",
+    "expected_signal": "clean",
+    "expected_freshness": "high",
+    "expected_keywords": ["latest", "status", "source", "update"],
+    "requires_official_source": false,
+    "weak_evidence_expected": false
+  },
+  {
+    "case_id": "live_status_query",
+    "category": "live_status",
+    "query": "Current status of Sudan ceasefire talks today",
+    "expected_signal": "partial_conflict",
+    "expected_freshness": "high",
+    "expected_keywords": ["current", "status", "talks"],
+    "requires_official_source": false,
+    "weak_evidence_expected": true
+  },
+  {
+    "case_id": "conflicting_news_query",
+    "category": "conflicting_news",
+    "query": "Did officials confirm a nationwide ceasefire in Yemen this week?",
+    "expected_signal": "partial_conflict",
+    "expected_freshness": "medium",
+    "expected_keywords": ["confirmed", "ceasefire"],
+    "requires_official_source": true,
+    "weak_evidence_expected": true
+  },
+  {
+    "case_id": "research_comparison_query",
+    "category": "research_comparison",
+    "query": "Compare lithium-ion and sodium-ion battery supply chain risks in 2026",
+    "expected_signal": "clean",
+    "expected_freshness": "medium",
+    "expected_keywords": ["compare", "risk", "supply chain", "lithium", "sodium"],
+    "requires_official_source": false,
+    "weak_evidence_expected": false
+  },
+  {
+    "case_id": "official_source_needed_query",
+    "category": "official_source_needed",
+    "query": "What did RBI officially announce about repo rate in the latest policy statement?",
+    "expected_signal": "clean",
+    "expected_freshness": "high",
+    "expected_keywords": ["official", "policy", "repo rate", "RBI"],
+    "requires_official_source": true,
+    "weak_evidence_expected": false
+  },
+  {
+    "case_id": "weak_evidence_query",
+    "category": "weak_evidence",
+    "query": "Who leaked unreleased startup valuation data yesterday and from where?",
+    "expected_signal": "conflicting",
+    "expected_freshness": "medium",
+    "expected_keywords": ["leaked", "unverified", "unknown"],
+    "forbidden_keywords": ["confirmed culprit"],
+    "requires_official_source": false,
+    "weak_evidence_expected": true
+  }
+]

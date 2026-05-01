@@ -1,0 +1,107 @@
+name: TAOS Quality Gate
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - develop
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: ${{ github.workspace }}/..
+      TAOS_ENV: development
+      AUTH_ALLOW_DEV_BYPASS: "true"
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Lint
+        run: |
+          python -m ruff check apps config core orchestration infra services tests
+
+      - name: Type Check
+        run: |
+          python -m mypy --ignore-missing-imports apps config core orchestration infra services
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Run Critical Regressions
+        run: |
+          pytest -q \
+            tests/test_phase91_answer_quality.py \
+            tests/test_document_pipeline.py \
+            tests/test_research_fallback_regression.py \
+            tests/test_intelligence_eval_harness.py
+
+      - name: Frontend Build (if present)
+        run: |
+          if [ -f package.json ]; then
+            npm ci
+            npm run build
+          elif [ -f frontend/package.json ]; then
+            cd frontend
+            npm ci
+            npm run build
+          else
+            echo "No frontend package.json detected; skipping frontend build."
+          fi
+
+      - name: Run Eval And Enforce Thresholds
+        run: |
+          python -m uvicorn taos.apps.api.main:app --host 127.0.0.1 --port 8000 > /tmp/taos_uvicorn.log 2>&1 &
+          UVICORN_PID=$!
+          cleanup() {
+            kill $UVICORN_PID || true
+          }
+          trap cleanup EXIT
+          sleep 8
+          python -m taos.scripts.run_intelligence_eval \
+            --base-url http://127.0.0.1:8000 \
+            --use-bypass-header \
+            --cases tests/fixtures/intelligence_eval_cases.json \
+            --out docs/intelligence_eval_latest.json
+          python scripts/check_eval_thresholds.py \
+            docs/intelligence_eval_latest.json \
+            docs/eval_thresholds.json
+          python -m taos.scripts.run_intelligence_eval \
+            --base-url http://127.0.0.1:8000 \
+            --use-bypass-header \
+            --cases tests/fixtures/intelligence_eval_cases_v2.json \
+            --limit 8 \
+            --out docs/intelligence_eval_killer_subset_latest.json
+          python scripts/check_route_integrity.py \
+            docs/intelligence_eval_killer_subset_latest.json \
+            --max-mismatches 0
+          python scripts/build_ops_dashboard.py \
+            --intelligence-report docs/intelligence_eval_latest.json \
+            --out-json docs/ops_dashboard_latest.json \
+            --out-md docs/ops_dashboard_latest.md
+
+      - name: Upload Eval Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: intelligence-eval-report
+          path: |
+            docs/intelligence_eval_latest.json
+            docs/intelligence_eval_killer_subset_latest.json
+            docs/ops_dashboard_latest.json
+            docs/ops_dashboard_latest.md
+            /tmp/taos_uvicorn.log

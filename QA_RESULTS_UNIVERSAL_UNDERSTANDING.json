@@ -1,0 +1,420 @@
+{
+  "phase": "134",
+  "mode": "mock",
+  "base_url": "",
+  "timestamp": "2026-04-26T17:17:55.123405+00:00",
+  "total": 9,
+  "passed": 9,
+  "failed": 0,
+  "pass_rate": 1.0,
+  "results": [
+    {
+      "id": "fast_message_messy",
+      "query": "heyy buddyy",
+      "mode": "mock",
+      "ok": true,
+      "failed_checks": [],
+      "checks": {
+        "answer_not_empty": true,
+        "route_matches": true,
+        "owner_matches": true,
+        "original_query_preserved": true,
+        "normalized_query_present": true,
+        "intent_frame_present": true,
+        "route_hint_present": true,
+        "handler_owner_present": true,
+        "public_trace_valid": true,
+        "no_raw_internal_error": true,
+        "intent_hint_matches": true
+      },
+      "elapsed_ms": 364.47,
+      "answer_preview": "Handled by fast_message using normalized query: hey buddy",
+      "route": "fast_message",
+      "owner": "direct",
+      "normalized_query": "hey buddy",
+      "intent_hint": "small_talk",
+      "route_hint": "fast_message",
+      "entities": [
+        "buddy",
+        "hey"
+      ],
+      "query_plan_summary": {
+        "route_hint_reason": "universal_fast_message"
+      },
+      "http_status": "",
+      "http_error": ""
+    },
+    {
+      "id": "no_search_messy",
+      "query": "explain js closur simple",
+      "mode": "mock",
+      "ok": true,
+      "failed_checks": [],
+      "checks": {
+        "answer_not_empty": true,
+        "route_matches": true,
+        "owner_matches": true,
+        "original_query_preserved": true,
+        "normalized_query_present": true,
+        "intent_frame_present": true,
+        "route_hint_present": true,
+        "handler_owner_present": true,
+        "public_trace_valid": true,
+        "no_raw_internal_error": true,
+        "normalized_contains_expected_terms": true
+      },
+      "elapsed_ms": 8.62,
+      "answer_preview": "Handled by no_search using normalized query: explain JavaScript closures simply",
+      "route": "no_search",
+      "owner": "direct",
+      "normalized_query": "explain JavaScript closures simply",
+      "intent_hint": "explanation",
+      "route_hint": "no_search",
+      "entities": [
+        "JavaScript",
+        "closures"
+      ],
+      "query_plan_summary": {
+        "route_hint_reason": "universal_explanation"
+      },
+      "http_status": "",
+      "http_error": ""
+    },
+    {
+      "id": "package_typo",
+      "query": "curent vite versio",
+      "mode": "mock",
+      "ok": true,
+      "failed_checks": [],
+      "checks": {
+        "answer_not_empty": true,
+        "route_matches": true,
+        "owner_matches": true,
+        "original_query_preserved": true,
+        "normalized_query_present": true,
+        "intent_frame_present": true,
+        "route_hint_present": true,
+        "handler_owner_present": true,
+        "public_trace_valid": true,
+        "no_raw_internal_error": true,
+        "expected_entity_present": true,
+        "source_of_record_used": true,
+        "generic_web_used_false": true
+      },
+      "elapsed_ms": 36.69,
+      "answer_preview": "Best-supported status: package source-of-record lookup is selected.",
+      "route": "fast_search",
+      "owner": "search_lite",
+      "normalized_query": "current vite version",
+      "intent_hint": "current_lookup",
+      "route_hint": "fast_search",
+      "entities": [
+        "Vite",
+        "current",
+        "version",
+        "vite"
+      ],
+      "query_plan_summary": {
+        "route_hint_reason": "universal_package_version_lookup"
+      },
+      "http_status": "",
+      "http_error": ""
+    },
+    {
+      "id": "rumour_research",
+      "query": "india lovking claude rumour",
+      "mode": "mock",
+      "ok": true,
+      "failed_checks": [],
+      "checks": {
+        "answer_not_empty": true,
+        "route_matches": true,
+        "owner_matches": true,
+        "original_query_preserved": true,
+        "normalized_query_present": true,
+        "intent_frame_present": true,
+        "route_hint_present": true,
+        "handler_owner_present": true,
+        "public_trace_valid": true,
+        "no_raw_internal_error": true,
+        "query_plan_summary_present": true,
+        "raw_query_not_primary": true,
+        "not_generic_failure": true,
+        "official_lane_present": true
+      },
+      "elapsed_ms": 64.47,
+      "answer_preview": "Rumour status: Not confirmed.\nBest-supported status: query-plan lanes are available for verification.",
+      "route": "news_search",
+      "owner": "research_pipeline",
+      "normalized_query": "india lovking claude",
+      "intent_hint": "rumour_verification",
+      "route_hint": "news_search",
+      "entities": [
+        "Anthropic",
+        "Claude",
+        "India",
+        "blocking",
+        "claude",
+        "india",
+        "locking"
+      ],
+      "query_plan_summary": {
+        "route_hint_reason": "universal_rumour_verification",
+        "original_query": "india lovking claude rumour",
+        "intent": "rumour_verification",
+        "normalized_question": "Is Claude blocked or restricted in India?",
+        "raw_query_priority": "fallback_only",
+        "lanes": {
+          "official": [
+            "Anthropic Claude supported countries India",
+            "site:anthropic.com Claude supported countries India",
+            "site:anthropic.com supported countries Claude India"
+          ],
+          "news": [
+            "India blocking Claude Anthropic",
+            "India ban Claude AI",
+            "Claude unavailable in India Anthropic"
+          ],
+          "contradiction": [
+            "Claude available in India Anthropic",
+            "Claude outage India"
+          ],
+          "background": [
+            "Anthropic Claude India regulatory concern",
+            "Claude India service issue"
+          ],
+          "regional": [
+            "India Claude access availability"
+          ],
+          "fallback": [
+            "india lovking claude rumour"
+          ]
+        },
+        "required_lanes": [
+          "official",
+          "contradiction",
+          "background"
+        ],
+        "metadata": {
+          "entities": {
+            "country": "India",
+            "product": "Claude",
+            "company": "Anthropic"
+          },
+          "relation": "blocked_or_restricted_access",
+          "confidence": 0.967,
+          "needs_llm_rewrite": false
+        },
+        "normalized_query": "india lovking claude"
+      },
+      "http_status": "",
+      "http_error": ""
+    },
+    {
+      "id": "doc_exam_messy",
+      "query": "in this pdf give imprtnt 16 marks",
+      "mode": "mock",
+      "ok": true,
+      "failed_checks": [],
+      "checks": {
+        "answer_not_empty": true,
+        "route_matches": true,
+        "owner_matches": true,
+        "original_query_preserved": true,
+        "normalized_query_present": true,
+        "intent_frame_present": true,
+        "route_hint_present": true,
+        "handler_owner_present": true,
+        "public_trace_valid": true,
+        "no_raw_internal_error": true,
+        "document_mode_hint_present": true,
+        "document_mark_format_present": true,
+        "route_uses_understanding_frame": true
+      },
+      "elapsed_ms": 16.07,
+      "answer_preview": "Handled by doc_mode using normalized query: in this pdf give important 16 marks",
+      "route": "doc_mode",
+      "owner": "document_pipeline",
+      "normalized_query": "in this pdf give important 16 marks",
+      "intent_hint": "document_question",
+      "route_hint": "doc_mode",
+      "entities": [
+        "important"
+      ],
+      "query_plan_summary": {
+        "route_hint_reason": "universal_document_intent"
+      },
+      "http_status": "",
+      "http_error": ""
+    },
+    {
+      "id": "task_reminder_messy",
+      "query": "remind me tomorw mrng 8",
+      "mode": "mock",
+      "ok": true,
+      "failed_checks": [],
+      "checks": {
+        "answer_not_empty": true,
+        "route_matches": true,
+        "owner_matches": true,
+        "original_query_preserved": true,
+        "normalized_query_present": true,
+        "intent_frame_present": true,
+        "route_hint_present": true,
+        "handler_owner_present": true,
+        "public_trace_valid": true,
+        "no_raw_internal_error": true,
+        "task_hint_present": true,
+        "route_uses_understanding_frame": true
+      },
+      "elapsed_ms": 10.76,
+      "answer_preview": "Handled by task using normalized query: remind me tomorrow morning at 8",
+      "route": "task",
+      "owner": "fsm_planner",
+      "normalized_query": "remind me tomorrow morning at 8",
+      "intent_hint": "general",
+      "route_hint": "task",
+      "entities": [
+        "morning",
+        "tomorrow"
+      ],
+      "query_plan_summary": {
+        "route_hint_reason": "universal_task_intent"
+      },
+      "http_status": "",
+      "http_error": ""
+    },
+    {
+      "id": "code_help_messy",
+      "query": "fix modu not fond react",
+      "mode": "mock",
+      "ok": true,
+      "failed_checks": [],
+      "checks": {
+        "answer_not_empty": true,
+        "route_matches": true,
+        "owner_matches": true,
+        "original_query_preserved": true,
+        "normalized_query_present": true,
+        "intent_frame_present": true,
+        "route_hint_present": true,
+        "handler_owner_present": true,
+        "public_trace_valid": true,
+        "no_raw_internal_error": true,
+        "expected_entity_present": true,
+        "code_hint_present": true,
+        "route_uses_understanding_frame": true
+      },
+      "elapsed_ms": 38.31,
+      "answer_preview": "Handled by task using normalized query: fix module not found error in React",
+      "route": "task",
+      "owner": "fsm_planner",
+      "normalized_query": "fix module not found error in React",
+      "intent_hint": "troubleshooting",
+      "route_hint": "task",
+      "entities": [
+        "React",
+        "found",
+        "module",
+        "react"
+      ],
+      "query_plan_summary": {
+        "route_hint_reason": "universal_code_help_intent"
+      },
+      "http_status": "",
+      "http_error": ""
+    },
+    {
+      "id": "comparison_messy",
+      "query": "react vs anglr whch better",
+      "mode": "mock",
+      "ok": true,
+      "failed_checks": [],
+      "checks": {
+        "answer_not_empty": true,
+        "route_matches": true,
+        "owner_matches": true,
+        "original_query_preserved": true,
+        "normalized_query_present": true,
+        "intent_frame_present": true,
+        "route_hint_present": true,
+        "handler_owner_present": true,
+        "public_trace_valid": true,
+        "no_raw_internal_error": true,
+        "expected_entities_present": true
+      },
+      "elapsed_ms": 33.1,
+      "answer_preview": "Handled by comparison_search using normalized query: React vs Angular which better",
+      "route": "comparison_search",
+      "owner": "research_pipeline",
+      "normalized_query": "React vs Angular which better",
+      "intent_hint": "comparison",
+      "route_hint": "comparison_search",
+      "entities": [
+        "Angular",
+        "React",
+        "angular",
+        "react",
+        "which"
+      ],
+      "query_plan_summary": {
+        "route_hint_reason": "universal_comparison",
+        "original_query": "react vs anglr whch better",
+        "intent": "comparison",
+        "normalized_question": "What is the current status of React?",
+        "raw_query_priority": "fallback_only",
+        "lanes": {
+          "news": [
+            "What is the current status of React"
+          ],
+          "background": [],
+          "fallback": []
+        },
+        "required_lanes": [],
+        "metadata": {
+          "entities": {
+            "tool_framework": "React"
+          },
+          "relation": "",
+          "confidence": 0.634,
+          "needs_llm_rewrite": false
+        },
+        "normalized_query": "React vs Angular which better"
+      },
+      "http_status": "",
+      "http_error": ""
+    },
+    {
+      "id": "low_signal_ambiguity",
+      "query": "do that thing from before",
+      "mode": "mock",
+      "ok": true,
+      "failed_checks": [],
+      "checks": {
+        "answer_not_empty": true,
+        "route_matches": true,
+        "owner_matches": true,
+        "original_query_preserved": true,
+        "normalized_query_present": true,
+        "intent_frame_present": true,
+        "route_hint_present": true,
+        "handler_owner_present": true,
+        "public_trace_valid": true,
+        "no_raw_internal_error": true
+      },
+      "elapsed_ms": 18.11,
+      "answer_preview": "I need one more detail before I can do that safely.",
+      "route": "clarification",
+      "owner": "clarification",
+      "normalized_query": "do that thing from before",
+      "intent_hint": "general",
+      "route_hint": "clarification",
+      "entities": [],
+      "query_plan_summary": {
+        "route_hint_reason": "low_confidence_ambiguous_input"
+      },
+      "http_status": "",
+      "http_error": ""
+    }
+  ]
+}

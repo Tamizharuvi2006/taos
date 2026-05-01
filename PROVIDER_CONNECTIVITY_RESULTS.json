@@ -1,0 +1,157 @@
+{
+  "timestamp": "2026-05-01T07:01:41.310400+00:00",
+  "search_provider_name": "serper",
+  "extract_provider_name": "web_extract",
+  "search_api_key_present": true,
+  "search_endpoint_configured": true,
+  "live_provider_configured": true,
+  "search_provider_ready": true,
+  "extract_provider_ready": true,
+  "external_network_ready": true,
+  "dns_resolution_ok": true,
+  "proxy_detected": false,
+  "provider_mode": "live",
+  "last_provider_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+  "search_http_status": 200,
+  "search_error_type": "",
+  "search_error_safe": "",
+  "search_query": "Relyce Infotech Founder CEO",
+  "search_query_known": "who is the ceo of microsoft",
+  "extract_url": "https://www.microsoft.com/en-us/about",
+  "linkedin_extract_reference": "https://www.linkedin.com/company/relyce-infotech",
+  "search_results_count": 5,
+  "search_domains": [
+    "in.linkedin.com",
+    "rocketreach.co",
+    "youtube.com"
+  ],
+  "search_results": [
+    {
+      "title": "Ukenthiran A - Relyce infotech - LinkedIn",
+      "url": "https://in.linkedin.com/in/ukenthiran-a-3603022b4",
+      "domain": "in.linkedin.com",
+      "snippet": "Experience: Relyce infotech \u00b7 Education: Sathyabama Institute of Science & Technology, Chennai \u00b7 Location: 600107 \u00b7 500+ connections on LinkedIn."
+    },
+    {
+      "title": "Relyce infotech Information - RocketReach",
+      "url": "https://rocketreach.co/relyce-infotech-profile_b6fff776c6523a5a",
+      "domain": "rocketreach.co",
+      "snippet": "Relyce infotech Questions. Who is the Founder of Relyce infotech? Ukenthiran A is the Founder of Relyce infotech. How many people are employed at Relyce ..."
+    },
+    {
+      "title": "Relyce infotech - LinkedIn",
+      "url": "https://in.linkedin.com/company/relyce-infotech",
+      "domain": "in.linkedin.com",
+      "snippet": "Core Team : Ukenthiran A Founder & CEO of Relyce infotech Dharsan L | Tamizharuvi p | GOHULA KANNAN | Naveenkumar Sivarajan | keerthana S #Startup ..."
+    },
+    {
+      "title": "Abhi Sharma, Relyance AI CEO: Why 99% of Founders ... - YouTube",
+      "url": "https://www.youtube.com/watch?v=z2ODCXLOH80",
+      "domain": "youtube.com",
+      "snippet": "Abhi Sharma, Relyance AI CEO: Why 99% of Founders Get Culture Wrong Until It's Too Late \u00b7 Comments."
+    },
+    {
+      "title": "Manish Sood, CEO, Founder, and Chairman, Reltio - YouTube",
+      "url": "https://www.youtube.com/watch?v=qbSqEX9ES64",
+      "domain": "youtube.com",
+      "snippet": "My Career in Data Episode 23: Manish Sood, CEO, Founder, and Chairman, Reltio \u00b7 Comments."
+    }
+  ],
+  "search_known_results_count": 5,
+  "search_known_domains": [
+    "britannica.com",
+    "en.wikipedia.org",
+    "linkedin.com",
+    "news.microsoft.com",
+    "x.com"
+  ],
+  "search_known_results": [
+    {
+      "title": "Satya Nadella - Wikipedia",
+      "url": "https://en.wikipedia.org/wiki/Satya_Nadella",
+      "domain": "en.wikipedia.org",
+      "snippet": "Satya Narayana Nadella (born 19 August 1967) is an Indian-American business executive. He is the chairman and chief executive officer (CEO) of Microsoft, ..."
+    },
+    {
+      "title": "Satya Nadella - Chairman and CEO at Microsoft - LinkedIn",
+      "url": "https://www.linkedin.com/in/satyanadella",
+      "domain": "linkedin.com",
+      "snippet": "As chairman and CEO of Microsoft, I define my mission and that of my company as empowering every person and every organization on the planet to achieve more."
+    },
+    {
+      "title": "Satya Nadella - Microsoft Source",
+      "url": "https://news.microsoft.com/source/exec/satya-nadella/",
+      "domain": "news.microsoft.com",
+      "snippet": "Satya Nadella is Chairman and Chief Executive Officer of Microsoft. Before being named CEO in February 2014, Nadella held leadership roles in both enterprise ..."
+    },
+    {
+      "title": "Satya Nadella (@satyanadella) / Posts / X - Twitter",
+      "url": "https://x.com/satyanadella",
+      "domain": "x.com",
+      "snippet": "Satya Nadella (@satyanadella) - Posts - Chairman and CEO at Microsoft | X (formerly Twitter)"
+    },
+    {
+      "title": "Satya Nadella | Biography & Facts | Britannica Money",
+      "url": "https://www.britannica.com/money/Satya-Nadella",
+      "domain": "britannica.com",
+      "snippet": "Satya Nadella (born August 19, 1967, Hyderabad, India) is an Indian-born business executive who was CEO of the computer software company Microsoft from 2014."
+    }
+  ],
+  "search_request_debug": {
+    "method": "POST",
+    "endpoint_host": "google.serper.dev",
+    "endpoint_path": "/search",
+    "body_keys": [
+      "q"
+    ],
+    "has_q": true,
+    "content_type": "application/json",
+    "auth_header_present": true,
+    "http_status": 200,
+    "response_error_preview": "{\"searchParameters\":{\"q\":\"Relyce Infotech Founder CEO\",\"type\":\"search\",\"engine\":\"google\"},\"organic\":[{\"title\":\"Ukenthiran A - Relyce infotech - LinkedIn\",\"link\":\"https://in.linkedin.com/in/ukenthiran-"
+  },
+  "search_known_request_debug": {
+    "method": "POST",
+    "endpoint_host": "google.serper.dev",
+    "endpoint_path": "/search",
+    "body_keys": [
+      "q"
+    ],
+    "has_q": true,
+    "content_type": "application/json",
+    "auth_header_present": true,
+    "http_status": 200,
+    "response_error_preview": "{\"searchParameters\":{\"q\":\"who is the ceo of microsoft\",\"type\":\"search\",\"engine\":\"google\"},\"organic\":[{\"title\":\"Satya Nadella - Wikipedia\",\"link\":\"https://en.wikipedia.org/wiki/Satya_Nadella\",\"snippet\""
+  },
+  "extract_status": "success",
+  "extract_adapter": "web_extract",
+  "extract_error_type": "",
+  "extract_error_safe": "scrapling_normalized_unsuccessful status=200 text_len=0 quality=0.00 rejection=text_too_short",
+  "linkedin_snippet_preservation": {
+    "candidate_name": "Ukenthiran A",
+    "supported_role": "founder_ceo",
+    "role_match": true,
+    "company_match": true,
+    "target_entity_match": true
+  },
+  "provider_health": {
+    "serper": {
+      "name": "serper",
+      "state": "closed",
+      "failures": 0,
+      "last_error": null,
+      "fallback_used": false,
+      "cache_used": false,
+      "circuit_opened": false
+    },
+    "web_extract": {
+      "name": "web_extract",
+      "state": "closed",
+      "failures": 0,
+      "last_error": null,
+      "fallback_used": false,
+      "cache_used": false,
+      "circuit_opened": false
+    }
+  }
+}

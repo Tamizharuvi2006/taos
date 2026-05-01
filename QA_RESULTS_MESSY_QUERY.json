@@ -1,0 +1,485 @@
+{
+  "phase": "133",
+  "mode": "mock",
+  "base_url": "",
+  "timestamp": "2026-04-26T17:18:04.781588+00:00",
+  "total": 6,
+  "passed": 6,
+  "failed": 0,
+  "pass_rate": 1.0,
+  "results": [
+    {
+      "id": "india_claude_lovking_rumour",
+      "query": "research that i got an news that india is lovking claude i got an rumour",
+      "mode": "mock",
+      "ok": true,
+      "failed_checks": [],
+      "checks": {
+        "answer_not_empty": true,
+        "not_generic_failure": true,
+        "raw_query_preserved": true,
+        "raw_query_not_primary": true,
+        "normalized_query_present": true,
+        "query_plan_summary_present": true,
+        "sources_or_checked_sources_present": true,
+        "no_raw_internal_error": true,
+        "expected_intent": true,
+        "expected_entities": true,
+        "expected_relation": true,
+        "official_lane_present_when_required": true,
+        "news_lane_present_when_required": true,
+        "contradiction_lane_present_when_required": true,
+        "background_lane_present_when_required": true,
+        "rumour_status_present_when_required": true,
+        "best_supported_status_present": true,
+        "related_evidence_or_confusion_present": true
+      },
+      "elapsed_ms": 23.16,
+      "answer_preview": "Rumour status: Not confirmed\nBest-supported status: The exact claim is not confirmed; available evidence points against treating it as established.\n\nEvidence:\n- Confirming evidence: 0 source(s)\n- Related but not confirming evidence: 2 source(s)\n- Contradicting evidence: 1 source(s)\n\nWhat may be causing confusion:\n- temporary outage or service availability reports\n- security or cyber-risk reporting\n- account suspension stories\n- regulatory concern coverage\n\nConfidence: Medium",
+      "route": "deep_research",
+      "intent": "rumour_verification",
+      "relation": "blocked_or_restricted_access",
+      "entities": [
+        "Anthropic",
+        "Claude",
+        "India"
+      ],
+      "raw_query_priority": "fallback_only",
+      "primary_query": "Anthropic Claude supported countries India",
+      "query_plan_summary": {
+        "original_query": "research that i got an news that india is lovking claude i got an rumour",
+        "intent": "rumour_verification",
+        "normalized_question": "Is Claude blocked or restricted in India?",
+        "raw_query_priority": "fallback_only",
+        "lanes": {
+          "official": [
+            "Anthropic Claude supported countries India",
+            "site:anthropic.com Claude supported countries India",
+            "site:anthropic.com supported countries Claude India"
+          ],
+          "news": [
+            "India blocking Claude Anthropic",
+            "India ban Claude AI",
+            "Claude unavailable in India Anthropic"
+          ],
+          "contradiction": [
+            "Claude available in India Anthropic",
+            "Claude outage India"
+          ],
+          "background": [
+            "Anthropic Claude India regulatory concern",
+            "Claude India service issue"
+          ],
+          "regional": [
+            "India Claude access availability"
+          ],
+          "fallback": [
+            "research that i got an news that india is lovking claude i got an rumour"
+          ]
+        },
+        "required_lanes": [
+          "official",
+          "contradiction",
+          "background"
+        ],
+        "metadata": {
+          "entities": {
+            "country": "India",
+            "product": "Claude",
+            "company": "Anthropic"
+          },
+          "relation": "blocked_or_restricted_access",
+          "confidence": 0.967,
+          "needs_llm_rewrite": false
+        }
+      }
+    },
+    {
+      "id": "india_banning_claude",
+      "query": "i heard india banning claude is it true",
+      "mode": "mock",
+      "ok": true,
+      "failed_checks": [],
+      "checks": {
+        "answer_not_empty": true,
+        "not_generic_failure": true,
+        "raw_query_preserved": true,
+        "raw_query_not_primary": true,
+        "normalized_query_present": true,
+        "query_plan_summary_present": true,
+        "sources_or_checked_sources_present": true,
+        "no_raw_internal_error": true,
+        "expected_intent": true,
+        "expected_entities": true,
+        "expected_relation": true,
+        "official_lane_present_when_required": true,
+        "news_lane_present_when_required": true,
+        "contradiction_lane_present_when_required": true,
+        "background_lane_present_when_required": true,
+        "rumour_status_present_when_required": true,
+        "best_supported_status_present": true,
+        "related_evidence_or_confusion_present": true
+      },
+      "elapsed_ms": 14.73,
+      "answer_preview": "Rumour status: Not confirmed\nBest-supported status: The exact claim is not confirmed; available evidence points against treating it as established.\n\nEvidence:\n- Confirming evidence: 0 source(s)\n- Related but not confirming evidence: 2 source(s)\n- Contradicting evidence: 1 source(s)\n\nWhat may be causing confusion:\n- temporary outage or service availability reports\n- security or cyber-risk reporting\n- account suspension stories\n- regulatory concern coverage\n\nConfidence: Medium",
+      "route": "deep_research",
+      "intent": "rumour_verification",
+      "relation": "blocked_or_restricted_access",
+      "entities": [
+        "Anthropic",
+        "Claude",
+        "India"
+      ],
+      "raw_query_priority": "fallback_only",
+      "primary_query": "Anthropic Claude supported countries India",
+      "query_plan_summary": {
+        "original_query": "i heard india banning claude is it true",
+        "intent": "rumour_verification",
+        "normalized_question": "Is Claude blocked or restricted in India?",
+        "raw_query_priority": "fallback_only",
+        "lanes": {
+          "official": [
+            "Anthropic Claude supported countries India",
+            "site:anthropic.com Claude supported countries India",
+            "site:anthropic.com supported countries Claude India"
+          ],
+          "news": [
+            "India blocking Claude Anthropic",
+            "India ban Claude AI",
+            "Claude unavailable in India Anthropic"
+          ],
+          "contradiction": [
+            "Claude available in India Anthropic",
+            "Claude outage India"
+          ],
+          "background": [
+            "Anthropic Claude India regulatory concern",
+            "Claude India service issue"
+          ],
+          "regional": [
+            "India Claude access availability"
+          ],
+          "fallback": [
+            "i heard india banning claude is it true"
+          ]
+        },
+        "required_lanes": [
+          "official",
+          "contradiction",
+          "background"
+        ],
+        "metadata": {
+          "entities": {
+            "country": "India",
+            "product": "Claude",
+            "company": "Anthropic"
+          },
+          "relation": "blocked_or_restricted_access",
+          "confidence": 1.0,
+          "needs_llm_rewrite": false
+        }
+      }
+    },
+    {
+      "id": "claud_not_working_india",
+      "query": "claud not working india true ah",
+      "mode": "mock",
+      "ok": true,
+      "failed_checks": [],
+      "checks": {
+        "answer_not_empty": true,
+        "not_generic_failure": true,
+        "raw_query_preserved": true,
+        "raw_query_not_primary": true,
+        "normalized_query_present": true,
+        "query_plan_summary_present": true,
+        "sources_or_checked_sources_present": true,
+        "no_raw_internal_error": true,
+        "expected_intent": true,
+        "expected_entities": true,
+        "expected_relation": true,
+        "official_lane_present_when_required": true,
+        "news_lane_present_when_required": true,
+        "contradiction_lane_present_when_required": true,
+        "background_lane_present_when_required": true,
+        "rumour_status_present_when_required": true,
+        "best_supported_status_present": true,
+        "related_evidence_or_confusion_present": true
+      },
+      "elapsed_ms": 19.73,
+      "answer_preview": "Rumour status: Not confirmed\nBest-supported status: The exact claim is not confirmed; available evidence points against treating it as established.\n\nEvidence:\n- Confirming evidence: 0 source(s)\n- Related but not confirming evidence: 2 source(s)\n- Contradicting evidence: 1 source(s)\n\nWhat may be causing confusion:\n- temporary outage or service availability reports\n- security or cyber-risk reporting\n- account suspension stories\n- regulatory concern coverage\n\nConfidence: Medium",
+      "route": "deep_research",
+      "intent": "rumour_verification",
+      "relation": "unavailable_or_outage",
+      "entities": [
+        "Anthropic",
+        "Claude",
+        "India"
+      ],
+      "raw_query_priority": "fallback_only",
+      "primary_query": "Anthropic Claude supported countries India",
+      "query_plan_summary": {
+        "original_query": "claud not working india true ah",
+        "intent": "rumour_verification",
+        "normalized_question": "Is Claude unavailable or having an outage in India?",
+        "raw_query_priority": "fallback_only",
+        "lanes": {
+          "official": [
+            "Anthropic Claude supported countries India",
+            "site:anthropic.com Claude supported countries India",
+            "site:anthropic.com supported countries Claude India"
+          ],
+          "news": [
+            "Claude outage India",
+            "Claude down India"
+          ],
+          "contradiction": [
+            "Claude status page outage India"
+          ],
+          "background": [
+            "Claude service issue India"
+          ],
+          "regional": [],
+          "fallback": []
+        },
+        "required_lanes": [
+          "official",
+          "contradiction",
+          "background"
+        ],
+        "metadata": {
+          "entities": {
+            "product": "Claude",
+            "company": "Anthropic",
+            "country": "India"
+          },
+          "relation": "unavailable_or_outage",
+          "confidence": 0.994,
+          "needs_llm_rewrite": false
+        }
+      }
+    },
+    {
+      "id": "openai_blocked_india",
+      "query": "rumor openai blocked in india",
+      "mode": "mock",
+      "ok": true,
+      "failed_checks": [],
+      "checks": {
+        "answer_not_empty": true,
+        "not_generic_failure": true,
+        "raw_query_preserved": true,
+        "raw_query_not_primary": true,
+        "normalized_query_present": true,
+        "query_plan_summary_present": true,
+        "sources_or_checked_sources_present": true,
+        "no_raw_internal_error": true,
+        "expected_intent": true,
+        "expected_entities": true,
+        "expected_relation": true,
+        "official_lane_present_when_required": true,
+        "news_lane_present_when_required": true,
+        "contradiction_lane_present_when_required": true,
+        "background_lane_present_when_required": true,
+        "rumour_status_present_when_required": true,
+        "best_supported_status_present": true,
+        "related_evidence_or_confusion_present": true
+      },
+      "elapsed_ms": 21.25,
+      "answer_preview": "Rumour status: Not confirmed\nBest-supported status: The exact claim is not confirmed; available evidence points against treating it as established.\n\nEvidence:\n- Confirming evidence: 0 source(s)\n- Related but not confirming evidence: 2 source(s)\n- Contradicting evidence: 1 source(s)\n\nWhat may be causing confusion:\n- temporary outage or service availability reports\n- security or cyber-risk reporting\n- account suspension stories\n- regulatory concern coverage\n\nConfidence: Medium",
+      "route": "deep_research",
+      "intent": "rumour_verification",
+      "relation": "blocked_or_restricted_access",
+      "entities": [
+        "India",
+        "OpenAI"
+      ],
+      "raw_query_priority": "fallback_only",
+      "primary_query": "OpenAI supported countries India",
+      "query_plan_summary": {
+        "original_query": "rumor openai blocked in india",
+        "intent": "rumour_verification",
+        "normalized_question": "Is OpenAI blocked or restricted in India?",
+        "raw_query_priority": "fallback_only",
+        "lanes": {
+          "official": [
+            "OpenAI supported countries India",
+            "site:openai.com OpenAI supported countries India",
+            "site:openai.com supported countries OpenAI India"
+          ],
+          "news": [
+            "India blocking OpenAI",
+            "India ban OpenAI AI",
+            "OpenAI unavailable in India"
+          ],
+          "contradiction": [
+            "OpenAI available in India",
+            "OpenAI outage India"
+          ],
+          "background": [
+            "OpenAI India regulatory concern",
+            "OpenAI India service issue"
+          ],
+          "regional": [
+            "India OpenAI access availability"
+          ],
+          "fallback": [
+            "rumor openai blocked in india"
+          ]
+        },
+        "required_lanes": [
+          "official",
+          "contradiction",
+          "background"
+        ],
+        "metadata": {
+          "entities": {
+            "company": "OpenAI",
+            "country": "India"
+          },
+          "relation": "blocked_or_restricted_access",
+          "confidence": 0.978,
+          "needs_llm_rewrite": false
+        }
+      }
+    },
+    {
+      "id": "gemini_down_europe",
+      "query": "gemni down in europe?",
+      "mode": "mock",
+      "ok": true,
+      "failed_checks": [],
+      "checks": {
+        "answer_not_empty": true,
+        "not_generic_failure": true,
+        "raw_query_preserved": true,
+        "raw_query_not_primary": true,
+        "normalized_query_present": true,
+        "query_plan_summary_present": true,
+        "sources_or_checked_sources_present": true,
+        "no_raw_internal_error": true,
+        "expected_intent": true,
+        "expected_entities": true,
+        "expected_relation": true,
+        "official_lane_present_when_required": true,
+        "news_lane_present_when_required": true,
+        "contradiction_lane_present_when_required": true,
+        "background_lane_present_when_required": true,
+        "rumour_status_present_when_required": true,
+        "best_supported_status_present": true,
+        "related_evidence_or_confusion_present": true
+      },
+      "elapsed_ms": 17.28,
+      "answer_preview": "Rumour status: Not confirmed\nBest-supported status: The exact claim is not confirmed; available evidence points against treating it as established.\n\nEvidence:\n- Confirming evidence: 0 source(s)\n- Related but not confirming evidence: 2 source(s)\n- Contradicting evidence: 1 source(s)\n\nWhat may be causing confusion:\n- temporary outage or service availability reports\n- security or cyber-risk reporting\n- account suspension stories\n- regulatory concern coverage\n\nConfidence: Medium",
+      "route": "deep_research",
+      "intent": "rumour_verification",
+      "relation": "unavailable_or_outage",
+      "entities": [
+        "Europe",
+        "Gemini",
+        "Google"
+      ],
+      "raw_query_priority": "fallback_only",
+      "primary_query": "Google Gemini supported countries Europe",
+      "query_plan_summary": {
+        "original_query": "gemni down in europe?",
+        "intent": "rumour_verification",
+        "normalized_question": "Is Gemini unavailable or having an outage in Europe?",
+        "raw_query_priority": "fallback_only",
+        "lanes": {
+          "official": [
+            "Google Gemini supported countries Europe",
+            "site:gemini.google.com Gemini supported countries Europe",
+            "site:gemini.google.com supported countries Gemini Europe"
+          ],
+          "news": [
+            "Gemini outage Europe",
+            "Gemini down Europe"
+          ],
+          "contradiction": [
+            "Gemini status page outage Europe"
+          ],
+          "background": [
+            "Gemini service issue Europe"
+          ],
+          "regional": [],
+          "fallback": [
+            "gemni down in europe?"
+          ]
+        },
+        "required_lanes": [
+          "official",
+          "contradiction",
+          "background"
+        ],
+        "metadata": {
+          "entities": {
+            "product": "Gemini",
+            "company": "Google",
+            "country": "Europe"
+          },
+          "relation": "unavailable_or_outage",
+          "confidence": 0.975,
+          "needs_llm_rewrite": false
+        }
+      }
+    },
+    {
+      "id": "package_typo_guard",
+      "query": "current vite versio",
+      "mode": "mock",
+      "ok": true,
+      "failed_checks": [],
+      "checks": {
+        "answer_not_empty": true,
+        "not_generic_failure": true,
+        "raw_query_preserved": true,
+        "raw_query_not_primary": true,
+        "normalized_query_present": true,
+        "query_plan_summary_present": true,
+        "sources_or_checked_sources_present": true,
+        "no_raw_internal_error": true,
+        "expected_entities": true,
+        "expected_route": true,
+        "technical_lane_present_when_required": true,
+        "package_source_of_record_present": true
+      },
+      "elapsed_ms": 4.45,
+      "answer_preview": "Best-supported status: Vite version lookup remains a package source-of-record path.\n\nEvidence checked:\n- npm package registry source-of-record\n- Vite official package metadata",
+      "route": "fast_search",
+      "intent": "current_lookup",
+      "relation": "",
+      "entities": [
+        "Vite"
+      ],
+      "raw_query_priority": "fallback_only",
+      "primary_query": "What is the current status of Vite",
+      "query_plan_summary": {
+        "original_query": "current vite versio",
+        "intent": "current_lookup",
+        "normalized_question": "What is the current status of Vite?",
+        "raw_query_priority": "fallback_only",
+        "lanes": {
+          "news": [
+            "What is the current status of Vite"
+          ],
+          "background": [],
+          "technical": [
+            "Vite npm package current version",
+            "site:vitejs.dev Vite current version"
+          ],
+          "fallback": []
+        },
+        "required_lanes": [],
+        "metadata": {
+          "entities": {
+            "tool_framework": "Vite"
+          },
+          "relation": "",
+          "confidence": 0.56,
+          "needs_llm_rewrite": true
+        }
+      }
+    }
+  ]
+}

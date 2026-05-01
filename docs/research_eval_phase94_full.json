@@ -1,0 +1,122 @@
+{
+  "generated_at": "2026-04-18T07:45:57.614076+00:00",
+  "base_url": "http://127.0.0.1:8000",
+  "case_count": 6,
+  "completed_count": 6,
+  "failed_count": 0,
+  "overall_score": 0.788,
+  "metric_averages": {
+    "answer_correctness": 0.866,
+    "citation_usefulness": 0.845,
+    "uncertainty_honesty": 0.808,
+    "freshness_handling": 0.683,
+    "agreement_accuracy": 0.758,
+    "source_diversity": 0.686,
+    "output_sharpness": 0.867
+  },
+  "results": [
+    {
+      "case_id": "current_news_query",
+      "query": "Latest updates on Red Sea shipping attacks current status",
+      "category": "current_news",
+      "scores": {
+        "answer_correctness": 0.812,
+        "citation_usefulness": 1.0,
+        "uncertainty_honesty": 0.85,
+        "freshness_handling": 1.0,
+        "agreement_accuracy": 0.45,
+        "source_diversity": 0.74,
+        "output_sharpness": 0.8
+      },
+      "overall_score": 0.807,
+      "summary": "good",
+      "status": "ok"
+    },
+    {
+      "case_id": "live_status_query",
+      "query": "Current status of Sudan ceasefire talks today",
+      "category": "live_status",
+      "scores": {
+        "answer_correctness": 0.9,
+        "citation_usefulness": 1.0,
+        "uncertainty_honesty": 0.9,
+        "freshness_handling": 0.6,
+        "agreement_accuracy": 0.55,
+        "source_diversity": 0.675,
+        "output_sharpness": 1.0
+      },
+      "overall_score": 0.804,
+      "summary": "good",
+      "status": "ok"
+    },
+    {
+      "case_id": "conflicting_news_query",
+      "query": "Did officials confirm a nationwide ceasefire in Yemen this week?",
+      "category": "conflicting_news",
+      "scores": {
+        "answer_correctness": 0.9,
+        "citation_usefulness": 1.0,
+        "uncertainty_honesty": 0.9,
+        "freshness_handling": 0.6,
+        "agreement_accuracy": 0.95,
+        "source_diversity": 0.919,
+        "output_sharpness": 1.0
+      },
+      "overall_score": 0.896,
+      "summary": "excellent",
+      "status": "ok"
+    },
+    {
+      "case_id": "research_comparison_query",
+      "query": "Compare lithium-ion and sodium-ion battery supply chain risks in 2026",
+      "category": "research_comparison",
+      "scores": {
+        "answer_correctness": 0.9,
+        "citation_usefulness": 1.0,
+        "uncertainty_honesty": 0.65,
+        "freshness_handling": 0.45,
+        "agreement_accuracy": 0.95,
+        "source_diversity": 1.0,
+        "output_sharpness": 0.4
+      },
+      "overall_score": 0.764,
+      "summary": "good",
+      "status": "ok"
+    },
+    {
+      "case_id": "official_source_needed_query",
+      "query": "What did RBI officially announce about repo rate in the latest policy statement?",
+      "category": "official_source_needed",
+      "scores": {
+        "answer_correctness": 0.9,
+        "citation_usefulness": 0.2,
+        "uncertainty_honesty": 0.65,
+        "freshness_handling": 0.85,
+        "agreement_accuracy": 0.95,
+        "source_diversity": 0.0,
+        "output_sharpness": 1.0
+      },
+      "overall_score": 0.65,
+      "summary": "needs_tuning",
+      "status": "ok"
+    },
+    {
+      "case_id": "weak_evidence_query",
+      "query": "Who leaked unreleased startup valuation data yesterday and from where?",
+      "category": "weak_evidence",
+      "scores": {
+        "answer_correctness": 0.783,
+        "citation_usefulness": 0.87,
+        "uncertainty_honesty": 0.9,
+        "freshness_handling": 0.6,
+        "agreement_accuracy": 0.7,
+        "source_diversity": 0.784,
+        "output_sharpness": 1.0
+      },
+      "overall_score": 0.805,
+      "summary": "good",
+      "status": "ok"
+    }
+  ],
+  "failures": []
+}

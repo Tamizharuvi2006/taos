@@ -1,0 +1,207 @@
+{
+  "generated_at": "2026-04-30T17:46:59.594771+00:00",
+  "mode": "mock",
+  "ok": true,
+  "passed_count": 16,
+  "failed_count": 0,
+  "blocked_count": 1,
+  "required_env": [
+    "TAOS_ENV",
+    "OPENROUTER_API_KEY",
+    "SERPER_API_KEY",
+    "STORAGE_BACKEND",
+    "FIREBASE_PROJECT_ID",
+    "FIREBASE_CLIENT_EMAIL",
+    "FIREBASE_PRIVATE_KEY"
+  ],
+  "readiness": {
+    "status": "ready",
+    "ready": true,
+    "errors": [],
+    "warnings": [
+      "STORAGE_BACKEND=memory is running in production by explicit override."
+    ],
+    "checks": {
+      "environment": "production",
+      "env_ok": true,
+      "health_endpoint_available": true,
+      "ops_dashboard_json_exists": true,
+      "ops_dashboard_md_exists": true,
+      "provider_health_available": true,
+      "frontend_root_exists": true,
+      "frontend_build_artifact_exists": true,
+      "firebase_runtime_ready": null,
+      "persistence_mode": "memory_fallback",
+      "firebase_admin_available": false,
+      "firestore_ready": null,
+      "persistence_fallback_reason": "storage_backend_memory",
+      "persistence_production_blocking": false,
+      "last_persistence_error": null,
+      "provider_health": {
+        "openrouter": {
+          "state": "unknown",
+          "configured": true
+        },
+        "serper": {
+          "state": "unknown",
+          "configured": true
+        },
+        "npm_registry": {
+          "state": "unknown",
+          "configured": true
+        },
+        "web_extract": {
+          "state": "unknown",
+          "configured": true
+        },
+        "firebase": {
+          "state": "unknown",
+          "configured": true
+        }
+      }
+    }
+  },
+  "checks": [
+    {
+      "name": "environment_ready",
+      "passed": true,
+      "status": "passed",
+      "blocked": false,
+      "detail": "readiness_status=ready",
+      "data": {
+        "errors": [],
+        "warnings": [
+          "STORAGE_BACKEND=memory is running in production by explicit override."
+        ]
+      }
+    },
+    {
+      "name": "health_contract_available",
+      "passed": true,
+      "status": "passed",
+      "blocked": false,
+      "detail": "",
+      "data": {}
+    },
+    {
+      "name": "provider_health_rows_available",
+      "passed": true,
+      "status": "passed",
+      "blocked": false,
+      "detail": "",
+      "data": {}
+    },
+    {
+      "name": "runbook_doc_exists",
+      "passed": true,
+      "status": "passed",
+      "blocked": false,
+      "detail": "D:\\agent\\taos\\docs\\RUNBOOK.md",
+      "data": {}
+    },
+    {
+      "name": "release_checklist_doc_exists",
+      "passed": true,
+      "status": "passed",
+      "blocked": false,
+      "detail": "D:\\agent\\taos\\docs\\RELEASE_CHECKLIST.md",
+      "data": {}
+    },
+    {
+      "name": "rollback_doc_exists",
+      "passed": true,
+      "status": "passed",
+      "blocked": false,
+      "detail": "D:\\agent\\taos\\docs\\ROLLBACK_PLAN.md",
+      "data": {}
+    },
+    {
+      "name": "incident_doc_exists",
+      "passed": true,
+      "status": "passed",
+      "blocked": false,
+      "detail": "D:\\agent\\taos\\docs\\INCIDENT_RESPONSE.md",
+      "data": {}
+    },
+    {
+      "name": "known_warnings_doc_exists",
+      "passed": true,
+      "status": "passed",
+      "blocked": false,
+      "detail": "D:\\agent\\taos\\docs\\KNOWN_WARNINGS.md",
+      "data": {}
+    },
+    {
+      "name": "smoke_script_exists",
+      "passed": true,
+      "status": "passed",
+      "blocked": false,
+      "detail": "D:\\agent\\taos\\scripts\\run_deployment_smoke.py",
+      "data": {}
+    },
+    {
+      "name": "full_qa_script_exists",
+      "passed": true,
+      "status": "passed",
+      "blocked": false,
+      "detail": "D:\\agent\\taos\\scripts\\run_full_live_qa_matrix.py",
+      "data": {}
+    },
+    {
+      "name": "document_qa_script_exists",
+      "passed": true,
+      "status": "passed",
+      "blocked": false,
+      "detail": "D:\\agent\\taos\\scripts\\run_document_live_qa.py",
+      "data": {}
+    },
+    {
+      "name": "ops_dashboard_script_exists",
+      "passed": true,
+      "status": "passed",
+      "blocked": false,
+      "detail": "D:\\agent\\taos\\scripts\\build_ops_dashboard.py",
+      "data": {}
+    },
+    {
+      "name": "research_eval_script_exists",
+      "passed": true,
+      "status": "passed",
+      "blocked": false,
+      "detail": "D:\\agent\\taos\\scripts\\run_research_eval.py",
+      "data": {}
+    },
+    {
+      "name": "frontend_root_exists",
+      "passed": true,
+      "status": "passed",
+      "blocked": false,
+      "detail": "D:\\agent\\frontend",
+      "data": {}
+    },
+    {
+      "name": "frontend_build_artifact_exists",
+      "passed": true,
+      "status": "passed",
+      "blocked": false,
+      "detail": "Expect .next/BUILD_ID or .next/server in D:\\agent\\frontend",
+      "data": {}
+    },
+    {
+      "name": "python_cli_available",
+      "passed": false,
+      "status": "blocked",
+      "blocked": true,
+      "detail": "Use py -3.13 if plain python is unavailable.",
+      "data": {}
+    },
+    {
+      "name": "python_runtime_supported",
+      "passed": true,
+      "status": "passed",
+      "blocked": false,
+      "detail": "runtime=3.12.13",
+      "data": {}
+    }
+  ]
+}

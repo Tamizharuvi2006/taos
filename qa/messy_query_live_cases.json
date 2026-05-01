@@ -1,0 +1,80 @@
+[
+  {
+    "id": "india_claude_lovking_rumour",
+    "query": "research that i got an news that india is lovking claude i got an rumour",
+    "expected_intent": "rumour_verification",
+    "expected_entities": ["India", "Claude", "Anthropic"],
+    "expected_relation": "blocked_or_restricted_access",
+    "requires_official_lane": true,
+    "requires_news_lane": true,
+    "requires_contradiction_lane": true,
+    "requires_background_lane": true,
+    "requires_rumour_status": true,
+    "requires_best_supported_status": true,
+    "requires_related_confusion": true
+  },
+  {
+    "id": "india_banning_claude",
+    "query": "i heard india banning claude is it true",
+    "expected_intent": "rumour_verification",
+    "expected_entities": ["India", "Claude", "Anthropic"],
+    "expected_relation": "blocked_or_restricted_access",
+    "requires_official_lane": true,
+    "requires_news_lane": true,
+    "requires_contradiction_lane": true,
+    "requires_background_lane": true,
+    "requires_rumour_status": true,
+    "requires_best_supported_status": true,
+    "requires_related_confusion": true
+  },
+  {
+    "id": "claud_not_working_india",
+    "query": "claud not working india true ah",
+    "expected_intent": "rumour_verification",
+    "expected_entities": ["Claude", "India"],
+    "expected_relation": "unavailable_or_outage",
+    "requires_official_lane": true,
+    "requires_news_lane": true,
+    "requires_contradiction_lane": true,
+    "requires_background_lane": true,
+    "requires_rumour_status": true,
+    "requires_best_supported_status": true,
+    "requires_related_confusion": true
+  },
+  {
+    "id": "openai_blocked_india",
+    "query": "rumor openai blocked in india",
+    "expected_intent": "rumour_verification",
+    "expected_entities": ["OpenAI", "India"],
+    "expected_relation": "blocked_or_restricted_access",
+    "requires_official_lane": true,
+    "requires_news_lane": true,
+    "requires_contradiction_lane": true,
+    "requires_background_lane": true,
+    "requires_rumour_status": true,
+    "requires_best_supported_status": true,
+    "requires_related_confusion": true
+  },
+  {
+    "id": "gemini_down_europe",
+    "query": "gemni down in europe?",
+    "expected_intent": "rumour_verification",
+    "expected_entities": ["Gemini", "Europe"],
+    "expected_relation": "outage",
+    "requires_official_lane": true,
+    "requires_news_lane": true,
+    "requires_contradiction_lane": true,
+    "requires_background_lane": true,
+    "requires_rumour_status": true,
+    "requires_best_supported_status": true,
+    "requires_related_confusion": true
+  },
+  {
+    "id": "package_typo_guard",
+    "query": "current vite versio",
+    "expected_route": "fast_search",
+    "expected_entities": ["Vite"],
+    "requires_source_of_record": true,
+    "requires_technical_lane": true
+  }
+]

@@ -1,0 +1,91 @@
+[
+  {
+    "id": "news_conflict_1",
+    "query": "latest update on a ceasefire claim with conflicting reports",
+    "expected_type": "deep_research",
+    "checks": [
+      "mentions uncertainty",
+      "shows multiple sources",
+      "does not overclaim",
+      "has citations"
+    ],
+    "expected_signal": "partial_conflict",
+    "expected_confidence": "low",
+    "weak_evidence_expected": true,
+    "expected_error_case": "conflicting_data",
+    "expected_keywords": ["update", "reports", "conflict"],
+    "forbidden_keywords": ["confirmed and final"]
+  },
+  {
+    "id": "official_required_1",
+    "query": "official statement on RBI policy announcement",
+    "expected_type": "deep_research",
+    "checks": [
+      "prefers official sources",
+      "mentions if official source missing",
+      "confidence adjusted"
+    ],
+    "expected_signal": "clean",
+    "expected_confidence": "medium",
+    "requires_official_source": true,
+    "high_stakes": true,
+    "expected_keywords": ["official", "policy", "statement"]
+  },
+  {
+    "id": "weak_evidence_1",
+    "query": "rumors about unreleased phone features",
+    "expected_type": "deep_research",
+    "checks": [
+      "low confidence",
+      "uncertainty block present",
+      "no strong claims"
+    ],
+    "expected_signal": "conflicting",
+    "expected_confidence": "low",
+    "weak_evidence_expected": true,
+    "expected_error_case": "weak_sources",
+    "expected_keywords": ["rumor", "unconfirmed", "unknown"]
+  },
+  {
+    "id": "doc_exam_1",
+    "query": "give important 16 mark questions from this",
+    "expected_type": "doc_mode",
+    "checks": [
+      "exam format",
+      "important questions list",
+      "grounded to doc"
+    ],
+    "expected_signal": "clean",
+    "expected_confidence": "high",
+    "expected_keywords": ["16", "important", "questions"]
+  },
+  {
+    "id": "standard_task_1",
+    "query": "write a python function to reverse string",
+    "expected_type": "standard_task",
+    "checks": [
+      "code present",
+      "correct output",
+      "no unnecessary explanation"
+    ],
+    "expected_signal": "clean",
+    "expected_confidence": "high",
+    "expected_keywords": ["python", "function", "reverse"]
+  },
+  {
+    "id": "no_results_case_1",
+    "query": "find verified source for a niche rumor with no reliable coverage",
+    "expected_type": "deep_research",
+    "checks": [
+      "calm fallback",
+      "clear limitation",
+      "next helpful step"
+    ],
+    "expected_signal": "conflicting",
+    "expected_confidence": "low",
+    "weak_evidence_expected": true,
+    "expected_error_case": "no_results",
+    "expected_keywords": ["not confirmed", "limited evidence", "refine"]
+  }
+]
+

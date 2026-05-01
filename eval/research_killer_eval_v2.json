@@ -1,0 +1,215 @@
+{
+  "timestamp": "2026-04-30T15:49:13.247772+00:00",
+  "passed": 4,
+  "failed": 0,
+  "pass_rate": 1.0,
+  "results": [
+    {
+      "id": "messy_rumour_claude_india",
+      "query": "research that indai is lovking claudde rumour",
+      "intent": "rumour_verification",
+      "query_plan": {
+        "original_query": "research that indai is lovking claudde rumour",
+        "intent": "rumour_verification",
+        "normalized_question": "Is Claude blocked or restricted in India?",
+        "raw_query_priority": "fallback_only",
+        "lanes": {
+          "official": [
+            "Anthropic Claude supported countries India",
+            "site:anthropic.com Claude supported countries India",
+            "site:anthropic.com supported countries Claude India",
+            "Claude API supported regions India"
+          ],
+          "news": [
+            "India blocking Claude Anthropic",
+            "India ban Claude AI",
+            "Claude unavailable in India Anthropic",
+            "India Claude Mythos cybersecurity risks RBI Anthropic",
+            "India warning banks Claude Mythos"
+          ],
+          "contradiction": [
+            "Claude available in India Anthropic",
+            "Claude outage India",
+            "Claude available in India Anthropic supported countries",
+            "India Claude access supported countries"
+          ],
+          "background": [
+            "Anthropic Claude India regulatory concern",
+            "Claude India service issue",
+            "Claude Mythos India banks cybersecurity concerns",
+            "Anthropic Claude Code issues April 2026"
+          ],
+          "regional": [
+            "India Claude access availability"
+          ],
+          "fallback": [
+            "research that indai is lovking claudde rumour"
+          ]
+        },
+        "required_lanes": [
+          "official",
+          "contradiction",
+          "background"
+        ],
+        "metadata": {
+          "entities": {
+            "country": "India",
+            "product": "Claude",
+            "company": "Anthropic"
+          },
+          "relation": "blocked_or_restricted_access",
+          "confidence": 0.976,
+          "needs_llm_rewrite": false
+        }
+      },
+      "answer": "Rumour status\nNot confirmed.\n\nBest-supported status\nThe best-supported answer is based on the normalized intent and source-aware plan.\n\nRelated evidence\n- Mock related evidence\n\nWhat this does NOT prove\nIt does not prove the exact claim in 'research that indai is lovking claudde rumour'.\n\nWhat may be causing confusion\nRelated risk, outage, or policy stories may be getting mixed into the rumour.\n\nConfidence\nLow for the exact claim unless a reliable confirming source is found.\n\nSources checked\n- Mock related evidence",
+      "failed_checks": [],
+      "ok": true
+    },
+    {
+      "id": "official_required_pricing",
+      "query": "firebase pricing changed?",
+      "intent": "current_lookup",
+      "query_plan": {
+        "original_query": "firebase pricing changed?",
+        "intent": "current_lookup",
+        "normalized_question": "Did pricing change for Firebase?",
+        "raw_query_priority": "fallback_only",
+        "lanes": {
+          "official": [
+            "Google Firebase supported countries",
+            "site:firebase.google.com Firebase supported countries",
+            "site:firebase.google.com supported countries Firebase",
+            "site:firebase.google.com Firebase pricing"
+          ],
+          "news": [
+            "Firebase pricing changed latest"
+          ],
+          "contradiction": [
+            "Firebase pricing unchanged official"
+          ],
+          "background": [],
+          "technical": [],
+          "fallback": [
+            "firebase pricing changed?"
+          ]
+        },
+        "required_lanes": [
+          "official"
+        ],
+        "metadata": {
+          "entities": {
+            "product": "Firebase",
+            "company": "Google"
+          },
+          "relation": "pricing_changed",
+          "confidence": 0.84,
+          "needs_llm_rewrite": false
+        }
+      },
+      "answer": "Best-supported answer\nThe best-supported answer is based on the normalized intent and source-aware plan.\n\nWhy this answer\n- Mock related evidence\n\nConfidence\nMedium unless stronger corroboration is available.\n\nWhat to treat carefully\n- Treat uncited or weakly supported details as provisional.\n\nSources\n- Mock related evidence",
+      "failed_checks": [],
+      "ok": true
+    },
+    {
+      "id": "regional_availability",
+      "query": "gemini not working in europe true?",
+      "intent": "rumour_verification",
+      "query_plan": {
+        "original_query": "gemini not working in europe true?",
+        "intent": "rumour_verification",
+        "normalized_question": "Is Gemini unavailable or having an outage in Europe?",
+        "raw_query_priority": "fallback_only",
+        "lanes": {
+          "official": [
+            "Google Gemini supported countries Europe",
+            "site:gemini.google.com Gemini supported countries Europe",
+            "site:gemini.google.com supported countries Gemini Europe"
+          ],
+          "news": [
+            "Gemini outage Europe",
+            "Gemini down Europe"
+          ],
+          "contradiction": [
+            "Gemini status page outage Europe"
+          ],
+          "background": [
+            "Gemini service issue Europe"
+          ],
+          "regional": [],
+          "fallback": [
+            "gemini not working in europe true?"
+          ]
+        },
+        "required_lanes": [
+          "official",
+          "contradiction",
+          "background"
+        ],
+        "metadata": {
+          "entities": {
+            "product": "Gemini",
+            "company": "Google",
+            "country": "Europe"
+          },
+          "relation": "unavailable_or_outage",
+          "confidence": 1.0,
+          "needs_llm_rewrite": false
+        }
+      },
+      "answer": "Rumour status\nNot confirmed.\n\nBest-supported status\nThe best-supported answer is based on the normalized intent and source-aware plan.\n\nRelated evidence\n- Mock related evidence\n\nWhat this does NOT prove\nIt does not prove the exact claim in 'gemini not working in europe true?'.\n\nWhat may be causing confusion\nRelated risk, outage, or policy stories may be getting mixed into the rumour.\n\nConfidence\nLow for the exact claim unless a reliable confirming source is found.\n\nSources checked\n- Mock related evidence",
+      "failed_checks": [],
+      "ok": true
+    },
+    {
+      "id": "broken_english_access",
+      "query": "claude india work agala?",
+      "intent": "rumour_verification",
+      "query_plan": {
+        "original_query": "claude india not working?",
+        "intent": "rumour_verification",
+        "normalized_question": "Is Claude unavailable or having an outage in India?",
+        "raw_query_priority": "fallback_only",
+        "lanes": {
+          "official": [
+            "Anthropic Claude supported countries India",
+            "site:anthropic.com Claude supported countries India",
+            "site:anthropic.com supported countries Claude India"
+          ],
+          "news": [
+            "Claude outage India",
+            "Claude down India"
+          ],
+          "contradiction": [
+            "Claude status page outage India"
+          ],
+          "background": [
+            "Claude service issue India"
+          ],
+          "regional": [],
+          "fallback": [
+            "claude india not working?"
+          ]
+        },
+        "required_lanes": [
+          "official",
+          "contradiction",
+          "background"
+        ],
+        "metadata": {
+          "entities": {
+            "product": "Claude",
+            "company": "Anthropic",
+            "country": "India"
+          },
+          "relation": "unavailable_or_outage",
+          "confidence": 1.0,
+          "needs_llm_rewrite": false
+        }
+      },
+      "answer": "Rumour status\nNot confirmed.\n\nBest-supported status\nThe best-supported answer is based on the normalized intent and source-aware plan.\n\nRelated evidence\n- Mock related evidence\n\nWhat this does NOT prove\nIt does not prove the exact claim in 'claude india work agala?'.\n\nWhat may be causing confusion\nRelated risk, outage, or policy stories may be getting mixed into the rumour.\n\nConfidence\nLow for the exact claim unless a reliable confirming source is found.\n\nSources checked\n- Mock related evidence",
+      "failed_checks": [],
+      "ok": true
+    }
+  ]
+}

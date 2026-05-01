@@ -1,0 +1,68 @@
+[
+  {
+    "id": "fast_message_messy",
+    "query": "heyy buddyy",
+    "expected_route": "fast_message",
+    "expected_owner": "direct",
+    "expected_intent_hint": "small_talk"
+  },
+  {
+    "id": "no_search_messy",
+    "query": "explain js closur simple",
+    "expected_route": "no_search",
+    "expected_owner": "direct",
+    "expected_normalized_contains": ["JavaScript", "closure"]
+  },
+  {
+    "id": "package_typo",
+    "query": "curent vite versio",
+    "expected_route": "fast_search",
+    "expected_owner": "search_lite",
+    "requires_source_of_record": true,
+    "expected_entity": "Vite"
+  },
+  {
+    "id": "rumour_research",
+    "query": "india lovking claude rumour",
+    "expected_route": "news_search",
+    "expected_owner": "research_pipeline",
+    "requires_query_plan": true,
+    "requires_official_lane": true
+  },
+  {
+    "id": "doc_exam_messy",
+    "query": "in this pdf give imprtnt 16 marks",
+    "expected_route": "doc_mode",
+    "expected_owner": "document_pipeline",
+    "expected_document_mode": "important_questions",
+    "expected_mark_format": "16_mark"
+  },
+  {
+    "id": "task_reminder_messy",
+    "query": "remind me tomorw mrng 8",
+    "expected_route": "task",
+    "expected_owner": "fsm_planner",
+    "expected_task_hint": "reminder"
+  },
+  {
+    "id": "code_help_messy",
+    "query": "fix modu not fond react",
+    "expected_route": "task",
+    "expected_owner": "fsm_planner",
+    "expected_code_hint": "module_not_found",
+    "expected_entity": "React"
+  },
+  {
+    "id": "comparison_messy",
+    "query": "react vs anglr whch better",
+    "expected_route": "comparison_search",
+    "expected_owner": "research_pipeline",
+    "expected_entities": ["React", "Angular"]
+  },
+  {
+    "id": "low_signal_ambiguity",
+    "query": "do that thing from before",
+    "expected_route": "clarification",
+    "expected_owner": "clarification"
+  }
+]

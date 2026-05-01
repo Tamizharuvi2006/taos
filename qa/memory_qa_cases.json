@@ -1,0 +1,27 @@
+[
+  {
+    "id": "explicit_remember",
+    "input": "remember that I prefer concise answers",
+    "expected_memory_saved": true
+  },
+  {
+    "id": "secret_not_saved",
+    "input": "remember my API key is sk-abc123456",
+    "expected_memory_saved": false
+  },
+  {
+    "id": "forget_memory",
+    "input": "forget that I prefer concise answers",
+    "expected_memory_deleted": true
+  },
+  {
+    "id": "recall_project",
+    "input": "what phase are we on in TAOS?",
+    "expected_project_memory_used": true
+  },
+  {
+    "id": "false_memory_guard",
+    "input": "what do you remember about my favorite food?",
+    "expected_no_fake_memory": true
+  }
+]

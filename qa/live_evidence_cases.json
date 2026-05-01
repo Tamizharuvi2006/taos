@@ -1,0 +1,101 @@
+[
+  {
+    "id": "relyce_ceo_role_truth",
+    "query": "who is the ceo of relyce infotech",
+    "category": "entity_role",
+    "expected_route": "entity_lookup",
+    "expected_owner": "entity_lookup_pipeline",
+    "requested_role": "ceo",
+    "expect_not_verified": true,
+    "forbid_candidate_name": "Tamizh Aruvi",
+    "require_search_lanes": ["official_website", "linkedin", "registry_directory", "news_articles", "general_web"],
+    "allow_supported_roles": ["founder_ceo", "ceo", ""]
+  },
+  {
+    "id": "relyce_founder_role_truth",
+    "query": "who is the founder of relyce infotech",
+    "category": "entity_role",
+    "expected_route": "entity_lookup",
+    "expected_owner": "entity_lookup_pipeline",
+    "requested_role": "founder",
+    "expect_not_verified": true,
+    "forbid_candidate_name": "Tamizh Aruvi",
+    "require_search_lanes": ["official_website", "linkedin", "registry_directory", "news_articles", "general_web"],
+    "allow_supported_roles": ["founder_ceo", "founder", ""]
+  },
+  {
+    "id": "relyce_official_site",
+    "query": "relyce infotech official website",
+    "category": "entity_profile",
+    "expected_route": "entity_lookup",
+    "expected_owner": "entity_lookup_pipeline"
+  },
+  {
+    "id": "relyce_linkedin",
+    "query": "find linkedin of relyce infotech",
+    "category": "entity_profile",
+    "expected_route": "entity_lookup",
+    "expected_owner": "entity_lookup_pipeline"
+  },
+  {
+    "id": "relyce_legitimacy",
+    "query": "is relyce infotech real company",
+    "category": "legitimacy",
+    "expected_route": "entity_lookup",
+    "expected_owner": "entity_lookup_pipeline"
+  },
+  {
+    "id": "known_ceo_official_company",
+    "query": "who is the ceo of microsoft",
+    "category": "entity_role",
+    "expected_route": "entity_lookup",
+    "expected_owner": "entity_lookup_pipeline",
+    "requested_role": "ceo",
+    "expect_exact_role_verified": true
+  },
+  {
+    "id": "known_founder_company",
+    "query": "who founded microsoft",
+    "category": "entity_role",
+    "expected_route": "entity_lookup",
+    "expected_owner": "entity_lookup_pipeline",
+    "requested_role": "founder",
+    "expect_exact_role_verified": true
+  },
+  {
+    "id": "unknown_local_company_weak",
+    "query": "who is the ceo of tiny neem labs vellore",
+    "category": "entity_role",
+    "expected_route": "entity_lookup",
+    "expected_owner": "entity_lookup_pipeline",
+    "requested_role": "ceo",
+    "expect_not_verified": true
+  },
+  {
+    "id": "claude_india_rumour",
+    "query": "india blocking claude rumour",
+    "category": "research_rumour",
+    "expected_route": "deep_research",
+    "expected_owner": "research_pipeline",
+    "require_research_lanes": ["official", "news", "contradiction", "background"],
+    "expect_related_evidence": true
+  },
+  {
+    "id": "claude_supported_countries_official",
+    "query": "official supported countries Claude India",
+    "category": "official_claim",
+    "expected_route": "deep_research",
+    "expected_owner": "research_pipeline",
+    "require_research_lanes": ["official"],
+    "require_official_source": true
+  },
+  {
+    "id": "openai_latest_news",
+    "query": "latest OpenAI news today",
+    "category": "latest_news",
+    "expected_route": "deep_research",
+    "expected_owner": "research_pipeline",
+    "require_research_lanes": ["news"],
+    "require_freshness": true
+  }
+]

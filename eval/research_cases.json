@@ -1,0 +1,212 @@
+[
+  {
+    "id": "fast_vite_version",
+    "query": "current Vite version",
+    "expected_route": "fast_search",
+    "category": "fast_search",
+    "freshness_required": true,
+    "min_sources": 2,
+    "expected_behavior": ["version", "current"],
+    "forbidden_behavior": ["as of my last update", "not sure"]
+  },
+  {
+    "id": "fast_react_release",
+    "query": "latest React release",
+    "expected_route": "fast_search",
+    "category": "fast_search",
+    "freshness_required": true,
+    "min_sources": 2,
+    "expected_behavior": ["latest", "release"],
+    "forbidden_behavior": ["as of my last update"]
+  },
+  {
+    "id": "fast_openai_ceo",
+    "query": "current CEO of OpenAI",
+    "expected_route": "fast_search",
+    "category": "fast_search",
+    "freshness_required": true,
+    "min_sources": 2,
+    "expected_behavior": ["CEO", "OpenAI"],
+    "forbidden_behavior": ["guess"]
+  },
+  {
+    "id": "deep_ai_job_market",
+    "query": "AI job market India 2026",
+    "expected_route": "deep_search",
+    "category": "deep_search",
+    "freshness_required": true,
+    "min_sources": 4,
+    "expected_behavior": ["India", "market"],
+    "forbidden_behavior": ["as of my last update"]
+  },
+  {
+    "id": "deep_rag_vs_finetune",
+    "query": "RAG vs fine-tuning for enterprise apps",
+    "expected_route": "comparison_search",
+    "category": "deep_search",
+    "freshness_required": false,
+    "min_sources": 4,
+    "expected_behavior": ["RAG", "fine-tuning"],
+    "forbidden_behavior": ["one-size-fits-all"]
+  },
+  {
+    "id": "deep_vector_db",
+    "query": "best vector database for production RAG",
+    "expected_route": "comparison_search",
+    "category": "deep_search",
+    "freshness_required": false,
+    "min_sources": 4,
+    "expected_behavior": ["vector", "RAG"],
+    "forbidden_behavior": ["always the best"]
+  },
+  {
+    "id": "news_openai_today",
+    "query": "latest OpenAI news today",
+    "expected_route": "news_search",
+    "category": "news_search",
+    "freshness_required": true,
+    "min_sources": 3,
+    "expected_behavior": ["latest", "today"],
+    "forbidden_behavior": ["2023"]
+  },
+  {
+    "id": "news_nvidia_earnings",
+    "query": "latest Nvidia earnings",
+    "expected_route": "news_search",
+    "category": "news_search",
+    "freshness_required": true,
+    "min_sources": 3,
+    "expected_behavior": ["earnings", "latest"],
+    "forbidden_behavior": ["as of my last update"]
+  },
+  {
+    "id": "news_ai_regulation_india",
+    "query": "recent AI regulation India",
+    "expected_route": "news_search",
+    "category": "news_search",
+    "freshness_required": true,
+    "min_sources": 3,
+    "expected_behavior": ["India", "regulation"],
+    "forbidden_behavior": ["not sure"]
+  },
+  {
+    "id": "failure_fake_entity",
+    "query": "current CEO of Zorlax Quantum Banana Labs",
+    "expected_route": "fast_search",
+    "category": "failure",
+    "freshness_required": true,
+    "min_sources": 0,
+    "expected_behavior": ["reliable sources"],
+    "forbidden_behavior": ["Sam Altman", "definitely"]
+  },
+  {
+    "id": "failure_misspelled_entity",
+    "query": "latest Nvidai earnings",
+    "expected_route": "news_search",
+    "category": "failure",
+    "freshness_required": true,
+    "min_sources": 0,
+    "expected_behavior": ["reliable sources"],
+    "forbidden_behavior": ["hallucinated"]
+  },
+  {
+    "id": "failure_contradiction",
+    "query": "contradictory reports on example merger status",
+    "expected_route": "deep_search",
+    "category": "failure",
+    "freshness_required": true,
+    "min_sources": 0,
+    "expected_behavior": ["reliable sources"],
+    "forbidden_behavior": ["settled fact"]
+  },
+  {
+    "id": "failure_extract_blocked",
+    "query": "latest details from blocked paywalled article",
+    "expected_route": "deep_search",
+    "category": "failure",
+    "freshness_required": true,
+    "min_sources": 0,
+    "expected_behavior": ["reliable sources"],
+    "forbidden_behavior": ["full article says"]
+  },
+  {
+    "id": "phase108c_official_firebase_pricing",
+    "query": "official Firebase pricing update",
+    "expected_route": "official_search",
+    "category": "phase108c",
+    "requires_official_source": true,
+    "freshness_sensitive": true
+  },
+  {
+    "id": "phase108c_latest_openai_models",
+    "query": "latest OpenAI API model changes",
+    "expected_route": "news_search",
+    "category": "phase108c",
+    "requires_fresh_sources": true
+  },
+  {
+    "id": "phase108c_nextjs_caching",
+    "query": "what changed in Next.js caching recently",
+    "expected_route": "deep_search",
+    "category": "phase108c",
+    "requires_technical_sources": true
+  },
+  {
+    "id": "phase108c_react_vue_compare",
+    "query": "compare React 19 and Vue latest",
+    "expected_route": "comparison_search",
+    "category": "phase108c",
+    "requires_source_diversity": true
+  },
+  {
+    "id": "phase108c_rag_vector_db_compare",
+    "query": "current best vector databases for RAG",
+    "expected_route": "comparison_search",
+    "category": "phase108c",
+    "requires_conflict_handling": true
+  },
+  {
+    "id": "phase108f_latest_openai_models",
+    "query": "latest OpenAI API model changes",
+    "expected_route": "news_search",
+    "category": "phase108f",
+    "requires_fresh_sources": true,
+    "requires_official_source": true
+  },
+  {
+    "id": "phase108f_official_firebase_pricing",
+    "query": "official Firebase pricing update",
+    "expected_route": "official_search",
+    "category": "phase108f",
+    "requires_official_source": true
+  },
+  {
+    "id": "phase108f_nextjs_caching_recent",
+    "query": "what changed in Next.js caching recently",
+    "expected_route": "deep_search",
+    "category": "phase108f",
+    "requires_technical_sources": true
+  },
+  {
+    "id": "phase108f_react_vue_compare",
+    "query": "compare React 19 and Vue latest",
+    "expected_route": "comparison_search",
+    "category": "phase108f",
+    "requires_source_diversity": true
+  },
+  {
+    "id": "phase108f_vector_db_rag_compare",
+    "query": "current best vector databases for RAG",
+    "expected_route": "comparison_search",
+    "category": "phase108f",
+    "requires_conflict_handling": true
+  },
+  {
+    "id": "phase108f_weak_private_startup",
+    "query": "latest unknown private startup AI model release",
+    "expected_route": "news_search",
+    "category": "phase108f",
+    "expects_weak_or_no_evidence": true,
+    "must_not_hallucinate": true
+  }
+]

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "chat_save_and_read",
+    "description": "Create chat, add messages, read them back"
+  },
+  {
+    "id": "trace_metadata_saved",
+    "description": "Execute query and verify route/trust/trace metadata persists"
+  },
+  {
+    "id": "cross_user_isolation",
+    "description": "User A cannot read User B chat"
+  },
+  {
+    "id": "memory_fallback",
+    "description": "If Firebase unavailable, memory fallback works safely"
+  },
+  {
+    "id": "task_execution_history",
+    "description": "Task execution history persists"
+  }
+]

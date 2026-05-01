@@ -1,0 +1,85 @@
+{
+  "active_case_count": 5,
+  "base_url": null,
+  "case_count": 5,
+  "failed_count": 0,
+  "generated_at": "2026-04-30T17:46:59.604370+00:00",
+  "mode": "mock",
+  "ok": true,
+  "pass_rate": 1.0,
+  "passed_count": 5,
+  "results": [
+    {
+      "case_id": "chat_save_and_read",
+      "checks": {
+        "chat_saved": true,
+        "message_count_preserved": true,
+        "roundtrip_message_text": true
+      },
+      "description": "Create chat, add messages, read them back",
+      "detail": "",
+      "failures": [],
+      "passed": true,
+      "skip_reason": "",
+      "skipped": false
+    },
+    {
+      "case_id": "trace_metadata_saved",
+      "checks": {
+        "request_id_preserved": true,
+        "trace_persisted": true,
+        "trust_block_persisted": true
+      },
+      "description": "Execute query and verify route/trust/trace metadata persists",
+      "detail": "",
+      "failures": [],
+      "passed": true,
+      "skip_reason": "",
+      "skipped": false
+    },
+    {
+      "case_id": "cross_user_isolation",
+      "checks": {
+        "intruder_cannot_read": true,
+        "isolation_failure_detected_false": true,
+        "owner_can_read": true
+      },
+      "description": "User A cannot read User B chat",
+      "detail": "",
+      "failures": [],
+      "passed": true,
+      "skip_reason": "",
+      "skipped": false
+    },
+    {
+      "case_id": "memory_fallback",
+      "checks": {
+        "fallback_controlled": true,
+        "firebase_unavailable": true,
+        "memory_write_read_works": true,
+        "persistence_mode_reported": true
+      },
+      "description": "If Firebase unavailable, memory fallback works safely",
+      "detail": "",
+      "failures": [],
+      "passed": true,
+      "skip_reason": "",
+      "skipped": false
+    },
+    {
+      "case_id": "task_execution_history",
+      "checks": {
+        "execution_id_present": true,
+        "execution_persisted": true,
+        "task_created": true
+      },
+      "description": "Task execution history persists",
+      "detail": "",
+      "failures": [],
+      "passed": true,
+      "skip_reason": "",
+      "skipped": false
+    }
+  ],
+  "skipped_count": 0
+}
