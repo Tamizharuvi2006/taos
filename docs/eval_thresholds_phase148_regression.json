@@ -1,0 +1,20 @@
+{
+  "hard_fail": {
+    "failed_cases_max": 0
+  },
+  "warn_only": {
+    "overall_score_min": 0.83,
+    "citation_quality_min": 0.65,
+    "confidence_calibration_min": 0.8,
+    "followup_usefulness_min": 0.75,
+    "mode_consistency_min": 0.9
+  },
+  "regression_hard": {
+    "overall_score_max_drop": 0.01,
+    "citation_quality_max_drop": 0.02,
+    "confidence_calibration_max_drop": 0.02,
+    "followup_usefulness_max_drop": 0.02,
+    "mode_consistency_max_drop": 0.02,
+    "failed_cases_max_increase": 0
+  }
+}
